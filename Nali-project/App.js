@@ -97,7 +97,7 @@ const StackNavigator = () => {
             iconName = 'journal';
           } else if (route.name == 'Recherche') {
             iconName = 'search';
-          }
+          } 
   
           return <Ionicons name={iconName} size={25} color={color} />;
         },
@@ -111,7 +111,7 @@ const StackNavigator = () => {
       }}
     >
      
-      <Stack.Screen name="StackNavigator" component={StackNavigator} />
+      <Stack.Screen name="StackNavigator" options={{}} component={StackNavigator} />
       <Tab.Screen name="RoutineChoice" component={RoutineChoice} />
       <Tab.Screen name="DailyProgram" component={DailyProgram} />
       <Tab.Screen name="MyDiary" component={MyDiary} />
