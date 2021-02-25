@@ -1,6 +1,5 @@
 import React from 'react';
 
-import EcranTempo from './screens/EcranTempo';
 import HomeScreen from './screens/HomeScreen';
 import RoutineChoice from './screens/RoutineChoice';
 import DailyProgram from './screens/DailyProgram';
@@ -15,6 +14,7 @@ import RecipeDay7 from './screens/RecipeDay7';
 
 import ShoppingList from './screens/ShoppingList';
 import Bravo from './screens/Bravo';
+import SnapScreen from './screens/SnapScreen';
 
 import MyDiary from './screens/MyDiary';
 import Profil from './screens/Profil';
@@ -44,7 +44,7 @@ const StackNavigator = () => {
         <Stack.Screen name="Home" component={HomeScreen} />
         
         
-        <Stack.Screen name="EcranTempo" component={EcranTempo} />
+      
 
         <Stack.Screen name="RoutineChoice" component={RoutineChoice} />
         
@@ -59,6 +59,7 @@ const StackNavigator = () => {
         <Stack.Screen name="RecipeDay7" component={RecipeDay7} />
 
         <Stack.Screen name="Bravo" component={Bravo} />
+        <Stack.Screen name="SnapScreen" component={SnapScreen} />
 
         <Stack.Screen name="ShoppingList" component={ShoppingList} />
 

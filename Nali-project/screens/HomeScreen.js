@@ -124,6 +124,12 @@ export default function HomeScreen(props) {
             onPress={() => props.navigation.navigate( 'SearchResults' ) }
             type="solid"
           />
+          <Button
+            title="SnapScreen"
+            buttonStyle={{ backgroundColor: "#eb4d4b" }}
+            onPress={() => props.navigation.navigate( 'SnapScreen' ) }
+            type="solid"
+          />
   </View>
   </ScrollView>
      
