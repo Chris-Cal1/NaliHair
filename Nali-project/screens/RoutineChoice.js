@@ -10,7 +10,6 @@ export default function RoutineChoice() {
   
   <View>
         <Text style={{ fontSize: 30, color: 'black', margin: 45 }}>Routine Choice</Text>
-        <Text style={{ fontSize: 30, color: 'black', margin: 45 }}>Salut</Text>
         
          
   </View>
