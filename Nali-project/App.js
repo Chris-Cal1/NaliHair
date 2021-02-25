@@ -15,6 +15,7 @@ import RecipeDay7 from './screens/RecipeDay7';
 
 import ShoppingList from './screens/ShoppingList';
 import Bravo from './screens/Bravo';
+import SnapScreen from './screens/SnapScreen';
 
 import MyDiary from './screens/MyDiary';
 import Profil from './screens/Profil';
@@ -59,6 +60,7 @@ const StackNavigator = () => {
         <Stack.Screen name="RecipeDay7" component={RecipeDay7} />
 
         <Stack.Screen name="Bravo" component={Bravo} />
+        <Stack.Screen name="SnapScreen" component={SnapScreen} />
 
         <Stack.Screen name="ShoppingList" component={ShoppingList} />
 
