@@ -43,8 +43,6 @@ const StackNavigator = () => {
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Home" component={HomeScreen} />
         
-        
-        <Stack.Screen name="EcranTempo" component={EcranTempo} />
 
         <Stack.Screen name="RoutineChoice" component={RoutineChoice} />
         
