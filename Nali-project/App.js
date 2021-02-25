@@ -1,6 +1,5 @@
 import React from 'react';
 
-import EcranTempo from './screens/EcranTempo';
 import HomeScreen from './screens/HomeScreen';
 import RoutineChoice from './screens/RoutineChoice';
 import DailyProgram from './screens/DailyProgram';
