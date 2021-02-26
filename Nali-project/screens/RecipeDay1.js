@@ -1,7 +1,7 @@
 // Chris
 
 import React from 'react';
-import { StyleSheet, Text, View, ImageBackground} from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, Image} from 'react-native';
 
 
 
@@ -11,6 +11,7 @@ export default function RecipeDay1() {
   <ImageBackground source={require('../assets/007.png')} style={styles.container}>
    <View>
         <Text style={{ fontSize: 30, color: 'black', margin: 45 }}>Recipe day 1</Text>
+        
              
    </View>
  </ImageBackground>

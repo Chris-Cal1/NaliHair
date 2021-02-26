@@ -40,7 +40,7 @@ const StackNavigator = () => {
  
    
     
-      <Stack.Navigator screenOptions={{headerShown: false}}>
+    <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Home" component={HomeScreen} />
         
 
