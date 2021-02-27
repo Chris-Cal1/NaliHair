@@ -14,7 +14,7 @@ export default function RecipeDay1(props) {
   
    <View style={{ marginLeft: 25 }}>
         
-        <Text style={{ fontSize: 30, color: 'black', margin: 25 }}>Recipe day 5</Text>
+        <Text style={{ fontSize: 30, color: 'black', margin: 25 }}>Recipe day 6</Text>
         <Text style={{ fontSize: 30, color: 'black', marginTop: 25, marginBottom: 10, fontWeight: 'bold' }}>Soin sans rinçage</Text>
         <Image style={{ flex: 1, width: 360 }} source={recipeDay2Photo}/>
         <ScrollView>
