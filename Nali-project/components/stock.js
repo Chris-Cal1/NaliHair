@@ -118,3 +118,10 @@ const BottomNavigator = () => {
     
   );
  }
+/*<Text>3h</Text>
+          
+          <View style={{alignItems: 'flex-end', marginBottom: 15}}>
+          <AntDesign 
+          onPress={() => props.navigation.navigate( 'RecipeDay2' ) }
+          name="right" size={40} color="black" />
+          </View>*/
