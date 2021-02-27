@@ -1,13 +1,16 @@
 // Chris
 
 import React from 'react';
-import recipeDay1Photo from '../assets/img/recette_jour_1.jpg';
+import recipeDay1Photo from '../assets/recette_jour_1.jpg';
 import { StyleSheet, Text, View, ImageBackground, Image} from 'react-native';
+
 
 import { AntDesign } from '@expo/vector-icons';
 
 
 export default function RecipeDay1(props) {
+
+  
     return (
       
   <ImageBackground source={require('../assets/007.png')} style={styles.container}>
@@ -36,7 +39,7 @@ export default function RecipeDay1(props) {
           onPress={() => props.navigation.navigate( 'Bravo' ) }
           name="right" size={40} color="black" />
         </View>
-        
+       
                       
    </View>
  </ImageBackground>
