@@ -43,7 +43,7 @@ export default function RecipeDay1(props) {
                           onPress={() => props.navigation.navigate('Profil')}
                           />
           </View>
-          <Text style={{ fontFamily: 'Roboto_500Medium', fontSize: 20, color: 'black',  marginTop: 10, marginBottom: 10 }}>L'après shampoing hydratant - crème d'avoine ou lait de coco :</Text>
+          <Text style={{ fontFamily: 'Roboto_500Medium', fontSize: 20, color: 'black',  marginTop: 10, marginBottom: 10}}>L'après shampoing hydratant - crème d'avoine ou lait de coco :</Text>
          <Image style={{ flex: 1, width: 360 }} source={recipeDay3Photo}/>
        <ScrollView> 
          <Image style={{ flex: 1, width: 360, height: 150 }} source={recipeDay3Photo}/> 
