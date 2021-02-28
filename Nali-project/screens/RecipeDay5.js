@@ -1,45 +1,80 @@
 // Chris
 
 import React from 'react';
-import recipeDay2Photo from '../assets/recette_jour_2.jpg';
-import { StyleSheet, Text, View, ImageBackground, Image, ScrollView} from 'react-native';
+import recipeDay4Photo from '../assets/soin4.jpg';
+import { StyleSheet, ImageBackground, Image, ScrollView} from 'react-native';
+import { Button, Text, View} from 'native-base';
+import {  Header } from 'react-native-elements';
+import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 
-import { AntDesign } from '@expo/vector-icons';
+import AppLoading from 'expo-app-loading';
+import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
+import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium } from '@expo-google-fonts/roboto';
 
 
 export default function RecipeDay1(props) {
+
+  let [fontsLoaded] = useFonts({
+    Handlee_400Regular,
+    Roboto_400Regular,
+    Roboto_700Bold,
+    Roboto_500Medium,
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+ 
     return (
       
   <ImageBackground source={require('../assets/007.png')} style={styles.container}>
-  
+
+    <Header
+      containerStyle = {{backgroundColor: 'white', elevation: 6,shadowOffset: { width: 5, height: 5 },shadowColor: "black", shadowColor: "black", shadowRadius: 10, paddingTop: "12%"}}
+       leftComponent={<MaterialIcons 
+                         name="arrow-back-ios" 
+                         size={26} 
+                         color="black" 
+                         onPress={() => props.navigation.navigate('DailyProgram')}
+                         />}
+       centerComponent={{ text: 'Programmes', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
+       rightComponent={<FontAwesome5 
+                          name="user-alt" 
+                          size={26} 
+                          color="black" 
+                          onPress={() => props.navigation.navigate('Profil')}
+                          />}
+      />
+
    <View style={{ marginLeft: 25 }}>
-        
-        <Text style={{ fontSize: 30, color: 'black', margin: 25 }}>Recipe day 5</Text>
-        <Text style={{ fontSize: 30, color: 'black', marginTop: 25, marginBottom: 10, fontWeight: 'bold' }}>Soin sans rinçage</Text>
-        <Image style={{ flex: 1, width: 360 }} source={recipeDay2Photo}/>
+   
+
+        <Text style={{ fontFamily: 'Roboto_500Medium', fontSize: 24, color: 'black', marginTop: 10, marginBottom: 10}}>Soin sans rinçage</Text>
+        <Image style={{ flex: 1, width: 360 }} source={recipeDay4Photo}/>
         <ScrollView>
-        <Text style={{ fontSize: 30, color: 'black', marginTop: 25, marginBottom: 10, fontWeight: 'bold' }}>Bienfaits</Text>
-        <Text>L'objectif de cette étape est de conserver l'hydratation apportée en recouvrant vos cheveux d'une matière grasse ou huilde de votre choix. Cette méthode que les anglophanes appellent parfois L.O.C (liquide Oil Cream) permet d'obtenir d'excellents résultats</Text>
-        <Text style={{ fontSize: 25, color: 'black',  marginTop: 10, marginBottom: 10 }}>Ingrédients nécessaires</Text>
-        <Text>- 2/3 d'eau de source</Text>
-        <Text>- c-à-s de glycérine végétale</Text>
-        <Text>- 1/3 de gel d'aloe vera</Text>
-        <Text>- c-à-s d'une huile végétale de votre choix</Text>
-        <Text style={{ fontSize: 25, color: 'black',  marginTop: 15, marginBottom: 10 }}>Mode d'emploi</Text>
-        <Text>Appliquez une fine couche d'huile végétale au choix puis une ou deux noisette du beurre végétale de votre choix sur l'ensemble de votre chevelure</Text>
-        <Text style={{ fontSize: 30, color: 'black', marginTop: 25, marginBottom: 5 }}>Terminé</Text>
+        <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 24, color: 'black', marginTop: 25, marginBottom: 10, fontWeight: 'bold' }}>Bienfaits</Text>
+        <Text style={{ fontFamily: 'Roboto_400Regular'}}>L'objectif de cette étape est de conserver l'hydratation apportée en recouvrant vos cheveux d'une matière grasse ou huilde de votre choix. Cette méthode que les anglophanes appellent parfois L.O.C (liquide Oil Cream) permet d'obtenir d'excellents résultats</Text>
+        <Text style={{ fontFamily: 'Roboto_500Medium', fontSize: 20, color: 'black',  marginTop: 10, marginBottom: 10 }}>Ingrédients nécessaires</Text>
+        <Text style={{ fontFamily: 'Roboto_400Regular'}}>- 2/3 d'eau de source</Text>
+        <Text style={{ fontFamily: 'Roboto_400Regular'}}>- c-à-s de glycérine végétale</Text>
+        <Text style={{ fontFamily: 'Roboto_400Regular'}}>- 1/3 de gel d'aloe vera</Text>
+        <Text style={{ fontFamily: 'Roboto_400Regular'}}>- c-à-s d'une huile végétale de votre choix</Text>
+        <Text style={{ fontFamily: 'Roboto_500Medium', fontSize: 20, color: 'black',  marginTop: 15, marginBottom: 10 }}>Mode d'emploi</Text>
+        <Text style={{ fontFamily: 'Roboto_400Regular'}}>Appliquez une fine couche d'huile végétale au choix puis une ou deux noisette du beurre végétale de votre choix sur l'ensemble de votre chevelure</Text>
+        
+         <Button dark
+          style={{marginTop: 35, marginBottom: 20, marginLeft: 120, backgroundColor: '#222222'}}
+          onPress={() => props.navigation.navigate( 'Bravo' ) }>
+           <Text style={{fontFamily: 'Roboto_500Medium', fontSize: 20}}> Terminé </Text>
+         </Button>
       
-        <View style={{alignItems: 'flex-end', marginBottom: 15, marginRight: 30}}>
-        <AntDesign 
-          onPress={() => props.navigation.navigate( 'Bravo' ) }
-          name="right" size={40} color="black" />
-        </View>
         </ScrollView>
                    
    </View>   
  </ImageBackground>
     
     );
+   }
   }
   
   const styles = StyleSheet.create({
