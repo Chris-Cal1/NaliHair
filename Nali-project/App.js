@@ -98,14 +98,16 @@ const StackNavigator = () => {
             iconName = 'search';
           } 
   
-          return <Ionicons name={iconName} size={25} color={color} />;
+          return <Ionicons name={iconName} size={28} color={color} />;
         },
         })}
       tabBarOptions={{
         activeTintColor: '#A1DEAB',
         inactiveTintColor: '#FFFFFF',
         style: {
+          height: 90,
           backgroundColor: '#222222',
+          
         }
       }}
     >
