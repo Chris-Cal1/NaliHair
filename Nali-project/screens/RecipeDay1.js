@@ -1,10 +1,10 @@
 // Chris
 
 import React from 'react';
+
 import recipeDay1Photo from '../assets/recette_jour_1.jpg';
 import { StyleSheet, Text, View, ImageBackground, Image, ScrollView} from 'react-native';
 import {  Header } from 'react-native-elements';
-
 
 import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
@@ -30,7 +30,7 @@ export default function RecipeDay1(props) {
     return (
       
   <ImageBackground source={require('../assets/007.png')} style={styles.container}>
-       
+ 
        <Header
       containerStyle = {{backgroundColor: 'white', elevation: 6,shadowOffset: { width: 5, height: 5 },shadowColor: "black", shadowColor: "black", shadowRadius: 10, paddingTop: "12%"}}
        leftComponent={<MaterialIcons 
@@ -76,6 +76,7 @@ export default function RecipeDay1(props) {
         </View>
        
         </ScrollView>               
+        
    </View>
  </ImageBackground>
  
