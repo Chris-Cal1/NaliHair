@@ -1,6 +1,5 @@
 import React from 'react';
 
-import EcranTempo from './screens/EcranTempo';
 import HomeScreen from './screens/HomeScreen';
 import RoutineChoice from './screens/RoutineChoice';
 import DailyProgram from './screens/DailyProgram';
@@ -82,7 +81,6 @@ const BottomNavigator = () => {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="BottomNavigator" component={BottomNavigator} />
         
-        <Stack.Screen name="EcranTempo" component={EcranTempo} />
 
         <Stack.Screen name="RoutineChoice" component={RoutineChoice} />
         

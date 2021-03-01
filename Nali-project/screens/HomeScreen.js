@@ -16,12 +16,6 @@ export default function HomeScreen(props) {
             type="solid"
           />
           <Button
-            title="Ecran Tempo"
-            buttonStyle={{ backgroundColor: "#eb4d4b" }}
-            onPress={() => props.navigation.navigate('EcranTempo') }
-            type="solid"
-          />
-          <Button
             title="Recipe Day 1"
             buttonStyle={{ backgroundColor: "#eb4d4b" }}
             onPress={() => props.navigation.navigate('RecipeDay1') }
