@@ -118,10 +118,19 @@ const BottomNavigator = () => {
     
   );
  }
-/*<Text>3h</Text>
-          
-          <View style={{alignItems: 'flex-end', marginBottom: 15}}>
-          <AntDesign 
-          onPress={() => props.navigation.navigate( 'RecipeDay2' ) }
-          name="right" size={40} color="black" />
+/*<View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10, marginTop: 55}}>
+      <MaterialIcons 
+                         name="arrow-back-ios" 
+                         size={36} 
+                         color="black" 
+                         onPress={() => props.navigation.navigate('RecipeDay2')}
+                         />
+          <Text style={{ fontFamily: 'Handlee_400Regular', fontSize: 30, color: 'black', marginLeft: 100 }}>Retour</Text>
+          <FontAwesome5 
+                         style={{  marginLeft: 100 }}
+                          name="user-alt" 
+                          size={36} 
+                          color="black" 
+                          onPress={() => props.navigation.navigate('Profil')}
+                          />
           </View>*/
