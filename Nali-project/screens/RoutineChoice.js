@@ -30,13 +30,8 @@ export default function RoutineChoice(props) {
       {/* header avec icone chevron à gauche et icone profil à droite -- onPress à compléter*/}
       <Header
       containerStyle = {{backgroundColor: 'white', elevation: 6,shadowOffset: { width: 5, height: 5 },shadowColor: "black", shadowColor: "black", shadowRadius: 10, paddingTop: "5%"}}
-       leftComponent={<MaterialIcons 
-                         name="arrow-back-ios" 
-                         size={26} 
-                         color="black" 
-                         onPress={() => props.navigation.navigate('')}
-                         />}
-       centerComponent={{ text: 'My Title', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
+       placement="left"
+       centerComponent={{ text: 'Routines capillaires', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
        rightComponent={<FontAwesome5 
                           name="user-alt" 
                           size={26} 
@@ -49,7 +44,7 @@ export default function RoutineChoice(props) {
 
         <ScrollView>
  
-          <Card style={{flex: 0, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%'}}>
+          <Card style={{flex: 1, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%', borderRadius: 10}}>
             <CardItem style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0}}>
               <Left style= {{marginLeft: 0}}>
                 <Image source={require('../assets/routines_capillaires_photo1.jpg')} style={{ height: 150, width: 150, flex: 1 }} />
@@ -74,7 +69,7 @@ export default function RoutineChoice(props) {
             </CardItem>
           </Card>
 
-          <Card style={{flex: 0, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%'}}>
+          <Card style={{flex: 1, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%', borderRadius: 10}}>
             <CardItem style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0}}>
               <Left style= {{marginLeft: 0}}>
                 <Image source={require('../assets/routines_capillaires_photo2.jpg')} style={{ height: 150, width: 150, flex: 1 }} />
@@ -99,7 +94,7 @@ export default function RoutineChoice(props) {
             </CardItem>
           </Card>
 
-          <Card style={{flex: 0, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%'}}>
+          <Card style={{flex: 1, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%', borderRadius: 10}}>
             <CardItem style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0}}>
               <Left style= {{marginLeft: 0}}>
                 <Image source={require('../assets/routines_capillaires_photo3.jpg')} style={{ height: 150, width: 150, flex: 1 }} />
@@ -124,7 +119,7 @@ export default function RoutineChoice(props) {
             </CardItem>
           </Card>
 
-          <Card style={{flex: 0, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%'}}>
+          <Card style={{flex: 0, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%', borderRadius: 10}}>
             <CardItem style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0}}>
               <Left style= {{marginLeft: 0}}>
                 <Image source={require('../assets/routines_capillaires_photo4.jpg')} style={{ height: 150, width: 150, flex: 1 }} />

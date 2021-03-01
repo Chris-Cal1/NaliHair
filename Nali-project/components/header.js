@@ -19,8 +19,9 @@ export default function App(props) {
 
       {/* header avec icone chevron à gauche et icone profil à droite -- onPress à compléter*/}
       <Header
-      containerStyle = {{backgroundColor: 'white', elevation: 6,shadowOffset: { width: 5, height: 5 },shadowColor: "black", shadowColor: "black", shadowRadius: 10, paddingTop: "12%"}}
-       leftComponent={{ text: 'My Title', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
+      containerStyle = {{backgroundColor: 'white', elevation: 6,shadowOffset: { width: 5, height: 5 },shadowColor: "black", shadowColor: "black", shadowRadius: 10, paddingTop: "5%"}}
+       placement="left"
+       centerComponent={{ text: 'My Title', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
        rightComponent={<FontAwesome5 
                           name="user-alt" 
                           size={26} 
