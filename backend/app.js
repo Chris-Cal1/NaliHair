@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var models = require('./models/bdd')
 
 var createError = require('http-errors');
