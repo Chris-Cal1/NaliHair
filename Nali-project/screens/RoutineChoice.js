@@ -36,7 +36,7 @@ export default function RoutineChoice(props) {
                           name="user-alt" 
                           size={26} 
                           color="black" 
-                          onPress={() => props.navigation.navigate('HomeScreen')}
+                          onPress={() => props.navigation.navigate('Profil', { screen: 'Profil' })}
                           />}
       />
 
