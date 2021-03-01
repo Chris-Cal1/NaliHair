@@ -27,6 +27,12 @@ export default function HomeScreen(props) {
             onPress={() => props.navigation.navigate('RecipeDay1') }
             type="solid"
           />
+          <Button
+            title="Recipe Day 1.1"
+            buttonStyle={{ backgroundColor: "#eb4d4b" }}
+            onPress={() => props.navigation.navigate('RecipeDay11') }
+            type="solid"
+          />
            <Button
             title="Recipe Day 2"
             buttonStyle={{ backgroundColor: "#eb4d4b" }}
