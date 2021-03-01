@@ -4,7 +4,9 @@ import HomeScreen from './screens/HomeScreen';
 import RoutineChoice from './screens/RoutineChoice';
 import DailyProgram from './screens/DailyProgram';
 
+
 import RecipeDay1 from './screens/RecipeDay1';
+import RecipeDay11 from './screens/RecipeDay1.1';
 import RecipeDay2 from './screens/RecipeDay2';
 import RecipeDay3 from './screens/RecipeDay3';
 import RecipeDay4 from './screens/RecipeDay4';
@@ -49,6 +51,7 @@ const StackNavigator = () => {
         <Stack.Screen name="DailyProgram" component={DailyProgram} />
       
         <Stack.Screen name="RecipeDay1" component={RecipeDay1} />
+        <Stack.Screen name="RecipeDay11" component={RecipeDay11} />
         <Stack.Screen name="RecipeDay2" component={RecipeDay2} />
         <Stack.Screen name="RecipeDay3" component={RecipeDay3} />
         <Stack.Screen name="RecipeDay4" component={RecipeDay4} />
@@ -105,7 +108,7 @@ const StackNavigator = () => {
         activeTintColor: '#A1DEAB',
         inactiveTintColor: '#FFFFFF',
         style: {
-          height: 90,
+          height: 70,
           backgroundColor: '#222222',
           
         }
