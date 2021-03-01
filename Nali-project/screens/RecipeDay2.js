@@ -26,7 +26,7 @@ export default function RecipeDay1(props) {
       
   <ImageBackground source={require('../assets/007.png')} style={styles.container}>
     <Header
-      containerStyle = {{backgroundColor: 'white', elevation: 6,shadowOffset: { width: 5, height: 5 },shadowColor: "black", shadowColor: "black", shadowRadius: 10, paddingTop: "12%"}}
+      containerStyle = {{backgroundColor: 'white', elevation: 6,shadowOffset: { width: 5, height: 5 },shadowColor: "black", shadowColor: "black", shadowRadius: 10, paddingTop: "5%"}}
        leftComponent={<MaterialIcons 
                          name="arrow-back-ios" 
                          size={26} 
@@ -41,19 +41,19 @@ export default function RecipeDay1(props) {
                           onPress={() => props.navigation.navigate('Profil')}
                           />}
       />
-   <View style={{ marginLeft: 25 }}>
-        <Text style={{ fontSize: 20, color: 'black', margin: 10, fontFamily: 'Roboto_500Medium', }}>Shampoing clarifiant à l'argile verte </Text>
+   <View style={{  marginLeft: '6%', marginRight: '5%', marginTop: '5%' }}>
+        <Text style={{ fontSize: 20, color: 'black', marginBottom: '4%', fontFamily: 'Roboto_500Medium', }}>Shampoing clarifiant à l'argile verte : </Text>
         <Image style={{ flex: 1, width: 360, height: '20%' }} source={recipeDay2Photo}/>
         <ScrollView>
-        <Text style={{ fontSize: 24, color: 'black', marginTop: 20, marginBottom: 10, fontWeight: 'bold', fontFamily: 'Roboto_700Bold' }}>Bienfaits</Text>
+        <Text style={{ fontSize: 24, color: 'black', marginTop: '5%', marginBottom: '3%', fontWeight: 'bold', fontFamily: 'Roboto_700Bold' }}>Bienfaits</Text>
         <Text style={{ fontFamily: 'Roboto_400Regular', fontSize: 13}}>Aère le cuir chevelu</Text>
         <Text style={{ fontFamily: 'Roboto_400Regular', fontSize: 13}}>Purifie la fibre capillaire pour "repartir à 0"</Text>
         <Text style={{ fontFamily: 'Roboto_400Regular', fontSize: 13}}>Laisse les cheveux légers et brillants</Text>
         <Text style={{ fontFamily: 'Roboto_400Regular', fontSize: 13}}>Favorise le volume</Text>
         <Text style={{ fontFamily: 'Roboto_400Regular', fontSize: 13}}>Idéal pour partir sur une bonne base</Text>
-        <Text style={{ fontSize: 20, color: 'black',  marginTop: 10, marginBottom: 10, fontFamily: 'Roboto_500Medium', }}>Ingrédients nécessaires</Text>
+        <Text style={{ fontSize: 20, color: 'black',  marginTop: '3%', marginBottom: '3%', fontFamily: 'Roboto_500Medium', }}>Ingrédients nécessaires</Text>
         <Text style={{ fontFamily: 'Roboto_400Regular', fontSize: 13}}>Argile verte, glycerine, miel, banane</Text>
-        <Text style={{ fontSize: 20, color: 'black',  marginTop: 15, marginBottom: 10, fontFamily: 'Roboto_500Medium', }}>Mode d'emploi</Text>
+        <Text style={{ fontSize: 20, color: 'black',  marginTop: '4%', marginBottom: '3%', fontFamily: 'Roboto_500Medium', }}>Mode d'emploi</Text>
         <Text style={{ fontFamily: 'Roboto_400Regular', fontSize: 13}}>1 - Réalise ton masque.</Text>
         <Text style={{ fontFamily: 'Roboto_400Regular', fontSize: 13}}>2 - Humidifie l'ensemble de ta chevelure.</Text>
         <Text style={{ fontFamily: 'Roboto_400Regular', fontSize: 13}}>Puis applique le masque sur le cuir chevelu en massant, puis sur tes longueurs et pointes.</Text>
@@ -61,11 +61,11 @@ export default function RecipeDay1(props) {
         <Text style={{ fontFamily: 'Roboto_400Regular', fontSize: 13}}>4 - Laisse poser environ 30 minutes.</Text>
         <Text style={{ fontFamily: 'Roboto_400Regular', fontSize: 13}}>Rince abondamment à l'eau claire.</Text>
         <Text style={{ fontFamily: 'Roboto_400Regular', fontSize: 13}}>Tu peux faire un shampoing doux si tu le souhaites ou reprends ta routine à l'étape après-shampoing</Text>
-        <View style={{ marginBottom: 15, marginRight: 15, marginTop: 15 ,flexDirection: 'row', alignItems: 'center'}}>
+        <View style={{ marginBottom: '5%', marginTop: '5%' ,flexDirection: 'row', alignItems: 'center'}}>
         <Text onPress={() => props.navigation.navigate( 'RecipeDay3' ) }
-        style={{marginLeft: 140, fontSize: 20, color: 'black',  fontFamily: 'Roboto_500Medium', }}>Suivant</Text>
+        style={{marginLeft: '35%', fontSize: 20, color: 'black',  fontFamily: 'Roboto_500Medium', }}>Suivant</Text>
         <AntDesign 
-          style={{ marginLeft: 100 }}
+          style={{ marginLeft: '25%' }}
           onPress={() => props.navigation.navigate( 'RecipeDay3' ) }
           name="right" size={40} color="black" />
           
