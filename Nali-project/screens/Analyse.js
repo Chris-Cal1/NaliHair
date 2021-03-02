@@ -14,7 +14,7 @@ import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light } 
 
 
 
-export default function ProductSearch(props) {
+export default function Analyse(props) {
 
   const [searchQuery, setSearchQuery] = React.useState('');
   const onChangeSearch = query => setSearchQuery(query);
