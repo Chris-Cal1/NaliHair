@@ -31,7 +31,7 @@
         "xhdpi": "./assets/splash-screens/android/drawable-xhdpi/splash.png",
         "xxhdpi": "./assets/splash-screens/android/drawable-xxhdpi/splash.png",
         "xxxhdpi": "./assets/splash-screens/android/drawable-xxxhdpi/splash.png",
-        "resizeMode": "cover",
+        "resizeMode": "cover"
 
       }
     },
