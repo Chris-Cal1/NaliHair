@@ -12,7 +12,7 @@ import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light } 
 
 
 
-export default function RoutineChoice(props) {
+export default function Profil(props) {
 
   let [fontsLoaded] = useFonts({
     Handlee_400Regular,
@@ -28,18 +28,17 @@ export default function RoutineChoice(props) {
     return (
       <ImageBackground source={require('../assets/004.png')} style={{flex: 1}}>
 
-       {/* header avec icone chevron à gauche et icone profil à droite -- onPress à compléter*/}
-       <Header
+      <Header
       containerStyle = {{backgroundColor: 'white', elevation: 6,shadowOffset: { width: 5, height: 5 },shadowColor: "black", shadowColor: "black", shadowRadius: 10, paddingTop: "5%"}}
-       leftComponent={{ text: 'Profil', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
+       placement="left"
+       centerComponent={{ text: 'Profil', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
        rightComponent={<FontAwesome5 
                           name="user-alt" 
                           size={26} 
                           color="black" 
-                          onPress={() => props.navigation.navigate('#')}
+                          onPress={() => props.navigation.navigate('Profil', { screen: 'Profil' })}
                           />}
       />
-
       <Content>
 
           <View style={{flex: 3, alignItems: 'center', justifyContent: 'flex-start', marginTop: '10%'}}>
