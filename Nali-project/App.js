@@ -73,7 +73,6 @@ const StackNavigator = () => {
 
         <Stack.Screen name="SearchResults" component={SearchResults} />
 
-
         
       </Stack.Navigator>
     
