@@ -128,7 +128,7 @@ router.post('/wishlist-articles', async function(req, res, next) {
 
 
 
-// suppression d'un article en bdd
+// suppression d'un article fake en bdd
 router.delete('/wishlist-articles/:name', async function(req, res, next) {
   
   var returnDb = await articleModel.deleteOne({name: req.params.name})
@@ -160,37 +160,9 @@ router.post('/wishlist-article', async function(req, res, next) {
        });
 
 
+ 
+
 /*
-
-router.post('/wishlist-article', async function(req, res, next) { 
-
-  var result = false
-  var user = await userModel.findOne({token: req.body.token})
-  var article = await articleModel.findOne({name: req.body.name})
-  console.log(article.name, 'MON ARTICLE =======>>>>>>')
-
-  if(article != null && user != null) {
-    var newUser = new userModel({      
-      userName: req.body.name, 
-      email: req.body.rating,   
-      password: req.body.composition,
-      token: req.body.token,
-      articleId: article,
-            
-    })        
-    var articleSave = await newUser.save()
-       
-            
-           if(articleSave.articleId){       
-             result = true     
-             }   
-           }    
-            res.json({result, article: article.name})   
-          });
-
-*/ 
-
-
 // ajout d'un article en bdd
 router.get('/wishlist-article', async function(req,res,next){
   
@@ -206,20 +178,46 @@ router.get('/wishlist-article', async function(req,res,next){
   
 
   res.json({articles})
-})
+})*/
 
 
 
+// =======>>> TEST <<<<<=============
+// ajout d'un article en cles étrangère de la collection user au like sur le btn coeur
+router.get('/add-article', async function(req, res, next) { 
 
+  var result = false
+  var article = await articleModel.findOne({name: req.query.name})
+
+    if(article != null){
+         var newArticle = new userModel({      
+            userName: req.body.name, 
+            email: req.body.email,
+            password: req.body.password,      
+            articleId: article._id,       
+                   
+          })        
+          var articleSave = await newArticle.save() 
+          console.log('ARTICLESAVE',articleSave)      
+            
+           if(articleSave){       
+             result = true     
+             }   
+           }    
+            res.json({result, articleX: articleSave})   
+          });
+
+// ========>> TEST <<<<<===========
 
 // Suppression d'un article dans la db
 router.delete('/wishlist-artilce', async function(req, res, next) {
 
   var result = false
-  var user = await userModel.findOne({token: req.body.token})
+  var article = await articleModel.findOne({name: req.body.name})
 
-  if(user != null){
-  var returnDb = await articleModel.deleteOne({title: req.body.title, userId: user._id})
+
+  if(article != null){
+  var returnDb = await userModel.deleteOne({userName: req.body.userName, articleId: article._id})
 
   
   if(returnDb.deletedCount == 1) {
@@ -228,6 +226,37 @@ router.delete('/wishlist-artilce', async function(req, res, next) {
 }
   res.json({result});
 })
+
+// extraction des film liker dans la db pour les ajouter dans la wishlist
+router.get('/wishlist-articles', async function(req, res, next){
+
+  var articles = []
+  var article = await articleModel.findOne({name: req.query.name})
+
+  if(article != null){
+   
+      articles = await userModel.find({articleId:article._id})
+    } else {
+      articles = await articleModel.find({userId:user._id})
+    }
+
+    
+  
+  
+  res.json({articles})
+})
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
