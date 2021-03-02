@@ -24,7 +24,7 @@ import Profil from './screens/Profil';
 import DailyPics from './screens/DailyPics';
 import Signin from './screens/Sign-in';
 import Signup from './screens/Sign-up';
-import ProductSearch from './screens/ProductSearch';
+import Analyse from './screens/Analyse';
 import SearchResults from './screens/SearchResults';
 
 import { NavigationContainer } from '@react-navigation/native';
