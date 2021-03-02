@@ -24,7 +24,7 @@ import Profil from './screens/Profil';
 import DailyPics from './screens/DailyPics';
 import Signin from './screens/Sign-in';
 import Signup from './screens/Sign-up';
-import ProductSearch from './screens/ProductSearch';
+import Analyse from './screens/Analyse';
 import SearchResults from './screens/SearchResults';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -72,7 +72,7 @@ const StackNavigator = () => {
         <Stack.Screen name="Signup" component={Signup} />
 
         <Stack.Screen name="SearchResults" component={SearchResults} />
-
+        <Stack.Screen name="Analyse" component={Analyse} />
 
         
       </Stack.Navigator>
@@ -95,7 +95,7 @@ const StackNavigator = () => {
             iconName = 'list';
           } else if (route.name == 'MyDiary') {
             iconName = 'journal';
-          } else if (route.name == 'Recherche') {
+          } else if (route.name == 'Analyse') {
             iconName = 'search';
           } 
   
@@ -128,7 +128,7 @@ const StackNavigator = () => {
       <Tab.Screen name="RoutineChoice" component={RoutineChoice} />
       <Tab.Screen name="DailyProgram" component={DailyProgram} />
       <Tab.Screen name="MyDiary" component={MyDiary} />
-      <Tab.Screen name="Recherche" component={ProductSearch} />
+      <Tab.Screen name="Analyse" component={Analyse} />
       
       
     </Tab.Navigator>

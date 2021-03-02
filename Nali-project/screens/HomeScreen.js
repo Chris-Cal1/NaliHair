@@ -100,12 +100,7 @@ export default function HomeScreen(props) {
             onPress={() => props.navigation.navigate( 'DailyPics' ) }
             type="solid"
           />
-           <Button
-            title="Favorites"
-            buttonStyle={{ backgroundColor: "#eb4d4b" }}
-            onPress={() => props.navigation.navigate( 'Favorites' ) }
-            type="solid"
-          />
+         
           <Button
             title="signin"
             buttonStyle={{ backgroundColor: "#eb4d4b" }}
@@ -122,6 +117,12 @@ export default function HomeScreen(props) {
             title="SearchResults"
             buttonStyle={{ backgroundColor: "#eb4d4b" }}
             onPress={() => props.navigation.navigate( 'SearchResults' ) }
+            type="solid"
+          />
+          <Button
+            title="Analyse"
+            buttonStyle={{ backgroundColor: "#eb4d4b" }}
+            onPress={() => props.navigation.navigate( 'Analyse' ) }
             type="solid"
           />
           <Button
