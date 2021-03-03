@@ -12,19 +12,19 @@ export default function HomeScreen(props) {
         <Button
             title="Home"
             buttonStyle={{ backgroundColor: "#eb4d4b" }}
-            onPress={() => props.navigation.navigate('StackNavigator', { screen: 'Home' })}
-            type="solid"
-          />
-          <Button
-            title="Ecran Tempo"
-            buttonStyle={{ backgroundColor: "#eb4d4b" }}
-            onPress={() => props.navigation.navigate('EcranTempo') }
+            onPress={() => props.navigation.navigate('StackNav', { screen: 'Home' })}
             type="solid"
           />
           <Button
             title="Recipe Day 1"
             buttonStyle={{ backgroundColor: "#eb4d4b" }}
             onPress={() => props.navigation.navigate('RecipeDay1') }
+            type="solid"
+          />
+          <Button
+            title="Recipe Day 1.1"
+            buttonStyle={{ backgroundColor: "#eb4d4b" }}
+            onPress={() => props.navigation.navigate('RecipeDay11') }
             type="solid"
           />
            <Button
@@ -100,12 +100,7 @@ export default function HomeScreen(props) {
             onPress={() => props.navigation.navigate( 'DailyPics' ) }
             type="solid"
           />
-           <Button
-            title="Favorites"
-            buttonStyle={{ backgroundColor: "#eb4d4b" }}
-            onPress={() => props.navigation.navigate( 'Favorites' ) }
-            type="solid"
-          />
+         
           <Button
             title="signin"
             buttonStyle={{ backgroundColor: "#eb4d4b" }}
@@ -122,6 +117,18 @@ export default function HomeScreen(props) {
             title="SearchResults"
             buttonStyle={{ backgroundColor: "#eb4d4b" }}
             onPress={() => props.navigation.navigate( 'SearchResults' ) }
+            type="solid"
+          />
+          <Button
+            title="Analyse"
+            buttonStyle={{ backgroundColor: "#eb4d4b" }}
+            onPress={() => props.navigation.navigate( 'Analyse' ) }
+            type="solid"
+          />
+          <Button
+            title="SnapScreen"
+            buttonStyle={{ backgroundColor: "#eb4d4b" }}
+            onPress={() => props.navigation.navigate( 'SnapScreen' ) }
             type="solid"
           />
   </View>

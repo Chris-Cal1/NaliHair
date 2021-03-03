@@ -1,6 +1,5 @@
 import React from 'react';
 
-import EcranTempo from './screens/EcranTempo';
 import HomeScreen from './screens/HomeScreen';
 import RoutineChoice from './screens/RoutineChoice';
 import DailyProgram from './screens/DailyProgram';
@@ -82,7 +81,6 @@ const BottomNavigator = () => {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="BottomNavigator" component={BottomNavigator} />
         
-        <Stack.Screen name="EcranTempo" component={EcranTempo} />
 
         <Stack.Screen name="RoutineChoice" component={RoutineChoice} />
         
@@ -118,3 +116,19 @@ const BottomNavigator = () => {
     
   );
  }
+/*<View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10, marginTop: 55}}>
+      <MaterialIcons 
+                         name="arrow-back-ios" 
+                         size={36} 
+                         color="black" 
+                         onPress={() => props.navigation.navigate('RecipeDay2')}
+                         />
+          <Text style={{ fontFamily: 'Handlee_400Regular', fontSize: 30, color: 'black', marginLeft: 100 }}>Retour</Text>
+          <FontAwesome5 
+                         style={{  marginLeft: 100 }}
+                          name="user-alt" 
+                          size={36} 
+                          color="black" 
+                          onPress={() => props.navigation.navigate('Profil')}
+                          />
+          </View>*/
