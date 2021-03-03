@@ -239,86 +239,9 @@ router.get('/wishlist-articles', async function(req, res, next){
     } else {
       articles = await articleModel.find({userId:user._id})
     }
-
-    
-  
   
   res.json({articles})
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ================>>>>>>>
-// ajout d'une photo en bdd & com
-router.post('/add-pics', async function(req, res, next) { 
-
-  var result = false
-  var user = await userModel.findOne({token: req.body.token})
-
-    if(user != null){
-         var newArticle = new articleModel({      
-            title: req.body.name, 
-            description: req.body.desc,   
-            content: req.body.content,
-            urlToImage: req.body.img,       
-            userId: user._id,          
-          })        
-          var articleSave = await newArticle.save()       
-            
-           if(articleSave.title){       
-             result = true     
-             }   
-           }    
-            res.json({result})   
-          });
-
-   // Suppression d'une photo en bdd la db
-router.delete('/delete-pics', async function(req, res, next) {
-
-  var result = false
-  var user = await userModel.findOne({token: req.body.token})
-
-  if(user != null){
-  var returnDb = await articleModel.deleteOne({title: req.body.title, userId: user._id})
-
-  
-  if(returnDb.deletedCount == 1) {
-    result = true; 
-   }
-}
-  res.json({result});
-})
-
-
-//extraction d'une photo en db
-router.get('/wishlist-pics', async function(req,res,next){
-  var articles = []
-  var user = await userModel.findOne({token: req.query.token})
-  
-  if(user != null){
-    
-      articles = await articleModel.find({userId:user._id})
-    } else {
-      articles = await articleModel.find({userId:user._id})
-    }
-
-  res.json({articles})
-})
-
-
-
 
 
 
