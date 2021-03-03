@@ -124,7 +124,7 @@ const StackNavigator = () => {
       }}
     >
      
-      <Stack.Screen name="StackNavigator" options={{}} component={StackNavigator} />
+      <Stack.Screen name='StackNav' options={{}} component={StackNavigator} />
       <Tab.Screen name="RoutineChoice" component={RoutineChoice} />
       <Tab.Screen name="DailyProgram" component={DailyProgram} />
       <Tab.Screen name="MyDiary" component={MyDiary} />

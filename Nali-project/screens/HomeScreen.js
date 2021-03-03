@@ -12,7 +12,7 @@ export default function HomeScreen(props) {
         <Button
             title="Home"
             buttonStyle={{ backgroundColor: "#eb4d4b" }}
-            onPress={() => props.navigation.navigate('StackNavigator', { screen: 'Home' })}
+            onPress={() => props.navigation.navigate('StackNav', { screen: 'Home' })}
             type="solid"
           />
           <Button
