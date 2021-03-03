@@ -1,6 +1,6 @@
 // Chris
 
-import React from 'react';
+import React, { useState } from 'react';
 import recipeDay3Photo from '../assets/recette_jour_1.jpg';
 import { StyleSheet, ImageBackground, Image, ScrollView} from 'react-native';
 import { Button, Text, View} from 'native-base';
@@ -9,9 +9,19 @@ import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
 import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium } from '@expo-google-fonts/roboto';
 import {  Header } from 'react-native-elements';
+import { connect } from 'react-redux';
 
 
-export default function RecipeDay1(props) {
+function RecipeDay1(props) {
+
+  const[termine, setTermine] = useState(false);
+  console.log(termine, 'TERMINE')
+
+  var handleSubmit = ()=> {
+    setTermine(true)
+    console.log(termine, 'TERMINE2');
+    props.rituel1Done(termine)
+  }
 
   let [fontsLoaded] = useFonts({
     Handlee_400Regular,
@@ -61,7 +71,7 @@ export default function RecipeDay1(props) {
         <Text style={{ marginBottom: '3%', fontFamily: 'Roboto_400Regular', fontSize: 13}}>- Laissez poser 20 minutes puis procéder au shampoing préconisé à l'étape suivante. </Text>
         <Button dark
           style={{marginTop: '11%', marginBottom: '9%', marginLeft: '33%', backgroundColor: '#222222'}}
-          onPress={() => props.navigation.navigate( 'Bravo' ) }>
+          onPress={()=> {props.navigation.navigate( 'Bravo' ); handleSubmit()}}>
            <Text style={{fontFamily: 'Roboto_500Medium', fontSize: 20}}> Terminé </Text>
          </Button>
         
@@ -82,3 +92,17 @@ export default function RecipeDay1(props) {
        justifyContent: 'flex-start',
      },
   });
+
+  function mapDispatchToProps(dispatch){
+    return {
+      rituel1Done: function(done1) {
+        console.log(done1, 'done1mapdispatch');
+        dispatch({type: 'doneOne', done1: done1})
+      }
+    }
+  }
+
+  export default connect(
+    null,
+    mapDispatchToProps
+  )(RecipeDay1)
