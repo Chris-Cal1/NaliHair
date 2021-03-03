@@ -1,9 +1,9 @@
-export default function(done1 = false, action) {
+export default function(done = false, action) {
     if(action.type == 'doneOne') {
         //var newDone1 = done1.action
-        console.log(done1, 'NEWDONE1')
-        return action.done1;
+        console.log(action.done, 'DOnnnnnne')
+        return action.done;
     } else {
-        return done1
+        return done
     }
 } 

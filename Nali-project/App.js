@@ -46,7 +46,7 @@ const StackNavigator = () => {
 
   return (
  
-    <Provider store={store}> 
+   
     
     <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Home" component={HomeScreen} />
@@ -83,14 +83,14 @@ const StackNavigator = () => {
         
       </Stack.Navigator>
     
-      </Provider>
+      
     
   );
  }
  
  export default function App() {
   return (
-    
+    <Provider store={store}> 
     <NavigationContainer>
       <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -145,6 +145,7 @@ const StackNavigator = () => {
         
 
     </NavigationContainer>
+    </Provider>
     
   );
  }
