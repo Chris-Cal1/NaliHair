@@ -33,6 +33,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { Ionicons } from '@expo/vector-icons';
 
+import {createStore, combineReducers} from 'redux';
+import {Provider} from 'react-redux';
+import done1 from './reducers/routine';
+
+const store = createStore(combineReducers({done1}))
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -40,7 +46,7 @@ const StackNavigator = () => {
 
   return (
  
-   
+    <Provider store={store}> 
     
     <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Home" component={HomeScreen} />
@@ -76,6 +82,8 @@ const StackNavigator = () => {
 
         
       </Stack.Navigator>
+    
+      </Provider>
     
   );
  }
