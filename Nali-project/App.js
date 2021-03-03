@@ -51,6 +51,11 @@ const StackNavigator = () => {
     <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Home" component={HomeScreen} />
         
+<<<<<<< HEAD
+=======
+        
+      
+>>>>>>> e55125104edc7bf160181c2dc2833bb461beb9ea
 
         <Stack.Screen name="RoutineChoice" component={RoutineChoice} />
         
