@@ -1,5 +1,12 @@
 const mongoose = require('mongoose');
 
+
+
+var user = process.env.MONGO_USER;
+var password = process.env.MONGO_PWD;
+var dbName = process.env.MONGO_URL;
+
+
 // useNewUrlParser ;)
 var options = {
   connectTimeoutMS: 5000,
@@ -9,7 +16,7 @@ var options = {
  
 
 // --------------------- BDD -----------------------------------------------------
-mongoose.connect('mongodb+srv://chris:QQB6LdVrSohl5NI8@cluster0.pxzni.mongodb.net/NailyHair?retryWrites=true&w=majority',
+mongoose.connect(`mongodb+srv://${user}:${password}@${dbName}`,
    options,
    function(err) {
     if (err) {

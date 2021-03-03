@@ -5,6 +5,7 @@ var photoSchema = mongoose.Schema({
     name: String,
     type: String,
     url: String,
+    comment: String,
    
   });
 
@@ -14,7 +15,7 @@ var userSchema = mongoose.Schema({
     email: String,
     password: String,
     token: String,
-    userId: [{type: mongoose.Schema.Types.ObjectId, ref: 'articles'}],
+    articleId: [{type: mongoose.Schema.Types.ObjectId, ref: 'articles'}],
     photo: [photoSchema]
   
   });
