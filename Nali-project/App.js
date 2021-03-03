@@ -1,6 +1,8 @@
 import React from 'react';
 import {Platform} from 'react-native';
 
+import Home2 from './screens/Home2';
+
 import HomeScreen from './screens/HomeScreen';
 import RoutineChoice from './screens/RoutineChoice';
 import DailyProgram from './screens/DailyProgram';
@@ -49,8 +51,9 @@ const StackNavigator = () => {
     <Provider store={store}> 
     
     <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
         
+        <Stack.Screen name="Home2" component={Home2} />
 
         <Stack.Screen name="RoutineChoice" component={RoutineChoice} />
         
