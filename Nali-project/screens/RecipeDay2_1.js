@@ -1,23 +1,28 @@
 // Chris
 
 import React from 'react';
-import recipeDay3Photo from '../assets/recette22.jpg';
+
+import { StatusBar } from 'expo-status-bar';
+import avoine from '../assets/avoine.jpg';
 import { StyleSheet, ImageBackground, Image, ScrollView} from 'react-native';
-import { Button, Text, View} from 'native-base';
-import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
-import AppLoading from 'expo-app-loading';
-import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
-import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium } from '@expo-google-fonts/roboto';
+import { Button, Text, View, Content} from 'native-base';
 import {  Header } from 'react-native-elements';
 
+import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 
-export default function RecipeDay1(props) {
+import AppLoading from 'expo-app-loading';
+import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
+import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light} from '@expo-google-fonts/roboto';
+
+
+export default function RecipeDay2_1(props) {
 
   let [fontsLoaded] = useFonts({
     Handlee_400Regular,
     Roboto_400Regular,
     Roboto_700Bold,
     Roboto_500Medium,
+    Roboto_300Light
   });
 
   if (!fontsLoaded) {
@@ -33,9 +38,9 @@ export default function RecipeDay1(props) {
                          name="arrow-back-ios" 
                          size={26} 
                          color="black" 
-                         onPress={() => props.navigation.navigate('DailyProgram')}
+                         onPress={() => props.navigation.navigate('RecipeDay2_0')}
                          />}
-       centerComponent={{ text: 'Retour', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
+       centerComponent={{ text: 'Programme', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
        rightComponent={<FontAwesome5 
                           name="user-alt" 
                           size={26} 
@@ -44,10 +49,13 @@ export default function RecipeDay1(props) {
                           onPress={() => props.navigation.navigate('Profil')}
                           />}
       />
+
+<Content>
+      <ScrollView> 
        <View style={{ marginLeft: '6%', marginRight: '5%', marginTop: '5%' }}>
           <Text style={{ fontFamily: 'Roboto_500Medium', fontSize: 20, color: 'black',  marginBottom: '4%'}}>L'après shampoing hydratant - crème d'avoine ou lait de coco :</Text>
-       <ScrollView> 
-         <Image style={{ flex: 1, width: 360, height: 150 }} source={recipeDay3Photo}/> 
+       
+         <Image style={{ flex: 1, width: '100%', height: 150 }} source={avoine}/> 
         <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 24, color: 'black', marginTop: '5%', marginBottom: '3%', fontWeight: 'bold' }}>Bienfaits</Text>
         <Text style={{ fontFamily: 'Roboto_400Regular', fontSize: 13}}>L'après shampoing a pour but de faciliter le demêlage de vos cheveux tout en les hydratant.</Text>
         <Text style={{ fontFamily: 'Roboto_400Regular', fontSize: 13}}>Tous les produits laitiers ont des propriétés hydratantes.</Text>
@@ -68,9 +76,12 @@ export default function RecipeDay1(props) {
            <Text style={{fontFamily: 'Roboto_500Medium', fontSize: 20}}> Terminé </Text>
          </Button>
         
-       </ScrollView>                
+                      
    </View>
-   
+   </ScrollView> 
+</Content>
+<StatusBar style="dark" backgroundColor='white'/>
+
  </ImageBackground>
   
     

@@ -1,30 +1,33 @@
 // Chris
 
 import React from 'react';
-import recipeDay4Photo from '../assets/soin4.jpg';
+
+import { StatusBar } from 'expo-status-bar';
+import aloeVera from '../assets/aloeVera.jpg';
 import { StyleSheet, ImageBackground, Image, ScrollView} from 'react-native';
-import { Button, Text, View} from 'native-base';
+import { Button, Text, View, Content} from 'native-base';
 import {  Header } from 'react-native-elements';
+
 import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 
 import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
-import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium } from '@expo-google-fonts/roboto';
+import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light} from '@expo-google-fonts/roboto';
 
 
-export default function RecipeDay1(props) {
+export default function RecipeDay4_0(props) {
 
   let [fontsLoaded] = useFonts({
     Handlee_400Regular,
     Roboto_400Regular,
     Roboto_700Bold,
     Roboto_500Medium,
+    Roboto_300Light
   });
 
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
- 
     return (
       
   <ImageBackground source={require('../assets/007.png')} style={styles.container}>
@@ -46,12 +49,13 @@ export default function RecipeDay1(props) {
                           />}
       />
 
-   <View style={{ marginLeft: '6%', marginRight: '5%', marginTop: '5%' }}>
-   
-
-        <Text style={{ fontFamily: 'Roboto_500Medium', fontSize: 24, color: 'black',  marginBottom: '4%'}}>Soin sans rinçage</Text>
-        <Image style={{ flex: 1, width: 360 }} source={recipeDay4Photo}/>
-        <ScrollView>
+<Content>
+<ScrollView>
+     <View style={{ marginLeft: '6%', marginRight: '5%', marginTop: '5%' }}>
+  
+        <Text style={{ fontFamily: 'Roboto_500Medium', fontSize: 24, color: 'black', marginTop: 10, marginBottom: 10}}>Soin sans rinçage</Text>
+        <Image style={{ flex: 1, width: '100%', height: 150 }} source={aloeVera}/>
+        
         <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 24, color: 'black', marginTop: '5%', marginBottom: '3%', fontWeight: 'bold' }}>Bienfaits</Text>
         <Text style={{ fontFamily: 'Roboto_400Regular'}}>L'objectif de cette étape est de conserver l'hydratation apportée en recouvrant vos cheveux d'une matière grasse ou huilde de votre choix. Cette méthode que les anglophanes appellent parfois L.O.C (liquide Oil Cream) permet d'obtenir d'excellents résultats</Text>
         <Text style={{ fontFamily: 'Roboto_500Medium', fontSize: 20, color: 'black',  marginTop: '4%', marginBottom: '3%' }}>Ingrédients nécessaires</Text>
@@ -68,9 +72,13 @@ export default function RecipeDay1(props) {
            <Text style={{fontFamily: 'Roboto_500Medium', fontSize: 20}}> Terminé </Text>
          </Button>
       
-        </ScrollView>
+        
                    
    </View>   
+   </ScrollView>
+   </Content>
+   <StatusBar style="dark" backgroundColor='white'/>
+
  </ImageBackground>
     
     );
@@ -84,3 +92,5 @@ export default function RecipeDay1(props) {
        justifyContent: 'flex-start',
      },
   });
+
+

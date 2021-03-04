@@ -1,9 +1,11 @@
 // Phyllis
 import React from 'react';
+
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, ImageBackground, Image, TouchableOpacity, Linking, Text, View, ScrollView, KeyboardAvoidingView } from 'react-native';
 import {  Header, SearchBar, Badge } from 'react-native-elements';
 import { Content} from 'native-base';
+
 import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
 
 import AppLoading from 'expo-app-loading';
@@ -61,7 +63,7 @@ export default function DailyPics(props) {
 
         <View style={{justifyContent: 'center', alignItems: 'center'}}>
           <View style={styles.boxImage}>
-            <Image source={require('../assets/woman.jpg')} style={{ height: '100%', width: '100%', borderRadius: 10 }} />
+            <Image source={require('../assets/carmen.jpg')} style={{ height: '100%', width: '100%', borderRadius: 10 }} />
           </View>
         </View>
 

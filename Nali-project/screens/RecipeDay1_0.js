@@ -2,32 +2,34 @@
 
 import React from 'react';
 
-import recipeDay1Photo from '../assets/choix_routine.jpg';
-import { StyleSheet, Text, View, ImageBackground, Image, ScrollView} from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import basilic from '../assets/basilic.jpg';
+import { StyleSheet, ImageBackground, Image, ScrollView} from 'react-native';
 import {  Header } from 'react-native-elements';
+import { Button, Text, View, Content} from 'native-base';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 
 import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
-import {  Roboto_400Regular, Roboto_400Regular_Italic, Roboto_700Bold, Roboto_500Medium } from '@expo-google-fonts/roboto';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light} from '@expo-google-fonts/roboto';
 
 
-export default function RecipeDay1(props) {
+export default function RecipeDay1_0(props) {
     
   let [fontsLoaded] = useFonts({
     Handlee_400Regular,
     Roboto_400Regular,
-    Roboto_400Regular_Italic,
     Roboto_700Bold,
     Roboto_500Medium,
+    Roboto_300Light
   });
 
   if (!fontsLoaded) {
     return <AppLoading />;
-   } else {
+  } else {
     return (
       
   <ImageBackground source={require('../assets/007.png')} style={styles.container}>
@@ -49,10 +51,12 @@ export default function RecipeDay1(props) {
                           onPress={() => props.navigation.navigate('Profil')}
                           />}
       />
-   
-        <View style={{ flex: 0, marginLeft: '6%', marginTop: '5%' }}> 
-        <Image style={{ flex: 1, width: 360,  height: '25%' }} source={recipeDay1Photo}/>
-        <ScrollView>
+
+      <Content>
+   <ScrollView>
+   <View style={{  marginLeft: '6%', marginRight: '5%', marginTop: '5%' }}>
+         <Image style={{ flex: 1, width: '100%', height: 150 }} source={basilic}/>
+        
         <Text style={{fontFamily: 'Roboto_700Bold', fontSize: 24, color: 'black', marginTop: '7%', marginBottom: '5%', fontWeight: 'bold' }}>Jour 01</Text>
         <Text style={{fontFamily: 'Roboto_400Regular'}}>Les produits indispensable à votre routine sont :</Text>
         <Text style={{fontFamily: 'Roboto_400Regular'}}>-L'eau pour hydrater</Text>
@@ -73,17 +77,21 @@ export default function RecipeDay1(props) {
         <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: '10%',}}>
           <Text style={{fontFamily: 'Roboto_400Regular', marginRight: '80%'}}>3h</Text>
         <AntDesign 
-          onPress={() => props.navigation.navigate( 'Bravo' ) }
+          onPress={() => props.navigation.navigate( 'RecipeDay1_1' ) }
           name="right" size={40} color="black" />
         </View>
        
-        </ScrollView>    
+      
 
 
 
-   </View>
+    </View>
+    </ScrollView> 
+    </Content>
+    <StatusBar style="dark" backgroundColor='white'/>
+
  </ImageBackground>
- 
+  
     
     );}
   }

@@ -1,33 +1,34 @@
 // Chris
 
 import React, { useState } from 'react';
-import recipeDay3Photo from '../assets/recette_jour_1.jpg';
+
+import { StatusBar } from 'expo-status-bar';
+import huileOlive from '../assets/huileOlive.jpg';
 import { StyleSheet, ImageBackground, Image, ScrollView} from 'react-native';
-import { Button, Text, View} from 'native-base';
+import { Button, Text, View, Content} from 'native-base';
+
 import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
+
 import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
-import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium } from '@expo-google-fonts/roboto';
+import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light} from '@expo-google-fonts/roboto';
+
 import {  Header } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 
-function RecipeDay1(props) {
+function RecipeDay1_1(props) {
 
   const[termine, setTermine] = useState(false);
   console.log(termine, 'TERMINE')
 
-  var handleSubmit = ()=> {
-    setTermine(true)
-    console.log(termine, 'TERMINE2');
-    props.rituel1Done(termine)
-  }
 
   let [fontsLoaded] = useFonts({
     Handlee_400Regular,
     Roboto_400Regular,
     Roboto_700Bold,
     Roboto_500Medium,
+    Roboto_300Light
   });
 
   if (!fontsLoaded) {
@@ -44,7 +45,7 @@ function RecipeDay1(props) {
                          name="arrow-back-ios" 
                          size={26} 
                          color="black" 
-                         onPress={() => props.navigation.navigate('DailyProgram')}
+                         onPress={() => props.navigation.navigate('RecipeDay1_0')}
                          />}
        centerComponent={{ text: 'Programmes', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
        rightComponent={<FontAwesome5 
@@ -56,10 +57,12 @@ function RecipeDay1(props) {
                           />}
       />
 
+<Content>
+    <ScrollView> 
         <View style={{ marginLeft: '6%', marginRight: '5%', marginTop: '5%' }}>
           <Text style={{ fontFamily: 'Roboto_500Medium', fontSize: 20, color: 'black',  marginBottom: '4%'}}>Le bain d'huile d'olive ou d'avocat :</Text>
-       <ScrollView> 
-         <Image style={{ flex: 1, width: 360, height: 150 }} source={recipeDay3Photo}/> 
+       
+         <Image style={{ flex: 1, width: '100%', height: 150 }} source={huileOlive}/> 
         <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 24, color: 'black', marginTop: '5%', marginBottom: '4%', fontWeight: 'bold' }}>Bienfaits</Text>
         <Text style={{ fontFamily: 'Roboto_400Regular', fontSize: 13}}>L'huile d'olive apporte brillance au cheveux. L'huile d'avocat, riche en vitamines convient aux cheveux secs et cassants auxquels elle redonne de l'éclat.</Text>
         <Text style={{ fontSize: 25, color: 'black',  marginTop: '5%', marginBottom: '4%' }}>Ingrédients nécessaires</Text>
@@ -71,15 +74,16 @@ function RecipeDay1(props) {
         <Text style={{ marginBottom: '3%', fontFamily: 'Roboto_400Regular', fontSize: 13}}>- Laissez poser 20 minutes puis procéder au shampoing préconisé à l'étape suivante. </Text>
         <Button dark
           style={{marginTop: '11%', marginBottom: '9%', marginLeft: '33%', backgroundColor: '#222222'}}
-          onPress={()=> {props.navigation.navigate( 'Bravo' ); handleSubmit()}}>
+          onPress={()=> {props.navigation.navigate( 'Bravo' ); setTermine(true); props.rituel1Done(true); }}>
            <Text style={{fontFamily: 'Roboto_500Medium', fontSize: 20}}> Terminé </Text>
          </Button>
-        
 
+                      
+    </View>
+   </ScrollView> 
+   </Content>
+   <StatusBar style="dark" backgroundColor='white'/>
 
-       </ScrollView>                
-   </View>
-   
  </ImageBackground>
   
     
@@ -107,4 +111,4 @@ function RecipeDay1(props) {
   export default connect(
     null,
     mapDispatchToProps
-  )(RecipeDay1)
+  )(RecipeDay1_1)

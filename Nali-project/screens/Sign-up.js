@@ -1,7 +1,14 @@
 import React, { useState, useEffect, useRef} from 'react';
+
+import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, ImageBackground, Button, TouchableOpacity, View, Image} from 'react-native';
 import { Card, ListItem, CheckBox, Input } from 'react-native-elements'
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import AppLoading from 'expo-app-loading';
+import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
+import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light} from '@expo-google-fonts/roboto';
 
 
 
@@ -21,7 +28,7 @@ var userData = {Name: name, Mail: mail, Password: password};
     const data = await fetch('/sign-up', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: `Name=${name}&Mail=${mail}&Password=${password}`
+      body: `name=${name}&mail=${mail}&password=${password}`
     })
 
     if(body.result == true){
@@ -40,7 +47,7 @@ var userData = {Name: name, Mail: mail, Password: password};
   
      if(name && mail && password !== '') {
       AsyncStorage.setItem("user", JSON.stringify(userData))
-      //props.navigation.navigate('Profil')
+      props.navigation.navigate('Profil')
       console.log(userData)
     }
    }
@@ -57,7 +64,17 @@ var userData = {Name: name, Mail: mail, Password: password};
        
       }
     });
-
+    let [fontsLoaded] = useFonts({
+      Handlee_400Regular,
+      Roboto_400Regular,
+      Roboto_700Bold,
+      Roboto_500Medium,
+      Roboto_300Light
+    });
+  
+    if (!fontsLoaded) {
+      return <AppLoading />;
+    } else {
   return (
 
     <ImageBackground  source={require('../assets/003.png')} style={styles.container}>
@@ -80,18 +97,18 @@ var userData = {Name: name, Mail: mail, Password: password};
           onChangeText={(val) => setPassword(val)}/>
 
 
-          <TouchableOpacity  style={{ fontSize: 40, color: 'white', backgroundColor: "#222222", marginTop: 15, fontFamily: 'Roboto', borderRadius: 10, height: 50, width: 180, alignItems: 'center', justifyContent: 'center'}}
+          <TouchableOpacity  style={{ fontSize: 40, color: 'white', backgroundColor: "#222222", marginTop: 15, fontFamily: 'Roboto_400Regular', borderRadius: 10, height: 50, width: 180, alignItems: 'center', justifyContent: 'center'}}
           onPress={() => handleSubmit()}
           >
-          <Text style={{ color: 'white', fontFamily: 'Roboto', fontSize: 20}}> Me connecter </Text>
+          <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular', fontSize: 20}}> Me connecter </Text>
           </TouchableOpacity>
-          <Text style={{ color: '#222222', fontFamily: 'Roboto', fontSize: 15, marginTop: 15}}  onPress={() => props.navigation.navigate('Signin')}> Déjà inscrit </Text>
+          <Text style={{ color: '#222222', fontFamily: 'Roboto_400Regular', fontSize: 15, marginTop: 15}}  onPress={() => props.navigation.navigate('Signin')}> Déjà inscrit </Text>
         </View>
-        
+      <StatusBar style="dark" backgroundColor='white'/>
     </ImageBackground>
   );
 }
-
+}
 const styles = StyleSheet.create({
    container: {
      flex: 1,
