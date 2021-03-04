@@ -7,7 +7,8 @@ var uid2 = require('uid2');
 var bcrypt = require('bcrypt');
 
 var userModel = require('../models/user')
-var articleModel = require('../models/article')
+var articleModel = require('../models/article');
+const { findById } = require('../models/user');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -193,16 +194,20 @@ router.get('/add-article', async function(req, res, next) {
 
   var result = false
   var article = await articleModel.findOne({name: req.query.name})
-
+ console.log('ARTICLE ====>>',article)
     if(article != null){
          var newArticle = new userModel({      
             userName: req.body.name, 
             email: req.body.email,
             password: req.body.password,      
-            articleId: article._id,       
+            articleId: article,       
                    
           })        
-          var articleSave = await newArticle.save() 
+          var articleSave = await newArticle.save()
+          //var user = userModel()
+           //findById(user._id) 
+          // .populate('article')
+          // .exec();
           console.log('ARTICLESAVE',articleSave)      
             
            if(articleSave){       

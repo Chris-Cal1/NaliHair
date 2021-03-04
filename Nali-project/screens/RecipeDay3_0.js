@@ -3,7 +3,7 @@
 import React from 'react';
 
 import { StatusBar } from 'expo-status-bar';
-import karité from '../assets/karité.jpg';
+import karité from '../assets/karité.jpg';
 import { StyleSheet, ImageBackground, Image, ScrollView} from 'react-native';
 import { Button, Text, View, Content} from 'native-base';
 import {  Header } from 'react-native-elements';

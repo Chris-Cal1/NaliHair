@@ -25,7 +25,7 @@ var userData = {Name: name, Mail: mail, Password: password};
  
   var handleSubmit = async () => {
 
-    const data = await fetch('/sign-up', {
+    const data = await fetch('http://10.0.0.106:3000/sign-up', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `name=${name}&mail=${mail}&password=${password}`

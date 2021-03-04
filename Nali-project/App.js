@@ -39,8 +39,10 @@ import { Ionicons } from '@expo/vector-icons';
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 import done1 from './reducers/routine';
+import article from './reducers/article';
+import articlesLiked from './reducers/articleLiked';
 
-const store = createStore(combineReducers({done1}))
+const store = createStore(combineReducers({done1, article, articlesLiked}))
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
