@@ -1,22 +1,28 @@
 // Chris
 
 import React from 'react';
-//import recipeDay2Photo from '../assets/recette_jour_2.jpg';
-import { StyleSheet, ImageBackground, Image, Text, View, ScrollView} from 'react-native';
+
+import { StatusBar } from 'expo-status-bar';
+import argileVerte from '../assets/argileVerte.jpg';
+import { StyleSheet, ImageBackground, Image, ScrollView} from 'react-native';
+import { Button, Text, View, Content} from 'native-base';
 import {  Header } from 'react-native-elements';
+
 import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
+
 import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
-import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium } from '@expo-google-fonts/roboto';
+import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light} from '@expo-google-fonts/roboto';
 
-export default function RecipeDay1(props) {
+export default function RecipeDay2_0(props) {
 
   let [fontsLoaded] = useFonts({
     Handlee_400Regular,
     Roboto_400Regular,
     Roboto_700Bold,
     Roboto_500Medium,
+    Roboto_300Light
   });
 
   if (!fontsLoaded) {
@@ -41,10 +47,13 @@ export default function RecipeDay1(props) {
                           onPress={() => props.navigation.navigate('Profil')}
                           />}
       />
+
+<Content>
+  <ScrollView>
    <View style={{  marginLeft: '6%', marginRight: '5%', marginTop: '5%' }}>
         <Text style={{ fontSize: 20, color: 'black', marginBottom: '4%', fontFamily: 'Roboto_500Medium', }}>Shampoing clarifiant à l'argile verte : </Text>
-        {/* <Image style={{ flex: 1, width: 360, height: '20%' }} source={recipeDay2Photo}/> */}
-        <ScrollView>
+        <Image style={{ flex: 1, width: '100%', height: 150 }} source={argileVerte}/>
+        
         <Text style={{ fontSize: 24, color: 'black', marginTop: '5%', marginBottom: '3%', fontWeight: 'bold', fontFamily: 'Roboto_700Bold' }}>Bienfaits</Text>
         <Text style={{ fontFamily: 'Roboto_400Regular', fontSize: 13}}>Aère le cuir chevelu</Text>
         <Text style={{ fontFamily: 'Roboto_400Regular', fontSize: 13}}>Purifie la fibre capillaire pour "repartir à 0"</Text>
@@ -62,20 +71,24 @@ export default function RecipeDay1(props) {
         <Text style={{ fontFamily: 'Roboto_400Regular', fontSize: 13}}>Rince abondamment à l'eau claire.</Text>
         <Text style={{ fontFamily: 'Roboto_400Regular', fontSize: 13}}>Tu peux faire un shampoing doux si tu le souhaites ou reprends ta routine à l'étape après-shampoing</Text>
         <View style={{ marginBottom: '5%', marginTop: '5%' ,flexDirection: 'row', alignItems: 'center'}}>
-        <Text onPress={() => props.navigation.navigate( 'RecipeDay3' ) }
-        style={{marginLeft: '35%', fontSize: 20, color: 'black',  fontFamily: 'Roboto_500Medium', }}>Suivant</Text>
+       
+        
         <AntDesign 
-          style={{ marginLeft: '25%' }}
-          onPress={() => props.navigation.navigate( 'RecipeDay3' ) }
+          style={{ marginLeft: '85%' }}
+          onPress={() => props.navigation.navigate( 'RecipeDay2_1' ) }
           name="right" size={40} color="black" />
           
 
           
         </View>
-        </ScrollView>
+        
     
                       
    </View>
+   </ScrollView>
+   </Content>
+   <StatusBar style="dark" backgroundColor='white'/>
+
  </ImageBackground>
     
     );

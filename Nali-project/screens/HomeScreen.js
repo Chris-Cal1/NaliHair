@@ -22,51 +22,57 @@ export default function HomeScreen(props) {
             type="solid"
           />
           <Button
-            title="Recipe Day 1"
+            title="RecipeDay1_0"
             buttonStyle={{ backgroundColor: "#eb4d4b" }}
-            onPress={() => props.navigation.navigate('RecipeDay1') }
+            onPress={() => props.navigation.navigate('RecipeDay1_0') }
             type="solid"
           />
           <Button
-            title="Recipe Day 1.1"
+            title="RecipeDay1_1"
             buttonStyle={{ backgroundColor: "#eb4d4b" }}
-            onPress={() => props.navigation.navigate('RecipeDay11') }
+            onPress={() => props.navigation.navigate('RecipeDay1_1') }
             type="solid"
           />
            <Button
-            title="Recipe Day 2"
+            title="RecipeDay2_0"
             buttonStyle={{ backgroundColor: "#eb4d4b" }}
-            onPress={() => props.navigation.navigate('RecipeDay2') }
+            onPress={() => props.navigation.navigate('RecipeDay2_0') }
             type="solid"
           />
            <Button
-            title="Recipe Day 3"
+            title="RecipeDay2_1"
             buttonStyle={{ backgroundColor: "#eb4d4b" }}
-            onPress={() => props.navigation.navigate('RecipeDay3' ) }
+            onPress={() => props.navigation.navigate('RecipeDay2_1' ) }
             type="solid"
           />
            <Button
-            title="Recipe Day 4"
+            title="RecipeDay3_0"
             buttonStyle={{ backgroundColor: "#eb4d4b" }}
-            onPress={() => props.navigation.navigate('RecipeDay4' ) }
+            onPress={() => props.navigation.navigate('RecipeDay3_0' ) }
+            type="solid"
+          />
+          <Button
+            title="RecipeDay4_0"
+            buttonStyle={{ backgroundColor: "#eb4d4b" }}
+            onPress={() => props.navigation.navigate('RecipeDay4_0' ) }
             type="solid"
           />
            <Button
-            title="Recipe Day 5"
+            title="RecipeDay5_0"
             buttonStyle={{ backgroundColor: "#eb4d4b" }}
-            onPress={() => props.navigation.navigate('RecipeDay5' ) }
+            onPress={() => props.navigation.navigate('RecipeDay5_0' ) }
             type="solid"
           />
            <Button
-            title="Recipe Day 6"
+            title="RecipeDay6_0"
             buttonStyle={{ backgroundColor: "#eb4d4b" }}
-            onPress={() => props.navigation.navigate( 'RecipeDay6' ) }
+            onPress={() => props.navigation.navigate( 'RecipeDay6_0' ) }
             type="solid"
           />
          <Button
-            title="Recipe Day 7"
+            title="RecipeDay7_0"
             buttonStyle={{ backgroundColor: "#eb4d4b" }}
-            onPress={() => props.navigation.navigate('RecipeDay7' ) }
+            onPress={() => props.navigation.navigate('RecipeDay7_0' ) }
             type="solid"
           />
 

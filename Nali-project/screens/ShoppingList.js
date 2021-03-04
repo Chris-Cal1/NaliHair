@@ -1,9 +1,16 @@
 //OK ECRAN
 
 import React, { useState, useEffect} from 'react';
+
+import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, ImageBackground, View} from 'react-native';
 import { Card, ListItem, CheckBox } from 'react-native-elements'
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import AppLoading from 'expo-app-loading';
+import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
+import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light} from '@expo-google-fonts/roboto';
 
 
 
@@ -104,7 +111,17 @@ export default function ShoppingList() {
 
       
 
-
+      let [fontsLoaded] = useFonts({
+        Handlee_400Regular,
+        Roboto_400Regular,
+        Roboto_700Bold,
+        Roboto_500Medium,
+        Roboto_300Light
+      });
+    
+      if (!fontsLoaded) {
+        return <AppLoading />;
+      } else {
 
 
   return (
@@ -154,11 +171,13 @@ export default function ShoppingList() {
 
       </View>
 
-    </ImageBackground>
+    <StatusBar style="dark" backgroundColor='white'/>
+
+   </ImageBackground>
 
   );
 }
-
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,

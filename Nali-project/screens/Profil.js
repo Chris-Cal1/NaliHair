@@ -1,9 +1,12 @@
 // Maurine
 
 import React from 'react';
+
+import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, ImageBackground, Image, Text, TouchableOpacity, Linking } from 'react-native';
 import {  Header, Avatar } from 'react-native-elements';
 import { View, Content} from 'native-base';
+
 import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
 
 import AppLoading from 'expo-app-loading';
@@ -45,7 +48,7 @@ export default function Profil(props) {
               <Avatar
                 size="xlarge"
                 rounded
-                source={require('../assets/woman.jpg')}
+                source={require('../assets/carmen.jpg')}
                 containerStyle={{
                 backgroundColor: 'white',
                 elevation: 6,
@@ -65,7 +68,7 @@ export default function Profil(props) {
                   <Text style={styles.textMenu}>Journal de bord</Text>
               </TouchableOpacity>
       
-              <TouchableOpacity style={styles.touchable} activeOpacity={1} onPress={() => props.navigation.navigate('Recherche', { screen: 'HistoryFavorites' })}>
+              <TouchableOpacity style={styles.touchable} activeOpacity={1} onPress={() => props.navigation.navigate('Analyse', { screen: 'Analyse' })}>
                   <MaterialIcons name="favorite" size={30} color="#F543A5" /> 
                   <Text style={styles.textMenu}>Mes favoris</Text>
               </TouchableOpacity>
@@ -88,7 +91,7 @@ export default function Profil(props) {
             </View>
   
         </Content>
-      
+      <StatusBar style="dark" backgroundColor='white'/>
     </ImageBackground>
        
     );

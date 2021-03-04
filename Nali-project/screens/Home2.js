@@ -1,7 +1,9 @@
 // Maurine
 
 import React from 'react';
-import { StyleSheet, ImageBackground, Text, TouchableOpacity, Linking, StatusBar } from 'react-native';
+
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, ImageBackground, Text, TouchableOpacity, Linking } from 'react-native';
 import { Button} from 'react-native-elements'
 import { View, Content} from 'native-base';
 
@@ -25,7 +27,7 @@ export default function Home2(props) {
     return <AppLoading />;
   } else {
     return (
-      <ImageBackground source={require('../assets/routines_capillaires_photo3.jpg')} style={{flex: 1}}>
+      <ImageBackground source={require('../assets/pellicules.jpg')} style={{flex: 1}}>
 
       
       <Content>

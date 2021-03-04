@@ -2,29 +2,31 @@
 // Chris back
 
 import React from 'react';
+
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, ImageBackground, Image, TouchableOpacity, Linking, Text, View, ScrollView, KeyboardAvoidingView } from 'react-native';
 import {  Header, SearchBar, Badge } from 'react-native-elements';
 import { Content} from 'native-base';
+
 import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
 
 import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
-import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light } from '@expo-google-fonts/roboto';
+import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light} from '@expo-google-fonts/roboto';
 
 export default function SearchResults(props) {
     
-      let [fontsLoaded] = useFonts({
-        Handlee_400Regular,
-        Roboto_400Regular,
-        Roboto_700Bold,
-        Roboto_500Medium,
-        Roboto_300Light
-      });
-    
-      if (!fontsLoaded) {
-        return <AppLoading />;
-      } else {
+  let [fontsLoaded] = useFonts({
+    Handlee_400Regular,
+    Roboto_400Regular,
+    Roboto_700Bold,
+    Roboto_500Medium,
+    Roboto_300Light
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
         return (
           <ImageBackground source={require('../assets/008.png')} style={{flex: 1}}>
     
@@ -43,7 +45,7 @@ export default function SearchResults(props) {
             name="arrow-back-ios" 
             size={26} 
             color="black" 
-            onPress={() => props.navigation.navigate('Recherche', { screen: 'ProductSearch' })}
+            onPress={() => props.navigation.navigate('Analyse', { screen: 'Analyse' })}
             />}
            centerComponent={{ text: 'Analyse', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
            rightComponent={<FontAwesome5 
