@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const request = require('sync-request');
 
 // (4.1) importation des deux modules nécessaires au chiffrement
 var uid2 = require('uid2');
@@ -113,13 +114,17 @@ router.post('/wishlist-articles', async function(req, res, next) {
 
   var newArticle = new articleModel({
     name: req.body.name,
+    rating: req.body.rating,
+    composition: req.body.composition,
+    image: req.body.image,
+    type: req.body.type,
   })
 
 
   var articleSave = await newArticle.save();
 
   var result = false;
-  if(articleSave.name){
+  if(articleSave){
     result = true;
   } 
   res.json({result});
@@ -156,11 +161,11 @@ router.post('/wishlist-article', async function(req, res, next) {
             if(article){       
              result = true     
              }   
-            res.json({result, article: article.name})   
+            res.json({result, article: article})   
        });
 
 
- 
+ //article.name
 
 /*
 // ajout d'un article en bdd
@@ -227,7 +232,7 @@ router.delete('/wishlist-artilce', async function(req, res, next) {
   res.json({result});
 })
 
-// extraction des film liker dans la db pour les ajouter dans la wishlist
+// extraction des produits liké dans la db pour les ajouter dans la wishlist
 router.get('/wishlist-articles', async function(req, res, next){
 
   var articles = []
