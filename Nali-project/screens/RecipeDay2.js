@@ -1,7 +1,7 @@
 // Chris
 
 import React from 'react';
-import recipeDay2Photo from '../assets/recette_jour_2.jpg';
+//import recipeDay2Photo from '../assets/recette_jour_2.jpg';
 import { StyleSheet, ImageBackground, Image, Text, View, ScrollView} from 'react-native';
 import {  Header } from 'react-native-elements';
 import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
@@ -43,7 +43,7 @@ export default function RecipeDay1(props) {
       />
    <View style={{  marginLeft: '6%', marginRight: '5%', marginTop: '5%' }}>
         <Text style={{ fontSize: 20, color: 'black', marginBottom: '4%', fontFamily: 'Roboto_500Medium', }}>Shampoing clarifiant à l'argile verte : </Text>
-        <Image style={{ flex: 1, width: 360, height: '20%' }} source={recipeDay2Photo}/>
+        {/* <Image style={{ flex: 1, width: 360, height: '20%' }} source={recipeDay2Photo}/> */}
         <ScrollView>
         <Text style={{ fontSize: 24, color: 'black', marginTop: '5%', marginBottom: '3%', fontWeight: 'bold', fontFamily: 'Roboto_700Bold' }}>Bienfaits</Text>
         <Text style={{ fontFamily: 'Roboto_400Regular', fontSize: 13}}>Aère le cuir chevelu</Text>
@@ -69,8 +69,11 @@ export default function RecipeDay1(props) {
           onPress={() => props.navigation.navigate( 'RecipeDay3' ) }
           name="right" size={40} color="black" />
           
+
+          
         </View>
         </ScrollView>
+    
                       
    </View>
  </ImageBackground>
