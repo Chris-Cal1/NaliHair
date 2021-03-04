@@ -2,10 +2,23 @@
 
 import React from 'react';
 import { StyleSheet, Text, View} from 'react-native';
+import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
+import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light} from '@expo-google-fonts/roboto';
 
 
 export default function AddComment() {
-    return (
+  let [fontsLoaded] = useFonts({
+    Handlee_400Regular,
+    Roboto_400Regular,
+    Roboto_700Bold,
+    Roboto_500Medium,
+    Roboto_300Light
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+  return (
       
   
   <View>
@@ -17,7 +30,7 @@ export default function AddComment() {
      
     );
   }
-  
+}
   const styles = StyleSheet.create({
      container: {
        flex: 1,

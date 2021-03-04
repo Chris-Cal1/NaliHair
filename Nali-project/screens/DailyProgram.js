@@ -1,6 +1,7 @@
 // Marie
 
 import React, { useState } from 'react';
+
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, ScrollView, ImageBackground } from 'react-native';
 import {  Header, CheckBox } from 'react-native-elements';
@@ -121,7 +122,7 @@ function DailyProgram(props) {
                                   name="arrow-forward-ios" 
                                   size={24} 
                                   color="#222"
-                                  onPress={() => props.navigation.navigate('RecipeDay1')}
+                                  onPress={() => props.navigation.navigate('RecipeDay1_0')}
                               />}
                 checked = {props.dayDone1}
                 //onPress={() => handleSubmit1()}
@@ -136,7 +137,7 @@ function DailyProgram(props) {
                                   name="arrow-forward-ios" 
                                   size={24} 
                                   color="#222"
-                                  onPress={() => props.navigation.navigate('RecipeDay2')}
+                                  onPress={() => props.navigation.navigate('RecipeDay2_0')}
                               />}
                 checked = {done2}
                 onPress={() => handleSubmit2()}
@@ -151,7 +152,7 @@ function DailyProgram(props) {
                                   name="arrow-forward-ios" 
                                   size={24} 
                                   color="#222"
-                                  onPress={() => props.navigation.navigate('RecipeDay3')}
+                                  onPress={() => props.navigation.navigate('RecipeDay3_0')}
                               />}
                 checked = {done3}
                 onPress={() => handleSubmit3()}
@@ -166,7 +167,7 @@ function DailyProgram(props) {
                                   name="arrow-forward-ios" 
                                   size={24} 
                                   color="#222"
-                                  onPress={() => props.navigation.navigate('RecipeDay4')}
+                                  onPress={() => props.navigation.navigate('RecipeDay4_0')}
                               />}
                 checked = {done4}
                 onPress={() => handleSubmit4()}
@@ -181,7 +182,7 @@ function DailyProgram(props) {
                                   name="arrow-forward-ios" 
                                   size={24} 
                                   color="#222"
-                                  onPress={() => props.navigation.navigate('RecipeDay5')}
+                                  onPress={() => props.navigation.navigate('RecipeDay5_0')}
                               />}
                 checked = {done5}
                 onPress={() => handleSubmit5()}
@@ -196,7 +197,7 @@ function DailyProgram(props) {
                                   name="arrow-forward-ios" 
                                   size={24} 
                                   color="#222"
-                                  onPress={() => props.navigation.navigate('RecipeDay6')}
+                                  onPress={() => props.navigation.navigate('RecipeDay6_0')}
                               />}
                 checked = {done6}
                 onPress={() => handleSubmit6()}
@@ -211,13 +212,14 @@ function DailyProgram(props) {
                                   name="arrow-forward-ios" 
                                   size={24} 
                                   color="#222"
-                                  onPress={() => props.navigation.navigate('RecipeDay7')}
+                                  onPress={() => props.navigation.navigate('RecipeDay7_0')}
                               />}
                 checked = {done7}
                 onPress={() => handleSubmit7()}
             />
 
         </Content>
+
 
         </ScrollView>
       </View>
