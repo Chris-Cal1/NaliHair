@@ -12,6 +12,7 @@ import { AntDesign } from '@expo/vector-icons';
 import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
 import {  Roboto_400Regular, Roboto_400Regular_Italic, Roboto_700Bold, Roboto_500Medium } from '@expo-google-fonts/roboto';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 export default function RecipeDay1(props) {
@@ -76,8 +77,10 @@ export default function RecipeDay1(props) {
           name="right" size={40} color="black" />
         </View>
        
-        </ScrollView>               
-        
+        </ScrollView>    
+
+
+
    </View>
  </ImageBackground>
  

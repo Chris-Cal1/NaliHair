@@ -75,6 +75,8 @@ function RecipeDay1(props) {
            <Text style={{fontFamily: 'Roboto_500Medium', fontSize: 20}}> Terminé </Text>
          </Button>
         
+
+
        </ScrollView>                
    </View>
    

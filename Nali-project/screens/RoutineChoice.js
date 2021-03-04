@@ -144,6 +144,8 @@ export default function RoutineChoice(props) {
             </CardItem>
           </Card>
 
+
+
           </ScrollView>
 
         </Content>

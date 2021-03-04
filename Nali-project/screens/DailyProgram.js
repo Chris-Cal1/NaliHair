@@ -219,6 +219,7 @@ function DailyProgram(props) {
 
         </Content>
 
+
         </ScrollView>
       </View>
       <StatusBar style="dark" backgroundColor='white'/>
