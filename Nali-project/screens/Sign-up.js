@@ -9,6 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
 import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light} from '@expo-google-fonts/roboto';
+
 import {connect} from 'react-redux'
 
 
@@ -25,6 +26,7 @@ var userData = {Name: name, Mail: mail, Password: password};
  
   var handleSubmit = async () => {
 
+
     const data = await fetch('http://10.0.0.106:3000/sign-up', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -37,12 +39,14 @@ var userData = {Name: name, Mail: mail, Password: password};
       props.addToken(body.token)
       setUserExists(true)
       props.navigation.navigate('Profil')
+
     } else {
       setErrorsSignup(body.error)
     }
 
     if(userExists){
       //props.navigation.navigate('Signin')
+
     }
     
     var tabErrorsSignup = listErrorsSignup.map((error,i) => {
@@ -53,23 +57,31 @@ var userData = {Name: name, Mail: mail, Password: password};
     //  AsyncStorage.setItem("user", JSON.stringify(userData))
     //  props.navigation.navigate('Profil')
        props.addToken(body.token)
+
       console.log(userData)
     }
    }
 
    
+
     /* AsyncStorage.getItem('user', (err, data) => {
+
       var userData = JSON.parse(data);
       if (data) {
         setName(userData.Name);
         setMail(userData.Mail);
         setPassword(userData.Password);
+
         
+
         props.navigation.navigate('Profil')
         console.log(data)
        
       }
+
     });*/
+
+
     let [fontsLoaded] = useFonts({
       Handlee_400Regular,
       Roboto_400Regular,
@@ -124,6 +136,7 @@ const styles = StyleSheet.create({
    },
 });
 
+
 function mapDispatchToProps(dispatch){
   return {
     addToken: function(token){
@@ -137,3 +150,4 @@ export default connect(
   null,
   mapDispatchToProps
 )(Signup)
+

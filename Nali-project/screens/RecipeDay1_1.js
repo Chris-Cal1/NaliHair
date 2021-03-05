@@ -20,7 +20,9 @@ import { connect } from 'react-redux';
 function RecipeDay1_1(props) {
 
   const[termine, setTermine] = useState(false);
+
   console.log(termine, 'TERMINE =======>>>')
+
 
 
 
@@ -76,7 +78,9 @@ function RecipeDay1_1(props) {
         <Button dark
           style={{marginTop: '11%', marginBottom: '9%', marginLeft: '33%', backgroundColor: '#222222'}}
 
+
           onPress={()=> {props.navigation.navigate( 'Bravo' ); setTermine(true); props.rituel1Done(true); }}>
+
 
            <Text style={{fontFamily: 'Roboto_500Medium', fontSize: 20}}> Terminé </Text>
          </Button>
@@ -104,9 +108,11 @@ function RecipeDay1_1(props) {
 
   function mapDispatchToProps(dispatch){
     return {
+
       rituel1Done: function(done) {
         console.log(done, 'done ============>>>>');
         dispatch({type: 'doneOne', done: done})
+
       }
     }
   }

@@ -2,16 +2,20 @@
 // Chris back
 
 import React from 'react';
+
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, ImageBackground, Image, TouchableOpacity, Linking, Text, View, ScrollView, KeyboardAvoidingView } from 'react-native';
 import {  Header, SearchBar, Badge } from 'react-native-elements';
 import { Content} from 'native-base';
+
 import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
 
 import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
+
 import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light } from '@expo-google-fonts/roboto';
 import {connect} from 'react-redux';
+
 
 
 function SearchResults(props) {
@@ -22,18 +26,15 @@ function SearchResults(props) {
 
 var findArticle = async () => {
     
+
   const saveReq = await fetch('http://10.0.0.106:3000/add-article', {
      method: 'POST',
      headers: {'Content-Type':'application/x-www-form-urlencoded'},
      body: `name=${props.article._id}&token=${props.token}`
     }); 
-      
-    
-    
+       
     
    }
-
-
 
       let [fontsLoaded] = useFonts({
         Handlee_400Regular,
@@ -46,6 +47,7 @@ var findArticle = async () => {
       if (!fontsLoaded) {
         return <AppLoading />;
       } else {
+
         return (
           <ImageBackground source={require('../assets/008.png')} style={{flex: 1}}>
     
@@ -64,7 +66,9 @@ var findArticle = async () => {
             name="arrow-back-ios" 
             size={26} 
             color="black" 
+
             onPress={() => props.navigation.navigate('Analyse')}
+
             />}
            centerComponent={{ text: 'Analyse', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
            rightComponent={<FontAwesome5 

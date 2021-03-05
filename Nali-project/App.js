@@ -51,7 +51,7 @@ const Tab = createBottomTabNavigator();
 const StackNavigator = () => {
 
   return (
- 
+
     
     <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
@@ -157,7 +157,6 @@ const StackNavigator = () => {
 
     </NavigationContainer>
     </Provider>
-
 
   );
  }
