@@ -1,4 +1,8 @@
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']);
+
 import React from 'react';
+
 import {Platform} from 'react-native';
 
 import Home2 from './screens/Home2';
