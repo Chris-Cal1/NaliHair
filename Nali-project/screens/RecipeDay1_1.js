@@ -20,7 +20,10 @@ import { connect } from 'react-redux';
 function RecipeDay1_1(props) {
 
   const[termine, setTermine] = useState(false);
-  console.log(termine, 'TERMINE')
+
+  console.log(termine, 'TERMINE =======>>>')
+
+
 
 
   let [fontsLoaded] = useFonts({
@@ -74,7 +77,11 @@ function RecipeDay1_1(props) {
         <Text style={{ marginBottom: '3%', fontFamily: 'Roboto_400Regular', fontSize: 13}}>- Laissez poser 20 minutes puis procéder au shampoing préconisé à l'étape suivante. </Text>
         <Button dark
           style={{marginTop: '11%', marginBottom: '9%', marginLeft: '33%', backgroundColor: '#222222'}}
+
+
           onPress={()=> {props.navigation.navigate( 'Bravo' ); setTermine(true); props.rituel1Done(true); }}>
+
+
            <Text style={{fontFamily: 'Roboto_500Medium', fontSize: 20}}> Terminé </Text>
          </Button>
 
@@ -101,9 +108,11 @@ function RecipeDay1_1(props) {
 
   function mapDispatchToProps(dispatch){
     return {
-      rituel1Done: function(done1) {
-        console.log(done1, 'done1mapdispatch');
-        dispatch({type: 'doneOne', done1: done1})
+
+      rituel1Done: function(done) {
+        console.log(done, 'done ============>>>>');
+        dispatch({type: 'doneOne', done: done})
+
       }
     }
   }

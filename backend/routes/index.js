@@ -1,12 +1,15 @@
 var express = require('express');
 var router = express.Router();
+const request = require('sync-request');
 
 // (4.1) importation des deux modules nécessaires au chiffrement
 var uid2 = require('uid2');
 var bcrypt = require('bcrypt');
 
 var userModel = require('../models/user')
-var articleModel = require('../models/article')
+var articleModel = require('../models/article');
+//const { findById } = require('../models/user');
+//const { default: article } = require('../../Nali-project/reducers/article');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -50,7 +53,7 @@ router.post('/sign-up', async function(req, res, next){
  
   })
    userSave = await newUser.save();
-  console.log(userSave)
+   console.log("USERSAVE ======>>",userSave)
 
   
     if(userSave){
@@ -113,13 +116,17 @@ router.post('/wishlist-articles', async function(req, res, next) {
 
   var newArticle = new articleModel({
     name: req.body.name,
+    rating: req.body.rating,
+    composition: req.body.composition,
+    image: req.body.image,
+    type: req.body.type,
   })
 
 
   var articleSave = await newArticle.save();
 
   var result = false;
-  if(articleSave.name){
+  if(articleSave){
     result = true;
   } 
   res.json({result});
@@ -156,11 +163,11 @@ router.post('/wishlist-article', async function(req, res, next) {
             if(article){       
              result = true     
              }   
-            res.json({result, article: article.name})   
+            res.json({result, article: article})   
        });
 
 
- 
+ //article.name
 
 /*
 // ajout d'un article en bdd
@@ -184,27 +191,28 @@ router.get('/wishlist-article', async function(req,res,next){
 
 // =======>>> TEST <<<<<=============
 // ajout d'un article en cles étrangère de la collection user au like sur le btn coeur
-router.get('/add-article', async function(req, res, next) { 
+router.post('/add-article', async function(req, res, next) { 
 
   var result = false
-  var article = await articleModel.findOne({name: req.query.name})
+  //var article = await articleModel.findOne({name: req.query.name})
+  var user = await userModel.findOne({token: req.body.token})
+ 
 
-    if(article != null){
-         var newArticle = new userModel({      
-            userName: req.body.name, 
-            email: req.body.email,
-            password: req.body.password,      
-            articleId: article._id,       
-                   
-          })        
-          var articleSave = await newArticle.save() 
+
+    if(user != null){
+          user.articleId.push(req.body.name)       
+          var articleSave = await user.save()
+          //var user = userModel()
+           //findById(user._id) 
+          // .populate('article')
+          // .exec();
           console.log('ARTICLESAVE',articleSave)      
             
            if(articleSave){       
              result = true     
              }   
            }    
-            res.json({result, articleX: articleSave})   
+            res.json({result})   
           });
 
 // ========>> TEST <<<<<===========
@@ -227,22 +235,33 @@ router.delete('/wishlist-artilce', async function(req, res, next) {
   res.json({result});
 })
 
-// extraction des film liker dans la db pour les ajouter dans la wishlist
+// extraction des produits liké dans la db pour les ajouter dans la wishlist
 router.get('/wishlist-articles', async function(req, res, next){
 
   var articles = []
-  var article = await articleModel.findOne({name: req.query.name})
-
-  if(article != null){
-   
-      articles = await userModel.find({articleId:article._id})
-    } else {
-      articles = await articleModel.find({userId:user._id})
-    }
+ var user = await userModel.findOne({token: req.query.token})
+                          
+  //var article = await articleModel.findById(user.articleId)
+  console.log("USER", user)
   
-  res.json({articles})
+  if(user){
+    articles = await userModel.findOne({token: req.query.token})
+                            .populate('articleId')
+                            .exec();
+    console.log("ART ===>>", articles)
+  }
+     
+    
+      // user.articleId.name
+     // console.log("ARTICLES BDD", articles)
+  
+    // articles = await userModel.find({articles: user.articleId})
+
+  
+ res.json({articles})
 })
 
+//
 
 
 module.exports = router;

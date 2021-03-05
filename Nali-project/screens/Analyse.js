@@ -1,25 +1,33 @@
 // Maurine
 
-import React from 'react';
+// Chris 
+import React, {useState, useEffect} from 'react';
 
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, ImageBackground, Image, TouchableOpacity, Linking, Text, View, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, ImageBackground, Image, TouchableOpacity, Linking,  ScrollView, KeyboardAvoidingView } from 'react-native';
 import {  Header, SearchBar, Badge } from 'react-native-elements';
 import { Content} from 'native-base';
 
 import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
+import { Button, Text, View} from 'native-base';
 
 import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
 import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light } from '@expo-google-fonts/roboto';
+import {connect} from 'react-redux';
 
 
 
+function Analyse(props) {
 
-export default function Analyse(props) {
-
-  const [searchQuery, setSearchQuery] = React.useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [product, setProduct] = useState('');
+  
+  
+  const [isFound, setIsFound] = useState(false);
+  const [favoris, setFavoris] = useState([]);
   const onChangeSearch = query => setSearchQuery(query);
+  
 
   let [fontsLoaded] = useFonts({
     Handlee_400Regular,
@@ -28,6 +36,48 @@ export default function Analyse(props) {
     Roboto_500Medium,
     Roboto_300Light
   });
+
+
+// acquisition des articles liké de la db
+  useEffect(() => {
+    const findArticlesWishList = async () => {
+      const dataWishlist = await fetch(`http://10.0.0.106:3000/wishlist-articles?token=${props.token}`)
+      const body = await dataWishlist.json()
+
+     setFavoris(body.articles.articleId)
+    }
+   console.log(favoris, 'FAVORIS =================>>>')
+    findArticlesWishList()
+  },[]) 
+
+
+  
+
+// recherche d'un article
+  var findArticle = async () => {
+    
+    const saveReq = await fetch('http://10.0.0.106:3000/wishlist-article', {
+       method: 'POST',
+       headers: {'Content-Type':'application/x-www-form-urlencoded'},
+       body: `name=${searchQuery}`
+      }); 
+      var response = await saveReq.json();
+      console.log(response, 'RESPONSE =================>>>')
+      console.log(response.article, 'RESPONSE.ARTICLE =================>>>')
+      console.log(response.article.name, 'RESPONSE.ARTICLE.NAME =================>>>')
+
+      if(response.article) {
+       
+        setIsFound(true)
+        props.saveArticles(response.article)
+      }
+      
+     }
+     
+
+     // faire un map sur les favoris et retourner les card 
+
+
 
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -83,11 +133,17 @@ export default function Analyse(props) {
             value={searchQuery}
             style={{color:'black'}}            
           />
+          <Button dark
+          style={{marginTop: '5%', marginBottom: '4%', backgroundColor: '#222222', marginLeft: '30%'}}
+          onPress={() => {findArticle(); props.navigation.navigate('SearchResults')}}>
+           <Text style={{fontFamily: 'Roboto_500Medium', fontSize: 20}}> Rechercher </Text>
+         </Button>
           <Text style={{marginTop: '3%', fontSize: 14}}>Que contient votre produit capillaire préféré ?</Text>
+          
         </View>
 
         <View style={{ marginLeft: '5%', marginTop: '15%', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
-          <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20,}}>Historique et Favoris</Text>
+          <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20,}}>Favoris</Text>
         </View>
 
 
@@ -96,7 +152,7 @@ export default function Analyse(props) {
           style={styles.box}>
             <Image source={require('../assets/shampoing.png')} style= {{width: 70, height: 110, marginLeft: '5%'}}/>
               <View style={{marginLeft: '5%'}}>
-                <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, marginTop: '-10%'}}>Shampoing Doux</Text>
+                <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, marginTop: '-10%'}}></Text>
                 <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20}}>Aromazon</Text>
                  <View style={{flexDirection: 'row', marginTop: '16%'}}>
                   <Badge value=" "
@@ -176,3 +232,29 @@ export default function Analyse(props) {
       borderRadius: 10,
      }
   });
+
+  function mapStateToProps(state){
+    console.log('MON STATE RETOUR =================>>>>>>>>',state)
+    return {articlesLiked: state.articlesLiked, token: state.token}
+    
+  }
+
+  function mapDispatchToProps(dispatch) {
+    return {
+      saveArticles: function(articles){
+        console.log('ARTICLES DISPATCH',articles)
+        dispatch({type: 'saveArticles',
+          articles: articles
+        })
+    }
+  }
+}
+ 
+  
+ //(3.19) Modification de l’export, pour appliquer nos functions au composant conteneur
+  export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  
+  )
+  (Analyse);
