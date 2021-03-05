@@ -8,7 +8,8 @@ var bcrypt = require('bcrypt');
 
 var userModel = require('../models/user')
 var articleModel = require('../models/article');
-const { findById } = require('../models/user');
+//const { findById } = require('../models/user');
+//const { default: article } = require('../../Nali-project/reducers/article');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -52,7 +53,7 @@ router.post('/sign-up', async function(req, res, next){
  
   })
    userSave = await newUser.save();
-  console.log(userSave)
+   console.log("USERSAVE ======>>",userSave)
 
   
     if(userSave){
@@ -190,20 +191,17 @@ router.get('/wishlist-article', async function(req,res,next){
 
 // =======>>> TEST <<<<<=============
 // ajout d'un article en cles étrangère de la collection user au like sur le btn coeur
-router.get('/add-article', async function(req, res, next) { 
+router.post('/add-article', async function(req, res, next) { 
 
   var result = false
-  var article = await articleModel.findOne({name: req.query.name})
- console.log('ARTICLE ====>>',article)
-    if(article != null){
-         var newArticle = new userModel({      
-            userName: req.body.name, 
-            email: req.body.email,
-            password: req.body.password,      
-            articleId: article,       
-                   
-          })        
-          var articleSave = await newArticle.save()
+  //var article = await articleModel.findOne({name: req.query.name})
+  var user = await userModel.findOne({token: req.body.token})
+ 
+
+
+    if(user != null){
+          user.articleId.push(req.body.name)       
+          var articleSave = await user.save()
           //var user = userModel()
            //findById(user._id) 
           // .populate('article')
@@ -214,7 +212,7 @@ router.get('/add-article', async function(req, res, next) {
              result = true     
              }   
            }    
-            res.json({result, articleX: articleSave})   
+            res.json({result})   
           });
 
 // ========>> TEST <<<<<===========
@@ -241,18 +239,29 @@ router.delete('/wishlist-artilce', async function(req, res, next) {
 router.get('/wishlist-articles', async function(req, res, next){
 
   var articles = []
-  var article = await articleModel.findOne({name: req.query.name})
-
-  if(article != null){
-   
-      articles = await userModel.find({articleId:article._id})
-    } else {
-      articles = await articleModel.find({userId:user._id})
-    }
+ var user = await userModel.findOne({token: req.query.token})
+                          
+  //var article = await articleModel.findById(user.articleId)
+  console.log("USER", user)
   
-  res.json({articles})
+  if(user){
+    articles = await userModel.findOne({token: req.query.token})
+                            .populate('articleId')
+                            .exec();
+    console.log("ART ===>>", articles)
+  }
+     
+    
+      // user.articleId.name
+     // console.log("ARTICLES BDD", articles)
+  
+    // articles = await userModel.find({articles: user.articleId})
+
+  
+ res.json({articles})
 })
 
+//
 
 
 module.exports = router;

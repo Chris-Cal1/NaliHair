@@ -38,10 +38,10 @@ function Analyse(props) {
 // acquisition des articles liké de la db
   useEffect(() => {
     const findArticlesWishList = async () => {
-      const dataWishlist = await fetch(`http://10.0.0.106:3000/wishlist-articles?name=${product}`)
+      const dataWishlist = await fetch(`http://10.0.0.106:3000/wishlist-articles?token=${props.token}`)
       const body = await dataWishlist.json()
 
-     setFavoris(body.articles)
+     setFavoris(body.articles.articleId)
     }
    console.log(favoris, 'FAVORIS =================>>>')
     findArticlesWishList()
@@ -232,7 +232,8 @@ function Analyse(props) {
 
   function mapStateToProps(state){
     console.log('MON STATE RETOUR =================>>>>>>>>',state)
-    return {articlesLiked: state.articlesLiked}
+    return {articlesLiked: state.articlesLiked, token: state.token}
+    
   }
 
   function mapDispatchToProps(dispatch) {

@@ -9,10 +9,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
 import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light} from '@expo-google-fonts/roboto';
+import {connect} from 'react-redux'
 
 
-
-export default function Signup(props) {
+ function Signup(props) {
 
   const [name, setName] = useState('');
   const [mail, setMail] = useState('');
@@ -28,17 +28,21 @@ var userData = {Name: name, Mail: mail, Password: password};
     const data = await fetch('http://10.0.0.106:3000/sign-up', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: `name=${name}&mail=${mail}&password=${password}`
+      body: `username=${name}&email=${mail}&password=${password}`
     })
 
+    const body = await data.json()
+
     if(body.result == true){
+      props.addToken(body.token)
       setUserExists(true)
+      props.navigation.navigate('Profil')
     } else {
       setErrorsSignup(body.error)
     }
 
     if(userExists){
-      props.navigation.navigate('Signin')
+      //props.navigation.navigate('Signin')
     }
     
     var tabErrorsSignup = listErrorsSignup.map((error,i) => {
@@ -46,24 +50,26 @@ var userData = {Name: name, Mail: mail, Password: password};
     });
   
      if(name && mail && password !== '') {
-      AsyncStorage.setItem("user", JSON.stringify(userData))
-      props.navigation.navigate('Profil')
+    //  AsyncStorage.setItem("user", JSON.stringify(userData))
+    //  props.navigation.navigate('Profil')
+       props.addToken(body.token)
       console.log(userData)
     }
    }
 
    
-    AsyncStorage.getItem('user', (err, data) => {
+    /* AsyncStorage.getItem('user', (err, data) => {
       var userData = JSON.parse(data);
       if (data) {
         setName(userData.Name);
         setMail(userData.Mail);
         setPassword(userData.Password);
+        
         props.navigation.navigate('Profil')
         console.log(data)
        
       }
-    });
+    });*/
     let [fontsLoaded] = useFonts({
       Handlee_400Regular,
       Roboto_400Regular,
@@ -118,3 +124,16 @@ const styles = StyleSheet.create({
    },
 });
 
+function mapDispatchToProps(dispatch){
+  return {
+    addToken: function(token){
+      console.log("MON TOKEN ======>>", token)
+      dispatch({type: 'addToken', token: token})
+    }
+  }
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Signup)

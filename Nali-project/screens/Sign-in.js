@@ -25,20 +25,19 @@ export default function Signin(props) {
     const data = await fetch('http://10.0.0.106:3000/sign-in', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: `mail=${mail}&password=${password}`
+      body: `email=${mail}&password=${password}`
     })
 
     const body = await data.json()
 
     if(body.result == true){
-      props.addToken(body.token)
       setUserExists(true)
 
     } else {
       setErrorsSignup(body.error)
     }
 
-    if(userExists){
+    if(userExists == true){
       props.navigation.navigate('Profil')
     } else {
       setErrorsSignin(body.error)

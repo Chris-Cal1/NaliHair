@@ -41,8 +41,9 @@ import {Provider} from 'react-redux';
 import done1 from './reducers/routine';
 import article from './reducers/article';
 import articlesLiked from './reducers/articleLiked';
+import token from './reducers/token';
 
-const store = createStore(combineReducers({done1, article, articlesLiked}))
+const store = createStore(combineReducers({done1, article, articlesLiked, token}))
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();

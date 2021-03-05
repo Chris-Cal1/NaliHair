@@ -18,13 +18,20 @@ function SearchResults(props) {
     
  
 
-// Ajout au like de l'article dans la db
-const likeArticle = async () => {
-  const dataWishlist = await fetch(`http://10.0.0.106:3000/add-article?name=${props.article.name}`)
-  const body = await dataWishlist.json()
 
 
-}
+var findArticle = async () => {
+    
+  const saveReq = await fetch('http://10.0.0.106:3000/add-article', {
+     method: 'POST',
+     headers: {'Content-Type':'application/x-www-form-urlencoded'},
+     body: `name=${props.article._id}&token=${props.token}`
+    }); 
+      
+    
+    
+    
+   }
 
 
 
@@ -57,7 +64,7 @@ const likeArticle = async () => {
             name="arrow-back-ios" 
             size={26} 
             color="black" 
-            onPress={() => props.navigation.navigate('Recherche', { screen: 'ProductSearch' })}
+            onPress={() => props.navigation.navigate('Analyse')}
             />}
            centerComponent={{ text: 'Analyse', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
            rightComponent={<FontAwesome5 
@@ -85,7 +92,7 @@ const likeArticle = async () => {
                     <Text style={{ fontFamily: 'Roboto_300Light', fontSize: 17, marginLeft: '5%'}}>{props.article.rating}/20</Text>
                   </View>
                 </View>
-              <MaterialIcons name="favorite" size={30} color="#F543A5" style= {{marginLeft: '-50%', marginTop: '25%'}} onPress={() => {likeArticle(); props.likeArticles(props.article)} }/>
+              <MaterialIcons name="favorite" size={30} color="#F543A5" style= {{marginLeft: '-50%', marginTop: '25%'}} onPress={() => {findArticle(); props.likeArticles(props.article)} }/>
             </View> 
           </TouchableOpacity>
 
@@ -159,7 +166,7 @@ const likeArticle = async () => {
 
   function mapStateToProps(state){
     console.log('MON STATE =================>>>>>>>>',state)
-    return {article: state.article}
+    return {article: state.article, token: state.token}
   }
   function mapDispatchToProps(dispatch) {
     return {
