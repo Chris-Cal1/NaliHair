@@ -23,7 +23,7 @@ export default function Signin(props) {
   var handleSubmit = async () => {
 
 
-    const data = await fetch('http://10.0.0.106:3000/sign-in', {
+    const data = await fetch('http://127.0.0.1:3000/sign-in', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `email=${mail}&password=${password}`
