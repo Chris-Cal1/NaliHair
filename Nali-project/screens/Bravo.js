@@ -2,7 +2,10 @@
 import React from 'react';
 
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ImageBackground, TouchableOpacity} from 'react-native';
+import { StyleSheet, ImageBackground, TouchableOpacity} from 'react-native';
+import { Button} from 'react-native-elements'
+
+import {  Text, View, Content} from 'native-base';
 
 import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
@@ -25,21 +28,27 @@ export default function Bravo(props) {
 
     return (
       
-      <ImageBackground source={require('../assets/009.png')}style={{ height: 800,  alignItems: 'center',
-      justifyContent: 'center'}}>
-  
-    
-        <Text style={{ fontSize: 30, color: '#222222', marginBottom: 30, fontFamily: 'Roboto_400Regular', height: 70 }}>Bravo</Text>
-        <Text style={{ fontSize: 20, color: '#222222', marginBottom: 30, fontFamily: 'Roboto_400Regular' }}>Votre routine du jour est terminée !</Text>
-        <Text style={{ fontSize: 20, color: '#222222', marginBottom: 30, fontFamily: 'Roboto_400Regular'}}>A demain pour la suite du programme.</Text>
-        <TouchableOpacity  style={{ fontSize: 40, color: 'white', backgroundColor: "#222222", margin: 5, fontFamily: 'Roboto', borderRadius: 10, height: 40, width: 150, alignItems: 'center', justifyContent: 'center'}}
-        onPress={() => props.navigation.navigate('DailyProgram')}
-        >
-                <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular'}}> Mon programme </Text>
-              </TouchableOpacity>
-              <StatusBar style="dark" backgroundColor='white'/>
+   <ImageBackground source={require('../assets/009.png')}style={styles.container}>  
+     <Content>
 
-        </ImageBackground>
+      <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '70%'}}>
+        <Text style={{ fontSize: 40, color: '#222222', marginBottom: 30, fontFamily: 'Roboto_700Bold'}}>Bravo !</Text>
+        <Text style={{ fontSize: 20, color: '#222222', marginBottom: 20, fontFamily: 'Roboto_500Medium' }}>Votre routine du jour est terminée.</Text>
+        <Text style={{ fontSize: 20, color: '#222222', marginBottom: 30, fontFamily: 'Roboto_400Regular'}}>A demain pour la suite du programme.</Text>
+      </View>
+
+        <View style={{ justifyContent:'center', alignItems: 'center'}}>
+            <Button 
+           title="Mon programme"
+           buttonStyle={styles.button}
+           onPress={() => props.navigation.navigate( 'DailyProgram' )}
+           type="solid"
+            />
+          </View>
+          
+      </Content>
+    <StatusBar style="dark" backgroundColor='white'/>
+   </ImageBackground>
     
   
     );
@@ -49,6 +58,17 @@ export default function Bravo(props) {
      container: {
        flex: 1,
        alignItems: 'center',
-       justifyContent: 'flex-start',
+       justifyContent: 'center',
      },
+     button: {
+      backgroundColor: "#222222", 
+      borderRadius: 10, 
+      width: 250, 
+      height: 50, 
+      fontFamily: 'Roboto_700Bold', 
+      marginTop: Platform.select({
+        ios: '10%', 
+        android:'7%', 
+      }),
+    }
   });
