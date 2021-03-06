@@ -7,10 +7,9 @@ import { Card, ListItem, CheckBox, Input } from 'react-native-elements';
 import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
 import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light} from '@expo-google-fonts/roboto';
+import {connect} from 'react-redux'
 
-
-
-export default function Signin(props) {
+function Signin(props) {
 
   const [mail, setMail] = useState('');
   const [password, setPassword] = useState('');
@@ -23,7 +22,7 @@ export default function Signin(props) {
   var handleSubmit = async () => {
 
 
-    const data = await fetch('http://10.0.0.106:3000/sign-in', {
+    const data = await fetch('http://10.0.0.100:3000/sign-in', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `email=${mail}&password=${password}`
@@ -33,8 +32,8 @@ export default function Signin(props) {
     const body = await data.json()
 
     if(body.result == true){
-
-
+      props.navigation.navigate('Profil')
+      props.addToken(body.token)
       setUserExists(true)
 
     } else {
@@ -42,12 +41,7 @@ export default function Signin(props) {
     }
 
 
-    if(userExists == true){
 
-      props.navigation.navigate('Profil')
-    } else {
-      setErrorsSignin(body.error)
-    }
 
     var tabErrorsSignin = listErrorsSignin.map((error,i) => {
       return(<p>{error}</p>)
@@ -110,3 +104,16 @@ const styles = StyleSheet.create({
    },
 });
 
+function mapDispatchToProps(dispatch){
+  return {
+    addToken: function(token){
+      console.log("MON TOKEN ======>>", token)
+      dispatch({type: 'addToken', token: token})
+    }
+  }
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Signin)

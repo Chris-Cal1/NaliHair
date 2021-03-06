@@ -202,11 +202,8 @@ router.post('/add-article', async function(req, res, next) {
     if(user != null){
           user.articleId.push(req.body.name)       
           var articleSave = await user.save()
-          //var user = userModel()
-           //findById(user._id) 
-          // .populate('article')
-          // .exec();
-          console.log('ARTICLESAVE',articleSave)      
+          
+          //console.log('ARTICLESAVE',articleSave)      
             
            if(articleSave){       
              result = true     
@@ -218,20 +215,21 @@ router.post('/add-article', async function(req, res, next) {
 // ========>> TEST <<<<<===========
 
 // Suppression d'un article dans la db
-router.delete('/wishlist-artilce', async function(req, res, next) {
+router.delete('/delete-article', async function(req, res, next) {
 
   var result = false
-  var article = await articleModel.findOne({name: req.body.name})
-
-
-  if(article != null){
-  var returnDb = await userModel.deleteOne({userName: req.body.userName, articleId: article._id})
+  var user = await userModel.findOne({token: req.body.token})
+  var article = await articleModel.findOne({_id: req.body.id})
+console.log("ARTICLE SUPPR ===", article._id)
+  if(user != null){
+  var returnDb = await userModel.deleteOne({ articleId: article._id})
 
   
   if(returnDb.deletedCount == 1) {
     result = true; 
    }
 }
+console.log("RESULT===>>", result)
   res.json({result});
 })
 
@@ -245,10 +243,10 @@ router.get('/wishlist-articles', async function(req, res, next){
   console.log("USER", user)
   
   if(user){
-    articles = await userModel.findOne({token: req.query.token})
+    articles = await userModel.find({token: req.query.token})
                             .populate('articleId')
                             .exec();
-    console.log("ART ===>>", articles)
+   // console.log("ART ===>>", articles[0].articleId)
   }
      
     
@@ -258,7 +256,7 @@ router.get('/wishlist-articles', async function(req, res, next){
     // articles = await userModel.find({articles: user.articleId})
 
   
- res.json({articles})
+ res.json({articles: articles[0].articleId })
 })
 
 //

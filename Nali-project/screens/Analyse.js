@@ -8,7 +8,7 @@ import { StyleSheet, ImageBackground, Image, TouchableOpacity, Linking,  ScrollV
 import {  Header, SearchBar, Badge } from 'react-native-elements';
 import { Content} from 'native-base';
 
-import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
+import { MaterialIcons, FontAwesome5, Ionicons, Entypo } from '@expo/vector-icons';
 import { Button, Text, View} from 'native-base';
 
 import AppLoading from 'expo-app-loading';
@@ -27,7 +27,7 @@ function Analyse(props) {
   const [isFound, setIsFound] = useState(false);
   const [favoris, setFavoris] = useState([]);
   const onChangeSearch = query => setSearchQuery(query);
-  
+  //console.log("FAVORIS", favoris)
 
   let [fontsLoaded] = useFonts({
     Handlee_400Regular,
@@ -41,22 +41,35 @@ function Analyse(props) {
 // acquisition des articles liké de la db
   useEffect(() => {
     const findArticlesWishList = async () => {
-      const dataWishlist = await fetch(`http://10.0.0.106:3000/wishlist-articles?token=${props.token}`)
+      const dataWishlist = await fetch(`http://10.0.0.100:3000/wishlist-articles?token=${props.token}`)
       const body = await dataWishlist.json()
-
-     setFavoris(body.articles.articleId)
+      
+     // console.log("BODY ARTICLE  ====>>>",body.articles)
+      if(body.articles){
+        
+         setFavoris(body.articles)
+     
+      }
+    
     }
-   console.log(favoris, 'FAVORIS =================>>>')
+  
     findArticlesWishList()
   },[]) 
 
+// suppression d'un article
+  const handleClickDeleteArticle = async name => {
 
-  
+  const response = await fetch('http://10.0.0.100:3000/delete-article', {
+   method: 'DELETE',
+   headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+   body: `id=${name}&token=${props.token}`
+  });
+}
 
 // recherche d'un article
   var findArticle = async () => {
     
-    const saveReq = await fetch('http://10.0.0.106:3000/wishlist-article', {
+    const saveReq = await fetch('http://10.0.0.100:3000/wishlist-article', {
        method: 'POST',
        headers: {'Content-Type':'application/x-www-form-urlencoded'},
        body: `name=${searchQuery}`
@@ -77,6 +90,36 @@ function Analyse(props) {
 
      // faire un map sur les favoris et retourner les card 
 
+   var userFavoris = favoris.map((article,i) => { 
+	
+   if(favoris != null){
+		return (
+      <TouchableOpacity key={i} activeOpacity={1} style={{marginTop: '3%', alignItems: 'center', justifyContent: 'center'}} onPress={() => props.navigation.navigate('SearchResults')}>
+      <View style={styles.box}>
+        <Image source={{  uri: article.image }} style= {{width: 70, height: 110, marginLeft: '5%'}}/>
+          <View style={{marginLeft: '5%'}}>
+            <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 14, marginTop: '10%', marginRight: '20%'}}>{article.type}</Text>
+            <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 14, marginBottom: "5%"}}>{article.name}</Text>
+             <View style={{flexDirection: 'row', marginTop: '1%'}}>
+              <Badge value=" "
+              status="success"// success = vert  //  warning = orange  //  error = rouge
+              />
+              <Text style={{ fontFamily: 'Roboto_300Light', fontSize: 17, marginLeft: '5%'}}>{article.rating}/20</Text>
+            </View>
+          </View>
+        <MaterialIcons name="favorite" size={30} color="#F543A5" style= {{marginLeft: '-50%', marginTop: '25%'}}/>
+        <Entypo name="circle-with-cross" size={24} color="black" style= {{ marginLeft: '10%',marginTop: '35%'}} onPress={() => handleClickDeleteArticle(article._id)}/>
+      </View> 
+    </TouchableOpacity>
+
+        
+		)
+  } else {
+    return (
+      <View></View>
+    )
+  }
+		})
 
 
   if (!fontsLoaded) {
@@ -145,7 +188,8 @@ function Analyse(props) {
         <View style={{ marginLeft: '5%', marginTop: '15%', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
           <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20,}}>Favoris</Text>
         </View>
-
+          {userFavoris}
+          
 
           <TouchableOpacity activeOpacity={1} style={{marginTop: '3%', alignItems: 'center', justifyContent: 'center'}} onPress={() => props.navigation.navigate('SearchResults', { screen: 'SearchResults' })}>
           <View
@@ -234,7 +278,7 @@ function Analyse(props) {
   });
 
   function mapStateToProps(state){
-    console.log('MON STATE RETOUR =================>>>>>>>>',state)
+    //console.log('MON STATE RETOUR =================>>>>>>>>',state)
     return {articlesLiked: state.articlesLiked, token: state.token}
     
   }
