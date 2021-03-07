@@ -39,7 +39,9 @@ function Analyse(props) {
 // acquisition des articles liké de la db
   useEffect(() => {
     const findArticlesWishList = async () => {
+
       const dataWishlist = await fetch(`http://10.0.0.100:3000/wishlist-articles?token=${props.token}`)
+
       const body = await dataWishlist.json()
       
      // console.log("BODY ARTICLE  ====>>>",body.articles)
@@ -79,7 +81,9 @@ function Analyse(props) {
 // recherche d'un article
   var findArticle = async () => {
     
+
     const saveReq = await fetch('http://10.0.0.100:3000/wishlist-article', {
+
        method: 'POST',
        headers: {'Content-Type':'application/x-www-form-urlencoded'},
        body: `name=${searchQuery}`

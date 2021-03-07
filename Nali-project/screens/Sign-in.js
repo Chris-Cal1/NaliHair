@@ -22,7 +22,9 @@ function Signin(props) {
   var handleSubmit = async () => {
 
 
+
     const data = await fetch('http://10.0.0.100:3000/sign-in', {
+
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `email=${mail}&password=${password}`
