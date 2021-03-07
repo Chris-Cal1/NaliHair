@@ -1,3 +1,5 @@
+//Chris
+
 var express = require('express');
 var router = express.Router();
 const request = require('sync-request');
@@ -8,8 +10,7 @@ var bcrypt = require('bcrypt');
 
 var userModel = require('../models/user')
 var articleModel = require('../models/article');
-//const { findById } = require('../models/user');
-//const { default: article } = require('../../Nali-project/reducers/article');
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -42,8 +43,6 @@ router.post('/sign-up', async function(req, res, next){
    error.push('champs vides')
  }
 
- //(4.3) Modification de la requête pour prendre en compte l’enregistrement du mot de passe désormais chiffré.
- //(4.6) modification de la requête pour ajouter la nouvelle propriété qui sera initialisée avec un id généré grâce au module uid2.
  if(error.length == 0) {
     var newUser = new userModel({
     userName: req.body.username,
@@ -62,12 +61,11 @@ router.post('/sign-up', async function(req, res, next){
   }
  }
  
-  //(2.4) Renvoi de la réponse au Frontend
   res.json({result, userSave, error, token});
 
 
 });
-//(2.10) création d'une nouvelle route nommée /sign-in qui se chargera de vérifier l'existence en base de données d’un utilisateur
+
 router.post('/sign-in', async function(req,res,next){
 
   
@@ -82,7 +80,7 @@ router.post('/sign-in', async function(req,res,next){
     error.push('champs vides')
   }
   if(error.length == 0) {
-//(2.11) requête permettant de rechercher un utilisateur en base de données
+
   const user = await userModel.findOne({ 
     email: req.body.email,
     //password: req.body.password,
@@ -102,12 +100,9 @@ router.post('/sign-in', async function(req,res,next){
     error.push('email incorrect')
   }
 }
-//(2.12) Renvoi de la réponse au Frontend
    res.json({result, user, error, token});
 
 })
-
-
 
 
 
@@ -150,9 +145,6 @@ router.delete('/wishlist-articles/:name', async function(req, res, next) {
 
 
 
-
-
-
 // recherche d'un article en db
 router.post('/wishlist-article', async function(req, res, next) { 
 
@@ -165,28 +157,6 @@ router.post('/wishlist-article', async function(req, res, next) {
              }   
             res.json({result, article: article})   
        });
-
-
- //article.name
-
-/*
-// ajout d'un article en bdd
-router.get('/wishlist-article', async function(req,res,next){
-  
-  var article = await articleModel.findOne({name: req.query.name})
-
-  if(article != null){
-    
-      articles =  userModel({articleId:article._id})
-    } else {
-      //articles = await articleModel.find({userId:user._id})
-    }
-    
-  
-
-  res.json({articles})
-})*/
-
 
 
 // =======>>> TEST <<<<<=============
@@ -202,11 +172,8 @@ router.post('/add-article', async function(req, res, next) {
     if(user != null){
           user.articleId.push(req.body.name)       
           var articleSave = await user.save()
-          //var user = userModel()
-           //findById(user._id) 
-          // .populate('article')
-          // .exec();
-          console.log('ARTICLESAVE',articleSave)      
+          
+          //console.log('ARTICLESAVE',articleSave)      
             
            if(articleSave){       
              result = true     
@@ -218,20 +185,20 @@ router.post('/add-article', async function(req, res, next) {
 // ========>> TEST <<<<<===========
 
 // Suppression d'un article dans la db
-router.delete('/wishlist-artilce', async function(req, res, next) {
+router.delete('/delete-article', async function(req, res, next) {
 
   var result = false
-  var article = await articleModel.findOne({name: req.body.name})
-
-
-  if(article != null){
-  var returnDb = await userModel.deleteOne({userName: req.body.userName, articleId: article._id})
-
+  var user = await userModel.findOne({token: req.body.token})
   
-  if(returnDb.deletedCount == 1) {
-    result = true; 
+  if(user != null){
+    user.articleId.splice(req.body.id.position,1);
+    var articleSave = await user.save()
+
+    if(articleSave){       
+      result = true     
+      }   
    }
-}
+   console.log("RESULT===>>", result)
   res.json({result});
 })
 
@@ -245,10 +212,10 @@ router.get('/wishlist-articles', async function(req, res, next){
   console.log("USER", user)
   
   if(user){
-    articles = await userModel.findOne({token: req.query.token})
+    articles = await userModel.find({token: req.query.token})
                             .populate('articleId')
                             .exec();
-    console.log("ART ===>>", articles)
+   // console.log("ART ===>>", articles[0].articleId)
   }
      
     
@@ -258,7 +225,7 @@ router.get('/wishlist-articles', async function(req, res, next){
     // articles = await userModel.find({articles: user.articleId})
 
   
- res.json({articles})
+ res.json({articles: articles[0].articleId })
 })
 
 //
