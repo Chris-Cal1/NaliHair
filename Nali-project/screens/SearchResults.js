@@ -1,7 +1,7 @@
 // Maurine front
 // Chris back
 
-import React from 'react';
+import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, ImageBackground, Image, TouchableOpacity, Linking, Text, View, ScrollView, KeyboardAvoidingView } from 'react-native';
 import {  Header, SearchBar, Badge } from 'react-native-elements';
@@ -16,9 +16,7 @@ import {connect} from 'react-redux';
 
 function SearchResults(props) {
     
- 
-
-
+  const [isLiked, setIsLiked] = useState(false);
 
 var findArticle = async () => {
     
@@ -27,13 +25,15 @@ var findArticle = async () => {
      headers: {'Content-Type':'application/x-www-form-urlencoded'},
      body: `name=${props.article._id}&token=${props.token}`
     }); 
-      
-    
-    
-    
+       
    }
 
-
+   var color;
+   if(isLiked == true){
+     color ='#F543A5'
+   } else {
+     color = 'grey'
+   }
 
       let [fontsLoaded] = useFonts({
         Handlee_400Regular,
@@ -92,7 +92,7 @@ var findArticle = async () => {
                     <Text style={{ fontFamily: 'Roboto_300Light', fontSize: 17, marginLeft: '5%'}}>{props.article.rating}/20</Text>
                   </View>
                 </View>
-              <MaterialIcons name="favorite" size={30} color="#F543A5" style= {{marginLeft: '-50%', marginTop: '25%'}} onPress={() => {findArticle(); props.likeArticles(props.article)} }/>
+              <MaterialIcons name="favorite" size={30} color={color} style= {{marginLeft: '-50%', marginTop: '25%', }} onPress={() => {findArticle(); props.likeArticles(props.article); setIsLiked(true)} }/>
             </View> 
           </TouchableOpacity>
 

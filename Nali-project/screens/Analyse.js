@@ -17,12 +17,10 @@ import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light } 
 import {connect} from 'react-redux';
 
 
-
 function Analyse(props) {
 
   const [searchQuery, setSearchQuery] = useState('');
   const [product, setProduct] = useState('');
-  
   
   const [isFound, setIsFound] = useState(false);
   const [favoris, setFavoris] = useState([]);
@@ -57,13 +55,25 @@ function Analyse(props) {
   },[]) 
 
 // suppression d'un article
-  const handleClickDeleteArticle = async name => {
+  const handleClickDeleteArticle = async (name, type) => {
 
   const response = await fetch('http://10.0.0.100:3000/delete-article', {
    method: 'DELETE',
    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
    body: `id=${name}&token=${props.token}`
   });
+   var favorisCopy = [...favoris]
+   var position = null
+   console.log("FAVORISCOPY", favorisCopy, name)
+     for(let i=0;i<favorisCopy.length;i++){
+         if(favorisCopy[i].type == type){
+             position = i
+             favorisCopy.splice(position,1);
+             
+         }
+     }setFavoris(favorisCopy)
+    
+
 }
 
 // recherche d'un article
@@ -108,7 +118,7 @@ function Analyse(props) {
             </View>
           </View>
         <MaterialIcons name="favorite" size={30} color="#F543A5" style= {{marginLeft: '-50%', marginTop: '25%'}}/>
-        <Entypo name="circle-with-cross" size={24} color="black" style= {{ marginLeft: '10%',marginTop: '35%'}} onPress={() => handleClickDeleteArticle(article._id)}/>
+        <Entypo name="circle-with-cross" size={24} color="black" style= {{ marginLeft: '10%',marginTop: '35%'}} onPress={() => handleClickDeleteArticle(article._id, article.type)}/>
       </View> 
     </TouchableOpacity>
 
