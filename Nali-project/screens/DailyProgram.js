@@ -37,7 +37,27 @@ function DailyProgram(props) {
     setDone7(true);
   }
 
+// recherche d'une recette 
+var findRecipe = async () => {
+    
 
+  const saveReq = await fetch('http://10.0.0.100:3000/search-recipe', {
+
+     method: 'POST',
+     headers: {'Content-Type':'application/x-www-form-urlencoded'},
+     body: `title=${recipe}`
+    }); 
+    var response = await saveReq.json();
+    console.log(response, 'RESPONSE =================>>>')
+    
+
+    if(response.article) {
+     
+     // setIsFound(true)
+     // props.saveArticles(response.recipe)
+    }
+    
+   }
 
   let [fontsLoaded] = useFonts({
     Handlee_400Regular,
