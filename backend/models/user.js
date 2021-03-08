@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 var photoSchema = mongoose.Schema({
     name: String,
-    type: String,
+    date: Date,
     url: String,
     comment: String,
    

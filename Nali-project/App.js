@@ -46,11 +46,14 @@ import done1 from './reducers/routine';
 import done2 from './reducers/routine2';
 import done3 from './reducers/routine3';
 import done4 from './reducers/routine4';
+import doneAll from './reducers/routineAll';
 import article from './reducers/article';
 import articlesLiked from './reducers/articleLiked';
 import token from './reducers/token';
+import recipe from './reducers/recipe';
+import picture from './reducers/picture';
 
-const store = createStore(combineReducers({done1, done2, done3, done4, article, articlesLiked, token}))
+const store = createStore(combineReducers({done1, done2, done3, done4, article, articlesLiked, token, recipe, doneAll, picture}))
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();

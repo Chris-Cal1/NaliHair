@@ -1,8 +1,8 @@
 // Phyllis
-import React from 'react';
+import React, {useState} from 'react';
 
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, ImageBackground, Image, TouchableOpacity, Linking, Text, View, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, ImageBackground, Image, TouchableOpacity, Linking, Text, View, ScrollView, KeyboardAvoidingView, TextInput } from 'react-native';
 import {  Header, SearchBar, Badge } from 'react-native-elements';
 import { Content} from 'native-base';
 
@@ -11,10 +11,78 @@ import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
 import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light } from '@expo-google-fonts/roboto';
+import {connect} from 'react-redux';
 
-
-export default function DailyPics(props) {
+function DailyPics(props) {
       
+  const [comment, setComment] = useState('');
+  var date = new Date().toLocaleDateString()
+ var photo = props.pictureList;
+ console.log("PHOTO", photo[0]._parts[0].[1].uri)
+var handleSubmit = async () => {
+ 
+               
+                var data = new FormData();
+                data.append('avatar', {
+                  uri: photo[0]._parts[0].[1].uri,
+                  type: 'image/jpeg',
+                  name: 'avatar.jpg'   
+                });
+                data.append('token', props.token);
+                data.append('comment', comment)
+
+
+               
+               
+
+  const database = await fetch("http://10.0.0.100:3000/dailypics", {
+    method: 'POST',
+    body: data 
+  })
+}
+
+var myPicture = props.pictureList.map((url, i) => {
+  //console.log(url._parts[0].[1].uri, "MY URL")
+  return(
+    <Content key= {i}>
+
+        <View style={{ marginLeft: '5%', marginTop: '8%', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
+          <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 24}}>{date}</Text>
+        </View>
+
+        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+          <View style={styles.boxImage}>
+            <Image source={{ uri: url._parts[0].[1].uri}} style={{ height: '100%', width: '100%', borderRadius: 10 }} />
+          </View>
+        </View>    
+
+        <View style={styles.addIcon}>
+        <Ionicons name="add-circle" size={40} color="black" onPress={() => props.navigation.navigate()}/>
+        </View>
+         
+
+        <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center', borderColor: 'grey', height: '20%', backgroundColor: "white", width: '90%', margin: 20, borderRadius: 10, elevation: 5, }}> 
+        <TextInput  style={{justifyContent: 'center', alignItems: 'center'}}
+          multiline={true}
+          numberOfLines={10}
+          placeholder="Indiquez le soin du jour et commentez l'état de vos cheveux"
+         onChangeText={(val) => setComment(val)}
+         />
+      </TouchableOpacity>
+
+       <TouchableOpacity  style={{ justifyContent: 'center', alignItems: 'center', fontSize: 40, color: 'white', backgroundColor: "#222222", marginTop: 15, fontFamily: 'Roboto', borderRadius: 10, height: 50, width: 180, alignItems: 'center', justifyContent: 'center', marginLeft: "25%", marginBottom: "60%"}}
+        onPress={() => handleSubmit()}
+        >
+        <Text style={{ color: 'white', fontFamily: 'Roboto', fontSize: 20}}> Valider </Text>
+       </TouchableOpacity >
+
+        </Content>
+  )
+
+})
+
+
+
       let [fontsLoaded] = useFonts({
         Handlee_400Regular,
         Roboto_400Regular,
@@ -55,29 +123,9 @@ export default function DailyPics(props) {
                               />}
           />
     
-        <Content>
+        {myPicture}
 
-        <View style={{ marginLeft: '5%', marginTop: '8%', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
-          <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 24}}>Jour 01</Text>
-        </View>
-
-        <View style={{justifyContent: 'center', alignItems: 'center'}}>
-          <View style={styles.boxImage}>
-            <Image source={require('../assets/carmen.jpg')} style={{ height: '100%', width: '100%', borderRadius: 10 }} />
-          </View>
-        </View>
-
-        <View style={{ marginLeft: '7%', marginTop: '12%', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
-          <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 18}}> Routine du jour </Text>
-          <Text style={{ fontFamily: 'Roboto_500Medium', fontSize: 18}}> Masque d'argile effectué </Text>
-          <Text style={{ fontFamily: 'Roboto_500Medium', fontSize: 18}}> Cheveux plus doux au touché </Text>
-        </View>    
-
-        <View style={styles.addIcon}>
-        <Ionicons name="add-circle" size={40} color="black" onPress={() => props.navigation.navigate()}/>
-        </View>
-
-        </Content>
+        
 
     <StatusBar style="dark" backgroundColor='white'/>
 
@@ -126,3 +174,13 @@ export default function DailyPics(props) {
       },
 
   });
+
+  function mapStateToProps(state) {
+    //console.log(state);
+    return { pictureList : state.picture, token: state.token }
+  }
+
+  export default connect(
+    mapStateToProps, 
+    null,
+  )(DailyPics);

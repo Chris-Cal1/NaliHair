@@ -1,9 +1,10 @@
 var mongoose = require('mongoose')
 
 var recipeSchema = mongoose.Schema({
+    day: String,
     title: String,
     benefits: String,
-    ingredients: String,
+    ingredients: Array,
     image: String,
     emploi: String,
     btn: String,

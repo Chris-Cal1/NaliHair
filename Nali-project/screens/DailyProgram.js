@@ -21,8 +21,6 @@ function DailyProgram(props) {
 
   const [done5, setDone5] = useState(false);
   const [done6, setDone6] = useState(false);
-  const [done7, setDone7] = useState(false);
-
  
 
   var handleSubmit5 = () => {
@@ -33,28 +31,24 @@ function DailyProgram(props) {
     setDone6(true);
   }
 
-  var handleSubmit7 = () => {
-    setDone7(true);
-  }
 
 // recherche d'une recette 
-var findRecipe = async () => {
+var findRecipe = async day => {
     
 
   const saveReq = await fetch('http://10.0.0.100:3000/search-recipe', {
 
      method: 'POST',
      headers: {'Content-Type':'application/x-www-form-urlencoded'},
-     body: `title=${recipe}`
+     body: `day=${day}`
     }); 
     var response = await saveReq.json();
-    console.log(response, 'RESPONSE =================>>>')
+    console.log(response.recipe, 'RESPONSE.RECIPE =================>>>')
     
 
-    if(response.article) {
-     
-     // setIsFound(true)
-     // props.saveArticles(response.recipe)
+    if(response.recipe) {
+      props.sendRecipe(response.recipe)
+      props.navigation.navigate('RecipeDay7_0')
     }
     
    }
@@ -184,10 +178,10 @@ var findRecipe = async () => {
                                   name="arrow-forward-ios" 
                                   size={24} 
                                   color="#222"
-                                  onPress={() => props.navigation.navigate('RecipeDay5_0')}
+                                  onPress={() => findRecipe('day7')}
                               />}
                 checked = {done5}
-                onPress={() => handleSubmit5()}
+                onPress={() => findRecipe('day7')}
             /> 
 
           <CheckBox
@@ -199,10 +193,10 @@ var findRecipe = async () => {
                                   name="arrow-forward-ios" 
                                   size={24} 
                                   color="#222"
-                                  onPress={() => props.navigation.navigate('RecipeDay6_0')}
+                                  onPress={() => findRecipe('day7')}
                               />}
                 checked = {done6}
-                onPress={() => handleSubmit6()}
+                onPress={() => findRecipe('day7')}
             />
 
           <CheckBox
@@ -214,10 +208,11 @@ var findRecipe = async () => {
                                   name="arrow-forward-ios" 
                                   size={24} 
                                   color="#222"
-                                  onPress={() => props.navigation.navigate('RecipeDay7_0')}
+                                  onPress={() => {findRecipe('day7')}}
                               />}
-                checked = {done7}
-                onPress={() => handleSubmit7()}
+                checked = {props.done4}
+                onPress={() => {findRecipe('day7')}}
+                
             />
 
         </Content>
@@ -242,11 +237,22 @@ var findRecipe = async () => {
 
 
 function mapStateToProps(state) {
-  return{dayDone1: state.done1, dayDone2: state.done2, dayDone3: state.done3, dayDone4: state.done4 }
+  return{dayDone1: state.done1, dayDone2: state.done2, dayDone3: state.done3, dayDone4: state.done4, dayAll: state.doneAll }
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+
+    sendRecipe: function(recipe) {
+      console.log(recipe, 'RECIPE ============>>>>');
+      dispatch({type: 'sendRecipe', recipe: recipe})
+
+    }
+  }
 }
 
 
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(DailyProgram)
