@@ -19,29 +19,11 @@ import { connect } from 'react-redux';
 
 function DailyProgram(props) {
 
-  const [done1, setDone1] = useState(false);
-  const [done2, setDone2] = useState(false);
-  const [done3, setDone3] = useState(false);
-  const [done4, setDone4] = useState(false);
   const [done5, setDone5] = useState(false);
   const [done6, setDone6] = useState(false);
   const [done7, setDone7] = useState(false);
 
-  var handleSubmit1 = () => {
-    setDone1(true);
-  } 
-
-  var handleSubmit2 = () => {
-    setDone2(true);
-  }
-
-  var handleSubmit3 = () => {
-    setDone3(true);
-  }
-
-  var handleSubmit4 = () => {
-    setDone4(true);
-  }
+ 
 
   var handleSubmit5 = () => {
     setDone5(true);
@@ -125,7 +107,7 @@ function DailyProgram(props) {
                                   onPress={() => props.navigation.navigate('RecipeDay1_0')}
                               />}
                 checked = {props.dayDone1}
-                //onPress={() => handleSubmit1()}
+                
             />
 
           <CheckBox
@@ -140,7 +122,7 @@ function DailyProgram(props) {
                                   onPress={() => props.navigation.navigate('RecipeDay2_0')}
                               />}
                 checked = {props.dayDone2}
-                //onPress={() => handleSubmit2()}
+                
             />
 
           <CheckBox
@@ -155,7 +137,7 @@ function DailyProgram(props) {
                                   onPress={() => props.navigation.navigate('RecipeDay3_0')}
                               />}
                 checked = {props.dayDone3}
-                //onPress={() => handleSubmit3()}
+              
             />
 
           <CheckBox
@@ -170,7 +152,7 @@ function DailyProgram(props) {
                                   onPress={() => props.navigation.navigate('RecipeDay4_0')}
                               />}
                 checked = {props.dayDone4}
-                //onPress={() => handleSubmit4()}
+                
             />           
 
           <CheckBox
