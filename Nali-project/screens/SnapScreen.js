@@ -84,16 +84,19 @@ function SnapScreen(props) {
                   type: 'image/jpeg',
                   name: 'avatar.jpg',
                 });
-
-                var rawResponse = await fetch("http://127.0.0.1:3000/upload", {
-                  method: 'POST',
-                  body: data
-                });
-                var response = await rawResponse.json();
-                props.onSnap(response.url);
-                setVisible(false);
+               props.onSnap(data)
+               // var rawResponse = await fetch("http://127.0.0.1:3000/upload", {
+               //   method: 'POST',
+                //  body: data
+               // });
+              //  var response = await rawResponse.json();
+              //  props.onSnap(response.url);
+              //  setVisible(false);
               }
-            }}><Entypo name="circle" size={50} color="white" /></TouchableOpacity>
+            }
+          }
+          >
+            <Entypo name="circle" size={50} color="white" /></TouchableOpacity>
 
 
         <TouchableOpacity
@@ -134,7 +137,9 @@ function SnapScreen(props) {
 
 function mapDispatchToProps(dispatch) {
   return {
+
     onSnap: function(url) { 
+     console.log(url, "URL URL")
       dispatch( {type: 'addPicture', url }) 
     }
   }

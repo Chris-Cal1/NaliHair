@@ -7,9 +7,24 @@ const request = require('sync-request');
 // (4.1) importation des deux modules nécessaires au chiffrement
 var uid2 = require('uid2');
 var bcrypt = require('bcrypt');
+// importation des modules nécéssaires pour la sauvegarde dans cloudinary
+var uniqid = require('uniqid');
+var fs = require('fs');
 
 var userModel = require('../models/user')
 var articleModel = require('../models/article');
+var recipeModel = require('../models/recipe')
+
+
+
+var cloudinary = require('cloudinary').v2;
+const { url } = require('inspector');
+cloudinary.config({ 
+  cloud_name: 'dzcx4fqfn', 
+  api_key: '787861123319936', 
+  api_secret: 'P1oll6tedOXfKRk27mQl3fXRaeA' 
+});
+
 
 
 /* GET home page. */
@@ -103,6 +118,46 @@ router.post('/sign-in', async function(req,res,next){
    res.json({result, user, error, token});
 
 })
+
+
+
+// ajout de recette fake en db
+router.post('/fake-recipe', async function(req, res, next) {
+
+  var newRecipe = new recipeModel({
+    day: req.body.day,
+    title: req.body.title,
+    benefits: req.body.benefits,
+    ingredients: req.body.ingredients,
+    image: req.body.image,
+    emploi: req.body.emploi,
+    btn: req.body.btn,
+  })
+
+
+  var recipeSave = await newRecipe.save();
+
+  var result = false;
+  if(recipeSave){
+    result = true;
+  } 
+  res.json({result});
+
+})
+
+
+// recherche d'une recette en db
+router.post('/search-recipe', async function(req, res, next) { 
+
+  var result = false
+  var recipe = await recipeModel.findOne({day: req.body.day})
+  console.log(recipe, 'MA RECETTE =======>>>>>>')
+
+            if(recipe){       
+             result = true     
+             }   
+            res.json({result, recipe: recipe})   
+       });
 
 
 
@@ -228,7 +283,40 @@ router.get('/wishlist-articles', async function(req, res, next){
  res.json({articles: articles[0].articleId })
 })
 
-//
+router.post('/dailypics', async function(req, res, next) {
+
+var result = false;
+
+  var pictureName = './tmp/'+uniqid()+'.jpg';
+  var resultCopy = await req.files.avatar.mv(pictureName);
+  console.log("RESULTCOPY", resultCopy)
+  if(!resultCopy) {
+  
+  var resultCloudinary = await cloudinary.uploader.upload(pictureName);
+} else {
+  console.log('else', resultCloudinary);
+ console.log('else', pictureName); 
+}
+
+console.log('resultcloudinary', resultCloudinary.url);
+console.log('pictureName', pictureName);
+
+  var userPhoto = await userModel.findOne({token: req.body.token})
+  console.log("USER", userPhoto.photo)
+  var date = new Date().toLocaleDateString()
+  console.log("DATE =====>>", date)
+  if(userPhoto){
+    userPhoto.photo.push({url: resultCloudinary.url, date: date, comment: req.body.comment});
+   
+    var photoSave = await userPhoto.save()
+   if(photoSave){       
+    result = true     
+    } 
+  }
+
+  res.json(result);
+  fs.unlinkSync(pictureName);
+});
 
 
 module.exports = router;

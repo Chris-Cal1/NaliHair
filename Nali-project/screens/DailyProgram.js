@@ -19,29 +19,9 @@ import { connect } from 'react-redux';
 
 function DailyProgram(props) {
 
-  const [done1, setDone1] = useState(false);
-  const [done2, setDone2] = useState(false);
-  const [done3, setDone3] = useState(false);
-  const [done4, setDone4] = useState(false);
   const [done5, setDone5] = useState(false);
   const [done6, setDone6] = useState(false);
-  const [done7, setDone7] = useState(false);
-
-  var handleSubmit1 = () => {
-    setDone1(true);
-  } 
-
-  var handleSubmit2 = () => {
-    setDone2(true);
-  }
-
-  var handleSubmit3 = () => {
-    setDone3(true);
-  }
-
-  var handleSubmit4 = () => {
-    setDone4(true);
-  }
+ 
 
   var handleSubmit5 = () => {
     setDone5(true);
@@ -51,11 +31,27 @@ function DailyProgram(props) {
     setDone6(true);
   }
 
-  var handleSubmit7 = () => {
-    setDone7(true);
-  }
 
+// recherche d'une recette 
+var findRecipe = async day => {
+    
 
+  const saveReq = await fetch('http://10.0.0.100:3000/search-recipe', {
+
+     method: 'POST',
+     headers: {'Content-Type':'application/x-www-form-urlencoded'},
+     body: `day=${day}`
+    }); 
+    var response = await saveReq.json();
+    console.log(response.recipe, 'RESPONSE.RECIPE =================>>>')
+    
+
+    if(response.recipe) {
+      props.sendRecipe(response.recipe)
+      props.navigation.navigate('RecipeDay7_0')
+    }
+    
+   }
 
   let [fontsLoaded] = useFonts({
     Handlee_400Regular,
@@ -125,7 +121,7 @@ function DailyProgram(props) {
                                   onPress={() => props.navigation.navigate('RecipeDay1_0')}
                               />}
                 checked = {props.dayDone1}
-                //onPress={() => handleSubmit1()}
+                
             />
 
           <CheckBox
@@ -140,7 +136,7 @@ function DailyProgram(props) {
                                   onPress={() => props.navigation.navigate('RecipeDay2_0')}
                               />}
                 checked = {props.dayDone2}
-                //onPress={() => handleSubmit2()}
+                
             />
 
           <CheckBox
@@ -155,7 +151,7 @@ function DailyProgram(props) {
                                   onPress={() => props.navigation.navigate('RecipeDay3_0')}
                               />}
                 checked = {props.dayDone3}
-                //onPress={() => handleSubmit3()}
+              
             />
 
           <CheckBox
@@ -170,7 +166,7 @@ function DailyProgram(props) {
                                   onPress={() => props.navigation.navigate('RecipeDay4_0')}
                               />}
                 checked = {props.dayDone4}
-                //onPress={() => handleSubmit4()}
+                
             />           
 
           <CheckBox
@@ -182,10 +178,10 @@ function DailyProgram(props) {
                                   name="arrow-forward-ios" 
                                   size={24} 
                                   color="#222"
-                                  onPress={() => props.navigation.navigate('RecipeDay5_0')}
+                                  onPress={() => findRecipe('day7')}
                               />}
                 checked = {done5}
-                onPress={() => handleSubmit5()}
+                onPress={() => findRecipe('day7')}
             /> 
 
           <CheckBox
@@ -197,10 +193,10 @@ function DailyProgram(props) {
                                   name="arrow-forward-ios" 
                                   size={24} 
                                   color="#222"
-                                  onPress={() => props.navigation.navigate('RecipeDay6_0')}
+                                  onPress={() => findRecipe('day7')}
                               />}
                 checked = {done6}
-                onPress={() => handleSubmit6()}
+                onPress={() => findRecipe('day7')}
             />
 
           <CheckBox
@@ -212,10 +208,11 @@ function DailyProgram(props) {
                                   name="arrow-forward-ios" 
                                   size={24} 
                                   color="#222"
-                                  onPress={() => props.navigation.navigate('RecipeDay7_0')}
+                                  onPress={() => {findRecipe('day7')}}
                               />}
-                checked = {done7}
-                onPress={() => handleSubmit7()}
+                checked = {props.done4}
+                onPress={() => {findRecipe('day7')}}
+                
             />
 
         </Content>
@@ -240,11 +237,22 @@ function DailyProgram(props) {
 
 
 function mapStateToProps(state) {
-  return{dayDone1: state.done1, dayDone2: state.done2, dayDone3: state.done3, dayDone4: state.done4 }
+  return{dayDone1: state.done1, dayDone2: state.done2, dayDone3: state.done3, dayDone4: state.done4, dayAll: state.doneAll }
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+
+    sendRecipe: function(recipe) {
+      console.log(recipe, 'RECIPE ============>>>>');
+      dispatch({type: 'sendRecipe', recipe: recipe})
+
+    }
+  }
 }
 
 
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(DailyProgram)
