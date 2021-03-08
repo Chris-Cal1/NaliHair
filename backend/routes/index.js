@@ -106,6 +106,44 @@ router.post('/sign-in', async function(req,res,next){
 
 
 
+// ajout de recette fake en db
+router.post('/fake-recipe', async function(req, res, next) {
+
+  var newRecipe = new recipeModel({
+    title: req.body.title,
+   // benefits: req.body.benefits,
+   // ingredients: req.body.ingredients,
+   // image: req.body.image,
+    btn: req.body.btn,
+  })
+
+
+  var recipeSave = await newRecipe.save();
+
+  var result = false;
+  if(recipeSave){
+    result = true;
+  } 
+  res.json({result});
+
+})
+
+
+// recherche d'une recette en db
+router.post('/search-recipe', async function(req, res, next) { 
+
+  var result = false
+  var recipe = await recipeModel.findOne({title: req.body.title})
+  console.log(recipe.title, 'MA RECETTE =======>>>>>>')
+
+            if(recipe){       
+             result = true     
+             }   
+            res.json({result, recipe: recipe})   
+       });
+
+
+
 // ajout des articles fake en db
 router.post('/wishlist-articles', async function(req, res, next) {
 
