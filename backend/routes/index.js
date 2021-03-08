@@ -10,6 +10,7 @@ var bcrypt = require('bcrypt');
 
 var userModel = require('../models/user')
 var articleModel = require('../models/article');
+var recipeModel = require('../models/recipe')
 
 
 /* GET home page. */
