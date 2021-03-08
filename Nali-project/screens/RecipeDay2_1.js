@@ -1,6 +1,6 @@
 // Chris
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import { StatusBar } from 'expo-status-bar';
 import avoine from '../assets/avoine.jpg';
@@ -14,8 +14,14 @@ import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
 import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light} from '@expo-google-fonts/roboto';
 
+import { connect } from 'react-redux';
 
-export default function RecipeDay2_1(props) {
+
+ function RecipeDay2_1(props) {
+
+  const[termine2, setTermine2] = useState(false);
+
+  console.log(termine2, 'TERMINE2 =======>>>')
 
   let [fontsLoaded] = useFonts({
     Handlee_400Regular,
@@ -72,7 +78,7 @@ export default function RecipeDay2_1(props) {
         <Text style={{ fontFamily: 'Roboto_400Regular', fontSize: 13}}>Conservez la crème d'avoine a côté elle sera utile pour la réalisation de votre spray hydratant ;-) gv</Text>
         <Button dark
           style={{marginTop: '11%', marginBottom: '50%', marginLeft: '35%', backgroundColor: '#222222'}}
-          onPress={() => props.navigation.navigate( 'Bravo' ) }>
+          onPress={()=> {props.navigation.navigate( 'Bravo' ); setTermine2(true); props.rituel2Done(true); }}>
            <Text style={{fontFamily: 'Roboto_500Medium', fontSize: 20}}> Terminé </Text>
          </Button>
         
@@ -96,3 +102,19 @@ export default function RecipeDay2_1(props) {
        justifyContent: 'flex-start',
      },
   });
+
+  function mapDispatchToProps(dispatch){
+    return {
+
+      rituel2Done: function(done) {
+        console.log(done, 'done ============>>>>');
+        dispatch({type: 'doneTwo', done: done})
+
+      }
+    }
+  }
+
+  export default connect(
+    null,
+    mapDispatchToProps
+  )(RecipeDay2_1)

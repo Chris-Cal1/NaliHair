@@ -13,7 +13,7 @@ import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light } 
 
 //import {Calendar, CalendarList, Agenda, WeekCalendar} from 'react-native-calendars';
 import CalendarStrip from 'react-native-calendar-strip';
-import moment from 'moment';
+//import moment from 'moment';
 
 
 export default function MyDiary(props) {
@@ -64,7 +64,7 @@ export default function MyDiary(props) {
       markedDatesStyle={{color:'#222'}}
       highlightDateNumberStyle={{color: '#F475BB', fontSize:16}}
       highlightDateNameStyle={{color: '#F475BB', fontFamily: 'Handlee_400Regular', fontSize: 12}}
-      onDateSelected = { ( day )  => props.navigation.navigate('DailyPics') }
+      onDateSelected = { ( day )  => {console.log('selected day', day) }}
       iconContainer={{flex: 0.1}}
       
     />

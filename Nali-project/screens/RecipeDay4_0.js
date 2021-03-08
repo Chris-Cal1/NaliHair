@@ -1,6 +1,6 @@
 // Chris
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import { StatusBar } from 'expo-status-bar';
 import aloeVera from '../assets/aloeVera.jpg';
@@ -14,8 +14,13 @@ import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
 import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light} from '@expo-google-fonts/roboto';
 
+import { connect } from 'react-redux';
 
-export default function RecipeDay4_0(props) {
+ function RecipeDay4_0(props) {
+
+  const[termine4, setTermine4] = useState(false);
+
+  console.log(termine4, 'TERMINE4 =======>>>')
 
   let [fontsLoaded] = useFonts({
     Handlee_400Regular,
@@ -68,7 +73,7 @@ export default function RecipeDay4_0(props) {
         
          <Button dark
           style={{marginTop: '11%', marginBottom: '10%', marginLeft: '32%', backgroundColor: '#222222'}}
-          onPress={() => props.navigation.navigate( 'Bravo' ) }>
+          onPress={()=> {props.navigation.navigate( 'Bravo' ); setTermine4(true); props.rituel4Done(true); }}>
            <Text style={{fontFamily: 'Roboto_500Medium', fontSize: 20}}> Terminé </Text>
          </Button>
       
@@ -93,4 +98,18 @@ export default function RecipeDay4_0(props) {
      },
   });
 
+  function mapDispatchToProps(dispatch){
+    return {
 
+      rituel4Done: function(done) {
+        console.log(done, 'done ============>>>>');
+        dispatch({type: 'doneFour', done: done})
+
+      }
+    }
+  }
+
+  export default connect(
+    null,
+    mapDispatchToProps
+  )(RecipeDay4_0)

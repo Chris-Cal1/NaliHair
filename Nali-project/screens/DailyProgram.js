@@ -139,8 +139,8 @@ function DailyProgram(props) {
                                   color="#222"
                                   onPress={() => props.navigation.navigate('RecipeDay2_0')}
                               />}
-                checked = {done2}
-                onPress={() => handleSubmit2()}
+                checked = {props.dayDone2}
+                //onPress={() => handleSubmit2()}
             />
 
           <CheckBox
@@ -154,8 +154,8 @@ function DailyProgram(props) {
                                   color="#222"
                                   onPress={() => props.navigation.navigate('RecipeDay3_0')}
                               />}
-                checked = {done3}
-                onPress={() => handleSubmit3()}
+                checked = {props.dayDone3}
+                //onPress={() => handleSubmit3()}
             />
 
           <CheckBox
@@ -169,8 +169,8 @@ function DailyProgram(props) {
                                   color="#222"
                                   onPress={() => props.navigation.navigate('RecipeDay4_0')}
                               />}
-                checked = {done4}
-                onPress={() => handleSubmit4()}
+                checked = {props.dayDone4}
+                //onPress={() => handleSubmit4()}
             />           
 
           <CheckBox
@@ -240,7 +240,7 @@ function DailyProgram(props) {
 
 
 function mapStateToProps(state) {
-  return{dayDone1: state.done1}
+  return{dayDone1: state.done1, dayDone2: state.done2, dayDone3: state.done3, dayDone4: state.done4 }
 }
 
 
