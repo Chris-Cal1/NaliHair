@@ -39,17 +39,19 @@ import { Ionicons } from '@expo/vector-icons';
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 import done1 from './reducers/routine';
+import done2 from './reducers/routine2';
+import done3 from './reducers/routine3';
+import done4 from './reducers/routine4';
 import article from './reducers/article';
 import articlesLiked from './reducers/articleLiked';
 import token from './reducers/token';
 
-const store = createStore(combineReducers({done1, article, articlesLiked, token}))
+const store = createStore(combineReducers({done1, done2, done3, done4, article, articlesLiked, token}))
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const StackNavigator = () => {
-
   return (
 
     

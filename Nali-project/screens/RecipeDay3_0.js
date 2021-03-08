@@ -1,6 +1,6 @@
 // Chris
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import { StatusBar } from 'expo-status-bar';
 
@@ -16,8 +16,14 @@ import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
 import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light} from '@expo-google-fonts/roboto';
 
+import { connect } from 'react-redux';
 
-export default function RecipeDay3_0(props) {
+
+ function RecipeDay3_0(props) {
+
+  const[termine3, setTermine3] = useState(false);
+
+  console.log(termine3, 'TERMINE3 =======>>>')
 
   let [fontsLoaded] = useFonts({
     Handlee_400Regular,
@@ -69,7 +75,7 @@ export default function RecipeDay3_0(props) {
         <Text style={{ marginBottom: '3%', fontFamily: 'Roboto_400Regular', fontSize: 13}}>Appliquez une fine couche d'une huile végétale au choix puis une ou deux noisette du beurre végétale de votre choix sur l'ensemble de votre chevelure.</Text>
         <Button dark
           style={{marginTop: '11%', marginBottom: '50%', marginLeft: '32%', backgroundColor: '#222222'}}
-          onPress={() => props.navigation.navigate( 'Bravo' ) }>
+          onPress={()=> {props.navigation.navigate( 'Bravo' ); setTermine3(true); props.rituel3Done(true); }}>
            <Text style={{fontFamily: 'Roboto_500Medium', fontSize: 20}}> Terminé </Text>
          </Button>
         
@@ -93,4 +99,20 @@ export default function RecipeDay3_0(props) {
        justifyContent: 'flex-start',
      },
   });
+
+  function mapDispatchToProps(dispatch){
+    return {
+
+      rituel3Done: function(done) {
+        console.log(done, 'done ============>>>>');
+        dispatch({type: 'doneThree', done: done})
+
+      }
+    }
+  }
+
+  export default connect(
+    null,
+    mapDispatchToProps
+  )(RecipeDay3_0)
 
