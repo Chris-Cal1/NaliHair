@@ -1,23 +1,31 @@
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']);
+
 import React from 'react';
+
 import {Platform} from 'react-native';
+
+import Home2 from './screens/Home2';
 
 import HomeScreen from './screens/HomeScreen';
 import RoutineChoice from './screens/RoutineChoice';
 import DailyProgram from './screens/DailyProgram';
 
 
-import RecipeDay1 from './screens/RecipeDay1';
-import RecipeDay11 from './screens/RecipeDay1.1';
-import RecipeDay2 from './screens/RecipeDay2';
-import RecipeDay3 from './screens/RecipeDay3';
-import RecipeDay4 from './screens/RecipeDay4';
-import RecipeDay5 from './screens/RecipeDay5';
-import RecipeDay6 from './screens/RecipeDay6';
-import RecipeDay7 from './screens/RecipeDay7';
+import RecipeDay1_0 from './screens/RecipeDay1_0';
+import RecipeDay1_1 from './screens/RecipeDay1_1';
+import RecipeDay2_0 from './screens/RecipeDay2_0';
+import RecipeDay2_1 from './screens/RecipeDay2_1';
+import RecipeDay3_0 from './screens/RecipeDay3_0';
+import RecipeDay4_0 from './screens/RecipeDay4_0';
+import RecipeDay5_0 from './screens/RecipeDay5_0';
+import RecipeDay6_0 from './screens/RecipeDay6_0';
+import RecipeDay7_0 from './screens/RecipeDay7_0';
 
 import ShoppingList from './screens/ShoppingList';
 import Bravo from './screens/Bravo';
 import SnapScreen from './screens/SnapScreen';
+import ReturnPics from './screens/ReturnPics';
 
 import MyDiary from './screens/MyDiary';
 import Profil from './screens/Profil';
@@ -36,39 +44,47 @@ import { Ionicons } from '@expo/vector-icons';
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 import done1 from './reducers/routine';
+import done2 from './reducers/routine2';
+import done3 from './reducers/routine3';
+import done4 from './reducers/routine4';
+import doneAll from './reducers/routineAll';
+import article from './reducers/article';
+import articlesLiked from './reducers/articleLiked';
+import token from './reducers/token';
+import recipe from './reducers/recipe';
+import picture from './reducers/picture';
+import photo from './reducers/photo';
 
-const store = createStore(combineReducers({done1}))
+const store = createStore(combineReducers({done1, done2, done3, done4, article, articlesLiked, token, recipe, doneAll, picture, photo}))
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const StackNavigator = () => {
-
   return (
- 
-   
+
     
     <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        
-<<<<<<< HEAD
-=======
-        
-      
->>>>>>> e55125104edc7bf160181c2dc2833bb461beb9ea
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
+
+        <Stack.Screen name="Home2" component={Home2} />
+
 
         <Stack.Screen name="RoutineChoice" component={RoutineChoice} />
         
         <Stack.Screen name="DailyProgram" component={DailyProgram} />
       
-        <Stack.Screen name="RecipeDay1" component={RecipeDay1} />
-        <Stack.Screen name="RecipeDay11" component={RecipeDay11} />
-        <Stack.Screen name="RecipeDay2" component={RecipeDay2} />
-        <Stack.Screen name="RecipeDay3" component={RecipeDay3} />
-        <Stack.Screen name="RecipeDay4" component={RecipeDay4} />
-        <Stack.Screen name="RecipeDay5" component={RecipeDay5} />
-        <Stack.Screen name="RecipeDay6" component={RecipeDay6} />
-        <Stack.Screen name="RecipeDay7" component={RecipeDay7} />
+        <Stack.Screen name="RecipeDay1_0" component={RecipeDay1_0} />
+        <Stack.Screen name="RecipeDay1_1" component={RecipeDay1_1} />
+        <Stack.Screen name="RecipeDay2_0" component={RecipeDay2_0} />
+        <Stack.Screen name="RecipeDay2_1" component={RecipeDay2_1} />
+        <Stack.Screen name="RecipeDay3_0" component={RecipeDay3_0} />
+        <Stack.Screen name="RecipeDay4_0" component={RecipeDay4_0} />
+        <Stack.Screen name="RecipeDay5_0" component={RecipeDay5_0} />
+        <Stack.Screen name="RecipeDay6_0" component={RecipeDay6_0} />
+        <Stack.Screen name="RecipeDay7_0" component={RecipeDay7_0} />
+        <Stack.Screen name="ReturnPics" component={ReturnPics} />
+        
 
         <Stack.Screen name="Bravo" component={Bravo} />
         <Stack.Screen name="SnapScreen" component={SnapScreen} />
@@ -88,14 +104,18 @@ const StackNavigator = () => {
         
       </Stack.Navigator>
     
-      
+
     
   );
  }
  
  export default function App() {
   return (
+
+
+    
     <Provider store={store}> 
+
     <NavigationContainer>
       <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -151,6 +171,6 @@ const StackNavigator = () => {
 
     </NavigationContainer>
     </Provider>
-    
+
   );
  }

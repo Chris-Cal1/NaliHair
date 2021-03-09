@@ -1,3 +1,4 @@
+var fileUpload = require('express-fileupload');
 require('dotenv').config();
 
 var models = require('./models/bdd')
@@ -12,6 +13,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+app.use(fileUpload());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

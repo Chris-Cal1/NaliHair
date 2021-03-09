@@ -1,13 +1,17 @@
 // Marie
 
 import React from 'react';
+
+import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, ScrollView, ImageBackground, Image } from 'react-native';
 import {  Header } from 'react-native-elements';
 import { Button, Text, View, Content, Card, CardItem, Left, Body, Right} from 'native-base';
+
 import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
+
 import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
-import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light } from '@expo-google-fonts/roboto';
+import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light} from '@expo-google-fonts/roboto';
 
 
 
@@ -47,7 +51,7 @@ export default function RoutineChoice(props) {
           <Card style={{flex: 1, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%', borderRadius: 10}}>
             <CardItem style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0}}>
               <Left style= {{marginLeft: 0}}>
-                <Image source={require('../assets/routines_capillaires_photo1.jpg')} style={{ height: 150, width: 150, flex: 1 }} />
+                <Image source={require('../assets/manqueVolume.jpg')} style={{ height: 150, width: 150, flex: 1 }} />
               </Left>
               <Body style={{justifyContent: 'center', marginLeft: '2%'}}>
                 <Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, color: 'black', marginBottom: '2%'}}>Manque de volume</Text>
@@ -72,7 +76,7 @@ export default function RoutineChoice(props) {
           <Card style={{flex: 1, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%', borderRadius: 10}}>
             <CardItem style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0}}>
               <Left style= {{marginLeft: 0}}>
-                <Image source={require('../assets/routines_capillaires_photo2.jpg')} style={{ height: 150, width: 150, flex: 1 }} />
+                <Image source={require('../assets/cheveuxTernes.jpg')} style={{ height: 150, width: 150, flex: 1 }} />
               </Left>
               <Body style={{justifyContent: 'center', marginLeft: '2%'}}>
                 <Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, color: 'black', marginBottom: '2%'}}>Cheveux ternes</Text>
@@ -97,7 +101,7 @@ export default function RoutineChoice(props) {
           <Card style={{flex: 1, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%', borderRadius: 10}}>
             <CardItem style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0}}>
               <Left style= {{marginLeft: 0}}>
-                <Image source={require('../assets/routines_capillaires_photo3.jpg')} style={{ height: 150, width: 150, flex: 1 }} />
+                <Image source={require('../assets/pellicules.jpg')} style={{ height: 150, width: 150, flex: 1 }} />
               </Left>
               <Body style={{justifyContent: 'center', marginLeft: '2%'}}>
                 <Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, color: 'black', marginBottom: '2%'}}>Pellicules</Text>
@@ -122,7 +126,7 @@ export default function RoutineChoice(props) {
           <Card style={{flex: 0, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%', borderRadius: 10}}>
             <CardItem style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0}}>
               <Left style= {{marginLeft: 0}}>
-                <Image source={require('../assets/routines_capillaires_photo4.jpg')} style={{ height: 150, width: 150, flex: 1 }} />
+                <Image source={require('../assets/cheveuxCassants.jpg')} style={{ height: 150, width: 150, flex: 1 }} />
               </Left>
               <Body style={{justifyContent: 'center', marginLeft: '2%'}}>
                 <Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, color: 'black', marginBottom: '2%'}}>Cheveux cassants</Text>
@@ -144,10 +148,14 @@ export default function RoutineChoice(props) {
             </CardItem>
           </Card>
 
+
+
           </ScrollView>
 
         </Content>
-      
+
+     <StatusBar style="dark" backgroundColor='white'/>
+
     </ImageBackground>
        
     );

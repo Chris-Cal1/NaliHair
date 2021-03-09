@@ -1,7 +1,7 @@
 // Maurine front
 // Chris back
 
-import React from 'react';
+import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, ImageBackground, Image, TouchableOpacity, Linking, Text, View, ScrollView, KeyboardAvoidingView } from 'react-native';
 import {  Header, SearchBar, Badge } from 'react-native-elements';
@@ -11,9 +11,32 @@ import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
 import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light } from '@expo-google-fonts/roboto';
+import {connect} from 'react-redux';
 
-export default function SearchResults(props) {
+
+function SearchResults(props) {
     
+  const [isLiked, setIsLiked] = useState(false);
+
+var findArticle = async () => {
+    
+
+  const saveReq = await fetch('http://10.0.0.100:3000/add-article', {
+
+     method: 'POST',
+     headers: {'Content-Type':'application/x-www-form-urlencoded'},
+     body: `name=${props.article._id}&token=${props.token}`
+    }); 
+       
+   }
+
+   var color;
+   if(isLiked == true){
+     color ='#F543A5'
+   } else {
+     color = 'grey'
+   }
+
       let [fontsLoaded] = useFonts({
         Handlee_400Regular,
         Roboto_400Regular,
@@ -43,7 +66,7 @@ export default function SearchResults(props) {
             name="arrow-back-ios" 
             size={26} 
             color="black" 
-            onPress={() => props.navigation.navigate('Recherche', { screen: 'ProductSearch' })}
+            onPress={() => props.navigation.navigate('Analyse')}
             />}
            centerComponent={{ text: 'Analyse', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
            rightComponent={<FontAwesome5 
@@ -60,18 +83,18 @@ export default function SearchResults(props) {
           <TouchableOpacity activeOpacity={1} style={{marginTop: '7%', alignItems: 'center', justifyContent: 'center'}}>
             <View
             style={styles.box}>
-              <Image source={require('../assets/shampoing.png')} style= {{width: 70, height: 110, marginLeft: '5%'}}/>
+              <Image source={{  uri: props.article.image, }} style= {{width: 70, height: 110, marginLeft: '5%'}}/>
                 <View style={{marginLeft: '5%'}}>
-                  <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, marginTop: '-10%'}}>Shampoing Doux</Text>
-                  <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20}}>Aromazon</Text>
+                  <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 14, marginRight: '20%'}}>{props.article.type}</Text>
+                  <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 14}}>{props.article.name}</Text>
                   <View style={{flexDirection: 'row', marginTop: '16%'}}>
                     <Badge value=" "
                     status="success"// success = vert  //  warning = orange  //  error = rouge
                     />
-                    <Text style={{ fontFamily: 'Roboto_300Light', fontSize: 17, marginLeft: '5%'}}>18/20</Text>
+                    <Text style={{ fontFamily: 'Roboto_300Light', fontSize: 17, marginLeft: '5%'}}>{props.article.rating}/20</Text>
                   </View>
                 </View>
-              <MaterialIcons name="favorite" size={30} color="#F543A5" style= {{marginLeft: '-2%', marginTop: '20%'}}/>
+              <MaterialIcons name="favorite" size={30} color={color} style= {{marginLeft: '-50%', marginTop: '25%', }} onPress={() => {findArticle(); props.likeArticles(props.article); setIsLiked(true)} }/>
             </View> 
           </TouchableOpacity>
 
@@ -80,10 +103,7 @@ export default function SearchResults(props) {
               Composition
             </Text>
             <Text>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-            It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
+            {props.article.composition}
             </Text>
           </View>
           <View style={styles.textAnalyse}>
@@ -145,3 +165,24 @@ export default function SearchResults(props) {
      
    },
   });
+
+  function mapStateToProps(state){
+    //console.log('MON STATE =================>>>>>>>>',state)
+    return {article: state.article, token: state.token}
+  }
+  function mapDispatchToProps(dispatch) {
+    return {
+      likeArticles: function(articlesLiked){
+        console.log('ARTICLES LIKé DISPATCH',articlesLiked)
+        dispatch({type: 'likeArticle',
+        articlesLiked: articlesLiked
+        })
+    }
+  }
+}
+  
+  
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(SearchResults)

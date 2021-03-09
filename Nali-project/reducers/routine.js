@@ -3,7 +3,7 @@ export default function(done = false, action) {
         //var newDone1 = done1.action
         console.log(action.done, 'DOnnnnnne')
         return action.done;
-    } else {
+    }  else {
         return done
     }
 } 
