@@ -1,3 +1,6 @@
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']);
+
 var fileUpload = require('express-fileupload');
 require('dotenv').config();
 

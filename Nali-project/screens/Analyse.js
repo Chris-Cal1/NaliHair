@@ -167,7 +167,11 @@ function Analyse(props) {
         
       <ScrollView>
         
-        <View style={{alignItems: 'center', justifyContent: 'flex-start', marginTop: "12%"}}>
+        <View style={{alignItems: 'center', justifyContent: 'center', marginTop: "10%"}}>
+        <Text style={{marginBottom: '5%', fontSize: 14}}>Que contient votre produit capillaire préféré ?</Text>
+
+        <View style={{flexDirection: 'row', marginTop: 0, alignItems: 'center'}}>
+        <MaterialIcons name="search" size={40} color="#A1DEAB" style= {{ marginTop: '5%', paddingRight: 12}} onPress={() => {findArticle(); props.navigation.navigate('SearchResults')}} />
           <SearchBar
             lightTheme
             containerStyle={{
@@ -180,22 +184,21 @@ function Analyse(props) {
                 shadowRadius: 5,
                 borderColor: 'white',
                 borderTopWidth:0,
-                borderRadius: 10,
+                borderRadius: 10, 
+                marginBottom: -20,
+                justifyContent: 'center', 
             }}        
-            inputContainerStyle={{backgroundColor: 'white', width: 260, height: 45}}
+            inputContainerStyle={{backgroundColor: 'white', width: 220, height: 40 }}
             placeholder="Rechercher produit.."
             placeholderTextColor={ "grey" }
-            searchIcon={{color:'#A1DEAB', size: 35 }}
+            searchIcon={null}
             onChangeText={onChangeSearch}
             value={searchQuery}
             style={{color:'black'}}            
           />
-          <Button dark
-          style={{marginTop: '5%', marginBottom: '4%', backgroundColor: '#222222', marginLeft: '30%'}}
-          onPress={() => {findArticle(); props.navigation.navigate('SearchResults')}}>
-           <Text style={{fontFamily: 'Roboto_500Medium', fontSize: 20}}> Rechercher </Text>
-         </Button>
-          <Text style={{marginTop: '3%', fontSize: 14}}>Que contient votre produit capillaire préféré ?</Text>
+          </View>
+          
+          
           
         </View>
 
@@ -288,9 +291,26 @@ function Analyse(props) {
       shadowRadius: 5,
       borderColor: 'white',
       borderRadius: 10,
-     }
+     },
+     button: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf: 'center',
+      alignContent: 'center',
+      backgroundColor: "#222222", 
+      borderRadius: 10, 
+      width: 200, 
+      height: 50, 
+      fontFamily: 'Roboto_700Bold', 
+      marginTop: Platform.select({
+        ios: '10%', 
+        android:'7%', 
+      }),
+    }
   });
 
+
+  
   function mapStateToProps(state){
     //console.log('MON STATE RETOUR =================>>>>>>>>',state)
     return {articlesLiked: state.articlesLiked, token: state.token}
