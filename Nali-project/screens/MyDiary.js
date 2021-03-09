@@ -23,7 +23,7 @@ function MyDiary(props) {
 useEffect(() => {
   const findPhoto = async () => {
 
-    const dataWishlist = await fetch(`http://10.0.0.100:3000/card-picture?token=${props.token}`)
+    const dataWishlist = await fetch(`http://192.168.0.213:3000/card-picture?token=${props.token}`)
 
     const body = await dataWishlist.json()
 
@@ -42,7 +42,7 @@ useEffect(() => {
 // suppression d'une photo
   const handleClickDeletePhoto = async (id) => {
 
-  const response = await fetch('http://10.0.0.100:3000/delete-photo', {
+  const response = await fetch('http://192.168.0.213:3000/delete-photo', {
    method: 'DELETE',
    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
    body: `id=${id}&token=${props.token}`

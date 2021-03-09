@@ -40,7 +40,7 @@ function Analyse(props) {
   useEffect(() => {
     const findArticlesWishList = async () => {
 
-      const dataWishlist = await fetch(`http://10.0.0.100:3000/wishlist-articles?token=${props.token}`)
+      const dataWishlist = await fetch(`http://192.168.0.213:3000/wishlist-articles?token=${props.token}`)
 
       const body = await dataWishlist.json()
       
@@ -59,7 +59,7 @@ function Analyse(props) {
 // suppression d'un article
   const handleClickDeleteArticle = async (name, type) => {
 
-  const response = await fetch('http://10.0.0.100:3000/delete-article', {
+  const response = await fetch('http://192.168.0.213:3000/delete-article', {
    method: 'DELETE',
    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
    body: `id=${name}&token=${props.token}`
@@ -82,7 +82,7 @@ function Analyse(props) {
   var findArticle = async () => {
     
 
-    const saveReq = await fetch('http://10.0.0.100:3000/wishlist-article', {
+    const saveReq = await fetch('http://192.168.0.213:3000/wishlist-article', {
 
        method: 'POST',
        headers: {'Content-Type':'application/x-www-form-urlencoded'},
