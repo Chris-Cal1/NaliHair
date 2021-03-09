@@ -1,7 +1,7 @@
 // Marie
 
 // Marie
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, ScrollView, ImageBackground, Image, TouchableOpacity } from 'react-native';
 import {  Header, Overlay } from 'react-native-elements';
@@ -13,19 +13,109 @@ import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light } 
 
 //import {Calendar, CalendarList, Agenda, WeekCalendar} from 'react-native-calendars';
 import CalendarStrip from 'react-native-calendar-strip';
-//import moment from 'moment';
+import moment from 'moment';
+import {connect} from 'react-redux';
+
+function MyDiary(props) {
+
+  const [myPicture, setMyPicture] = useState([]);
+
+useEffect(() => {
+  const findPhoto = async () => {
+
+    const dataWishlist = await fetch(`http://10.0.0.100:3000/card-picture?token=${props.token}`)
+
+    const body = await dataWishlist.json()
+
+   // console.log("BODY ARTICLE  ====>>>",body.articles)
+    //if(body.articles){
+
+       setMyPicture(body)
+   //console.log('YOUPI', body)
+   // }
+
+  }
+
+  findPhoto()
+},[])
+
+// suppression d'une photo
+  const handleClickDeletePhoto = async (id) => {
+
+  const response = await fetch('http://10.0.0.100:3000/delete-photo', {
+   method: 'DELETE',
+   headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+   body: `id=${id}&token=${props.token}`
+  });
+   var myPictureCopy = [...myPicture]
+    var position = null
+    console.log("myPictureCopy", myPictureCopy, id)
+     for(let i=0;i<myPictureCopy.length;i++){
+         if(myPictureCopy[i]._id == id){
+            position = i
+            myPictureCopy.splice(position,1);
+             
+         }
+     } setMyPicture(myPictureCopy)    
+
+}
 
 
-export default function MyDiary(props) {
+var cardPicture = myPicture.map((picture, i) => {
+  console.log(picture, 'PIC PIC')
+  return (
+    <TouchableOpacity 
+    onPress={() => props.navigation.navigate('DailyPics', { screen: 'DailyPics' })}>
+    <Card style={{flex: 1, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%'}}>
+            <CardItem style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0, borderRadius: 10,  elevation: 10,shadowOffset: { width: 5, height: 5 },shadowColor: "black",shadowColor: "black", shadowRadius: 10}}>
+              <Left style= {{marginLeft: 0}}>
+                <Image source={{uri: picture.url}}
+                       style={{ height: 150, width: 150, flex: 1 }} />
+              </Left>
+              <Body style={{justifyContent: 'center', marginLeft: '2%'}}>
+                <Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, color: 'black', marginBottom: '2%'}}>{new Date(picture.date).toLocaleDateString()}</Text>
+                <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12, color: 'black', marginBottom: '2%'}}>{picture.comment}</Text>
+                <View style={{flexDirection: 'row', marginTop: '3%'}}>
+                  <Left>
+                    <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12}}></Text>
+                  </Left>
+                  <Right style= {{paddingRight:'3%'}}>
+                    <SimpleLineIcons 
+                      name="trash" 
+                      size={20} 
+                      color="black"
+                      onPress={() => handleClickDeletePhoto(picture._id)}
+                    />
+                  </Right>
+                </View>
+              </Body>
+            </CardItem>
+          </Card>
+        </TouchableOpacity>
 
-  const [text, setText] = useState('');
-  const [visible, setVisible] = useState(false);
-
-  const toggleOverlay = () => {
-    setVisible(!visible);
-  };
+  )
+})
 
 
+
+var handleTest = (day) => {
+  var thisDay = day;
+
+    //console.log(new Date(thisDay).toLocaleDateString(), "DAY DAY DAY DAY")
+        myPicture.map((date, i) => {
+        
+          //console.log(new Date(date.date).toLocaleDateString(), "DATE string")
+           // console.log(date.date.slice(0, 10), "DATE")
+           console.log(date, "date test")
+           if(new Date(date.date).toLocaleDateString() == new Date(thisDay).toLocaleDateString()){
+            props.sendPhoto(date)
+            props.navigation.navigate('ReturnPics')
+             
+      }
+    
+  })
+  
+}
 
   let [fontsLoaded] = useFonts({
     Handlee_400Regular,
@@ -66,7 +156,8 @@ export default function MyDiary(props) {
       markedDatesStyle={{color:'#222'}}
       highlightDateNumberStyle={{color: '#F475BB', fontSize:16}}
       highlightDateNameStyle={{color: '#F475BB', fontFamily: 'Handlee_400Regular', fontSize: 12}}
-      onDateSelected = { ( day )  => {console.log('selected day', day) }}
+      onDateSelected = { ( day )  => { console.log('selected day', day); handleTest(day) }}
+      
       iconContainer={{flex: 0.1}}
       
     />
@@ -78,6 +169,8 @@ export default function MyDiary(props) {
   </Button>
 
   <ScrollView>
+
+    {cardPicture}
   <TouchableOpacity 
     onPress={() => props.navigation.navigate('DailyPics', { screen: 'DailyPics' })}>
     <Card style={{flex: 1, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%'}}>
@@ -127,3 +220,24 @@ export default function MyDiary(props) {
        justifyContent: 'flex-start',
      },
   });
+
+  function mapStateToProps(state) {
+    //console.log(state);
+    return {  token: state.token }
+  }
+
+  function mapDispatchToProps(dispatch){
+    return {
+  
+      sendPhoto: function(photo) {
+        console.log(photo, 'PHOTO ============>>>>');
+        dispatch({type: 'sendPhoto', photo: photo})
+  
+      }
+    }
+  }
+
+  export default connect(
+    mapStateToProps, 
+    mapDispatchToProps,
+  )(MyDiary);

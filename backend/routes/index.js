@@ -253,7 +253,7 @@ router.delete('/delete-article', async function(req, res, next) {
       result = true     
       }   
    }
-   console.log("RESULT===>>", result)
+  // console.log("RESULT===>>", result)
   res.json({result});
 })
 
@@ -264,7 +264,7 @@ router.get('/wishlist-articles', async function(req, res, next){
  var user = await userModel.findOne({token: req.query.token})
                           
   //var article = await articleModel.findById(user.articleId)
-  console.log("USER", user)
+ // console.log("USER", user)
   
   if(user){
     articles = await userModel.find({token: req.query.token})
@@ -273,12 +273,7 @@ router.get('/wishlist-articles', async function(req, res, next){
    // console.log("ART ===>>", articles[0].articleId)
   }
      
-    
-      // user.articleId.name
-     // console.log("ARTICLES BDD", articles)
   
-    // articles = await userModel.find({articles: user.articleId})
-
   
  res.json({articles: articles[0].articleId })
 })
@@ -303,7 +298,7 @@ console.log('pictureName', pictureName);
 
   var userPhoto = await userModel.findOne({token: req.body.token})
   console.log("USER", userPhoto.photo)
-  var date = new Date().toLocaleDateString()
+  var date = new Date().toLocaleString()
   console.log("DATE =====>>", date)
   if(userPhoto){
     userPhoto.photo.push({url: resultCloudinary.url, date: date, comment: req.body.comment});
@@ -318,7 +313,41 @@ console.log('pictureName', pictureName);
   fs.unlinkSync(pictureName);
 });
 
+// extraction des cards  dans la db pour les ajouter dans MyDiary
+router.get('/card-picture', async function(req, res, next){
 
+  var photos = []
+ var user = await userModel.findOne({token: req.query.token})
+
+     console.log(user.photo, "USERRR")
+
+  if(user){
+    photos = user.photo
+   // photos = await userModel.find({photo: user.photo})
+                         console.log('PHOTOOOO', photos)
+  
+  }
+
+ res.json(photos)
+})
+
+// Suppression d'une photo dans la db
+router.delete('/delete-photo', async function(req, res, next) {
+
+  var result = false
+  var user = await userModel.findOne({token: req.body.token})
+  
+  if(user != null){
+    user.photo.splice(req.body.id.position,1);
+    var photoSave = await user.save()
+
+    if(photoSave){       
+      result = true     
+      }   
+   }
+  // console.log("RESULT===>>", result)
+  res.json({result});
+})
 
 
 module.exports = router;
