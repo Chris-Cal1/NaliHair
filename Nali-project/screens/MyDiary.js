@@ -25,6 +25,8 @@ export default function MyDiary(props) {
     setVisible(!visible);
   };
 
+
+
   let [fontsLoaded] = useFonts({
     Handlee_400Regular,
     Roboto_400Regular,

@@ -18,7 +18,7 @@ function DailyPics(props) {
   const [comment, setComment] = useState('');
   var date = new Date().toLocaleDateString()
  var photo = props.pictureList;
- console.log("PHOTO", photo[0]._parts[0].[1].uri)
+ //console.log("PHOTO", photo[0]._parts[0].[1].uri)
 var handleSubmit = async () => {
  
                
