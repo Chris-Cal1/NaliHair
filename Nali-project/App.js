@@ -25,6 +25,7 @@ import RecipeDay7_0 from './screens/RecipeDay7_0';
 import ShoppingList from './screens/ShoppingList';
 import Bravo from './screens/Bravo';
 import SnapScreen from './screens/SnapScreen';
+import ReturnPics from './screens/ReturnPics';
 
 import MyDiary from './screens/MyDiary';
 import Profil from './screens/Profil';
@@ -52,8 +53,9 @@ import articlesLiked from './reducers/articleLiked';
 import token from './reducers/token';
 import recipe from './reducers/recipe';
 import picture from './reducers/picture';
+import photo from './reducers/photo';
 
-const store = createStore(combineReducers({done1, done2, done3, done4, article, articlesLiked, token, recipe, doneAll, picture}))
+const store = createStore(combineReducers({done1, done2, done3, done4, article, articlesLiked, token, recipe, doneAll, picture, photo}))
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -80,6 +82,8 @@ const StackNavigator = () => {
         <Stack.Screen name="RecipeDay5_0" component={RecipeDay5_0} />
         <Stack.Screen name="RecipeDay6_0" component={RecipeDay6_0} />
         <Stack.Screen name="RecipeDay7_0" component={RecipeDay7_0} />
+        <Stack.Screen name="ReturnPics" component={ReturnPics} />
+        
 
         <Stack.Screen name="Bravo" component={Bravo} />
         <Stack.Screen name="SnapScreen" component={SnapScreen} />
