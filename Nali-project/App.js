@@ -1,5 +1,6 @@
 import { LogBox } from 'react-native';
-LogBox.ignoreLogs(['Warning: ...']);
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
 
 import React from 'react';
 
@@ -60,63 +61,72 @@ const store = createStore(combineReducers({done1, done2, done3, done4, article, 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const StackNavigator = () => {
+const RoutineChoiceStack = createStackNavigator();
+const DailyProgramStack = createStackNavigator();
+const MyDiaryStack = createStackNavigator();
+const RechercheStack = createStackNavigator();
+
+
+
+function RoutineChoiceStackScreen() {
   return (
-
+    <RoutineChoiceStack.Navigator screenOptions={{headerShown: false}}>
+     <RoutineChoiceStack.Screen name="RoutineChoice" component={RoutineChoice} />
+   
     
-    <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
-
-        <Stack.Screen name="Home2" component={Home2} />
-
-
-        <Stack.Screen name="RoutineChoice" component={RoutineChoice} />
-        
-        <Stack.Screen name="DailyProgram" component={DailyProgram} />
-      
-        <Stack.Screen name="RecipeDay1_0" component={RecipeDay1_0} />
-        <Stack.Screen name="RecipeDay1_1" component={RecipeDay1_1} />
-        <Stack.Screen name="RecipeDay2_0" component={RecipeDay2_0} />
-        <Stack.Screen name="RecipeDay2_1" component={RecipeDay2_1} />
-        <Stack.Screen name="RecipeDay3_0" component={RecipeDay3_0} />
-        <Stack.Screen name="RecipeDay4_0" component={RecipeDay4_0} />
-        <Stack.Screen name="RecipeDay5_0" component={RecipeDay5_0} />
-        <Stack.Screen name="RecipeDay6_0" component={RecipeDay6_0} />
-        <Stack.Screen name="RecipeDay7_0" component={RecipeDay7_0} />
-        <Stack.Screen name="ReturnPics" component={ReturnPics} />
-        
-
-        <Stack.Screen name="Bravo" component={Bravo} />
-        <Stack.Screen name="SnapScreen" component={SnapScreen} />
-
-        <Stack.Screen name="ShoppingList" component={ShoppingList} />
-
-        <Stack.Screen name="Profil" component={Profil} />
-
-        <Stack.Screen name="DailyPics" component={DailyPics} />
-
-        <Stack.Screen name="Signin" component={Signin} />
-        <Stack.Screen name="Signup" component={Signup} />
-
-        <Stack.Screen name="SearchResults" component={SearchResults} />
-        <Stack.Screen name="Analyse" component={Analyse} />
-
-        
-      </Stack.Navigator>
-    
-
-    
+    </RoutineChoiceStack.Navigator>
   );
- }
+}
+
+
+function DailyProgramStackScreen() {
+  return (
+    <DailyProgramStack.Navigator screenOptions={{headerShown: false}}>
+
+        <DailyProgramStack.Screen name="DailyProgram" component={DailyProgram} />
+        <DailyProgramStack.Screen name="RecipeDay1_0" component={RecipeDay1_0} />
+        <DailyProgramStack.Screen name="RecipeDay1_1" component={RecipeDay1_1} />
+        <DailyProgramStack.Screen name="RecipeDay2_0" component={RecipeDay2_0} />
+        <DailyProgramStack.Screen name="RecipeDay2_1" component={RecipeDay2_1} />
+        <DailyProgramStack.Screen name="RecipeDay3_0" component={RecipeDay3_0} />
+        <DailyProgramStack.Screen name="RecipeDay4_0" component={RecipeDay4_0} />
+        <DailyProgramStack.Screen name="RecipeDay5_0" component={RecipeDay5_0} />
+        <DailyProgramStack.Screen name="RecipeDay6_0" component={RecipeDay6_0} />
+        <DailyProgramStack.Screen name="RecipeDay7_0" component={RecipeDay7_0} />
+        <DailyProgramStack.Screen name="ShoppingList" component={ShoppingList} />
+        <DailyProgramStack.Screen name="Bravo" component={Bravo} />
+    </DailyProgramStack.Navigator>
+  );
+}
+
+function MyDiaryStackScreen() {
+  return (
+    <MyDiaryStack.Navigator screenOptions={{headerShown: false}}>
+        <MyDiaryStack.Screen name="MyDiary" component={MyDiary} />
+        <MyDiaryStack.Screen name="DailyPics" component={DailyPics} />
+        <MyDiaryStack.Screen name="ReturnPics" component={ReturnPics} />
+    </MyDiaryStack.Navigator>
+  );
+}
+
+function RechercheStackScreen() {
+  return (
+    <RechercheStack.Navigator screenOptions={{headerShown: false}}>
+         <RechercheStack.Screen name="Analyse" component={Analyse} />
+         <RechercheStack.Screen name="SearchResults" component={SearchResults} />
+    </RechercheStack.Navigator>
+  );
+}
+
+
+
  
- export default function App() {
+ function NewTab() {
+    
+   
   return (
 
-
     
-    <Provider store={store}> 
-
-    <NavigationContainer>
       <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color }) => {
@@ -157,20 +167,46 @@ const StackNavigator = () => {
       }}
     >
      
-      <Stack.Screen name='StackNav' options={{}} component={StackNavigator} />
-      <Tab.Screen name="RoutineChoice" component={RoutineChoice} />
-      <Tab.Screen name="DailyProgram" component={DailyProgram} />
-      <Tab.Screen name="MyDiary" component={MyDiary} />
-      <Tab.Screen name="Analyse" component={Analyse} />
-      
+
+     
+     <Tab.Screen name="RoutineChoice" component={RoutineChoiceStackScreen} />
+      <Tab.Screen name="DailyProgram" component={DailyProgramStackScreen} />
+      <Tab.Screen name="MyDiary" component={MyDiaryStackScreen} />
+      <Tab.Screen name="Analyse" component={RechercheStackScreen} />
+
+     
       
     </Tab.Navigator>
      
         
-        
+   ) }   
 
-    </NavigationContainer>
-    </Provider>
+   
 
-  );
+  
+
+  export default function App() {
+    return (
+      <Provider store={store}>
+      <NavigationContainer >
+   
+        <Stack.Navigator screenOptions={{headerShown: false}}> 
+          <Stack.Screen name="Home" component={Home2} />
+          <Stack.Screen name="Home1" component={NewTab} />
+          <Stack.Screen name="Signin" component={Signin} />
+          <Stack.Screen name="Signup" component={Signup} />
+          <Stack.Screen name="SnapScreen" component={SnapScreen} />
+          <Stack.Screen name="Profil" component={Profil} />
+  
+         </Stack.Navigator>
+   
+  
+  
+  
+  
+      </NavigationContainer>
+      </Provider>
+  
+      );
+
  }

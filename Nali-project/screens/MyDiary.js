@@ -28,11 +28,11 @@ useEffect(() => {
     const body = await dataWishlist.json()
 
    // console.log("BODY ARTICLE  ====>>>",body.articles)
-    //if(body.articles){
+   // if(body.articles){
 
        setMyPicture(body)
    //console.log('YOUPI', body)
-   // }
+    //}
 
   }
 
@@ -132,7 +132,16 @@ var handleTest = (day) => {
       <ImageBackground source={require('../assets/005.png')} style={{flex: 1}}>
       
       <Header
-        containerStyle = {{backgroundColor: 'white', elevation: 6,shadowOffset: { width: 5, height: 5 },shadowColor: "black", shadowColor: "black", shadowRadius: 10, paddingTop: "5%"}}
+        containerStyle = {{
+          backgroundColor: 'white', 
+          elevation: 6, 
+          shadowOffsetX: 0,
+          shadowOffsetY: -10,
+          shadowColor: 'black', 
+          shadowRadius: 7, 
+          shadowOpacity: 0.2,
+          paddingTop: "5%"
+        }}        
         placement="left"
         centerComponent={{ text: 'Journal de bord', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
         rightComponent={<FontAwesome5 

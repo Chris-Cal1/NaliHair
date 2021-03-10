@@ -32,7 +32,22 @@ export default function Profil(props) {
       <ImageBackground source={require('../assets/004.png')} style={{flex: 1}}>
 
       <Header
-      containerStyle = {{backgroundColor: 'white', elevation: 6,shadowOffset: { width: 5, height: 5 },shadowColor: "black", shadowColor: "black", shadowRadius: 10, paddingTop: "5%"}}
+       containerStyle = {{
+        backgroundColor: 'white', 
+        elevation: 6, 
+        shadowOffsetX: 0,
+        shadowOffsetY: -10,
+        shadowColor: 'black', 
+        shadowRadius: 7, 
+        shadowOpacity: 0.2,
+        paddingTop: "5%"
+       }}
+       leftComponent={<MaterialIcons 
+        name="arrow-back-ios" 
+        size={26} 
+        color="black" 
+        onPress={() => props.navigation.navigate('RoutineChoice')}
+        />}
        placement="left"
        centerComponent={{ text: 'Profil', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
        rightComponent={<FontAwesome5 

@@ -30,15 +30,14 @@ var handleSubmit = async () => {
                 });
                 data.append('token', props.token);
                 data.append('comment', comment)
-
-
-               
-               
+           
 
   const database = await fetch("http://10.0.0.100:3000/dailypics", {
     method: 'POST',
     body: data 
   })
+  props.navigation.navigate('MyDiary')
+
 }
 
 var myPicture = props.pictureList.map((url, i) => {
@@ -122,9 +121,9 @@ var myPicture = props.pictureList.map((url, i) => {
                               onPress={() => props.navigation.navigate('Profil', { screen: 'Profil' })}
                               />}
           />
-    
+    <ScrollView>
         {myPicture}
-
+        </ScrollView>
         
 
     <StatusBar style="dark" backgroundColor='white'/>

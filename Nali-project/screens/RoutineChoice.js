@@ -33,7 +33,16 @@ export default function RoutineChoice(props) {
 
       {/* header avec icone chevron à gauche et icone profil à droite -- onPress à compléter*/}
       <Header
-      containerStyle = {{backgroundColor: 'white', elevation: 6,shadowOffset: { width: 5, height: 5 },shadowColor: "black", shadowColor: "black", shadowRadius: 10, paddingTop: "5%"}}
+      containerStyle = {{
+        backgroundColor: 'white', 
+        elevation: 6, 
+        shadowOffsetX: 0,
+        shadowOffsetY: -10,
+        shadowColor: 'black', 
+        shadowRadius: 7, 
+        shadowOpacity: 0.2,
+        paddingTop: "5%"
+      }}      
        placement="left"
        centerComponent={{ text: 'Routines capillaires', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
        rightComponent={<FontAwesome5 
@@ -48,23 +57,24 @@ export default function RoutineChoice(props) {
 
         <ScrollView>
  
-          <Card style={{flex: 1, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%', borderRadius: 10}}>
-            <CardItem style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0}}>
+          <Card style={styles.card}>
+            <CardItem style={styles.cardItem}>
               <Left style= {{marginLeft: 0}}>
-                <Image source={require('../assets/manqueVolume.jpg')} style={{ height: 150, width: 150, flex: 1 }} />
+                <Image source={require('../assets/manqueVolume.jpg')} style={styles.cardImage} />
               </Left>
               <Body style={{justifyContent: 'center', marginLeft: '2%'}}>
                 <Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, color: 'black', marginBottom: '2%'}}>Manque de volume</Text>
                 <Text style={{fontFamily: 'Roboto_400Regular', fontSize: 12}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed lorem enim.</Text>
                 <View style={{flexDirection: 'row', marginTop: '3%'}}>
                   <Left>
-                    <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12}}>7 jours</Text>
+                    <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12, marginTop: '10%'}}>7 jours</Text>
                   </Left>
                   <Right>
                     <MaterialIcons 
                                  name="arrow-forward-ios" 
                                  size={26} 
                                  color="#A1DEAB"
+                                 style={{marginTop: '15%', marginRight: '20%'}}
                                  onPress={() => props.navigation.navigate('DailyProgram')}
                     />
                   </Right>
@@ -73,23 +83,24 @@ export default function RoutineChoice(props) {
             </CardItem>
           </Card>
 
-          <Card style={{flex: 1, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%', borderRadius: 10}}>
-            <CardItem style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0}}>
+          <Card style={styles.card}>
+            <CardItem style={styles.cardItem}>
               <Left style= {{marginLeft: 0}}>
-                <Image source={require('../assets/cheveuxTernes.jpg')} style={{ height: 150, width: 150, flex: 1 }} />
+                <Image source={require('../assets/cheveuxTernes.jpg')} style={styles.cardImage} />
               </Left>
               <Body style={{justifyContent: 'center', marginLeft: '2%'}}>
                 <Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, color: 'black', marginBottom: '2%'}}>Cheveux ternes</Text>
                 <Text style={{fontFamily: 'Roboto_400Regular', fontSize: 12}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed lorem enim.</Text>
                 <View style={{flexDirection: 'row', marginTop: '3%'}}>
                   <Left>
-                    <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12}}>7 jours</Text>
+                    <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12, marginTop: '10%'}}>7 jours</Text>
                   </Left>
                   <Right>
                     <MaterialIcons 
                                  name="arrow-forward-ios" 
                                  size={26} 
                                  color="#A1DEAB"
+                                 style={{marginTop: '15%', marginRight: '20%'}}
                                  onPress={() => props.navigation.navigate('DailyProgram')}
                     />
                   </Right>
@@ -98,23 +109,24 @@ export default function RoutineChoice(props) {
             </CardItem>
           </Card>
 
-          <Card style={{flex: 1, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%', borderRadius: 10}}>
-            <CardItem style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0}}>
+          <Card style={styles.card}>
+            <CardItem style={styles.cardItem}>
               <Left style= {{marginLeft: 0}}>
-                <Image source={require('../assets/pellicules.jpg')} style={{ height: 150, width: 150, flex: 1 }} />
+                <Image source={require('../assets/pellicules.jpg')} style={styles.cardImage} />
               </Left>
               <Body style={{justifyContent: 'center', marginLeft: '2%'}}>
                 <Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, color: 'black', marginBottom: '2%'}}>Pellicules</Text>
                 <Text style={{fontFamily: 'Roboto_400Regular', fontSize: 12}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed lorem enim.</Text>
                 <View style={{flexDirection: 'row', marginTop: '3%'}}>
                   <Left>
-                    <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12}}>7 jours</Text>
+                    <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12, marginTop: '10%'}}>7 jours</Text>
                   </Left>
                   <Right>
                     <MaterialIcons 
                                  name="arrow-forward-ios" 
                                  size={26} 
                                  color="#A1DEAB"
+                                 style={{marginTop: '15%', marginRight: '20%'}}
                                  onPress={() => props.navigation.navigate('DailyProgram')}
                     />
                   </Right>
@@ -123,23 +135,24 @@ export default function RoutineChoice(props) {
             </CardItem>
           </Card>
 
-          <Card style={{flex: 0, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%', borderRadius: 10}}>
-            <CardItem style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0}}>
+          <Card style={styles.card}>
+            <CardItem style={styles.cardItem}>
               <Left style= {{marginLeft: 0}}>
-                <Image source={require('../assets/cheveuxCassants.jpg')} style={{ height: 150, width: 150, flex: 1 }} />
+                <Image source={require('../assets/cheveuxCassants.jpg')} style={styles.cardImage} />
               </Left>
               <Body style={{justifyContent: 'center', marginLeft: '2%'}}>
                 <Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, color: 'black', marginBottom: '2%'}}>Cheveux cassants</Text>
                 <Text style={{fontFamily: 'Roboto_400Regular', fontSize: 12}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed lorem enim.</Text>
                 <View style={{flexDirection: 'row', marginTop: '3%'}}>
                   <Left>
-                    <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12}}>7 jours</Text>
+                    <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12, marginTop: '10%'}}>7 jours</Text>
                   </Left>
                   <Right>
                     <MaterialIcons 
                                  name="arrow-forward-ios" 
                                  size={26} 
                                  color="#A1DEAB"
+                                 style={{marginTop: '15%', marginRight: '20%'}}
                                  onPress={() => props.navigation.navigate('DailyProgram')}
                     />
                   </Right>
@@ -168,4 +181,33 @@ export default function RoutineChoice(props) {
        alignItems: 'center',
        justifyContent: 'flex-start',
      },
+     card: {
+      flex: 1, 
+      marginLeft:'3%', 
+      marginTop: '3%', 
+      marginRight: '3%', 
+      marginBottom: '3%', 
+      borderRadius: 10, 
+      borderColor: 'white',
+      elevation: 3,
+      shadowOffset: { width: 5, height: 5 },
+      shadowColor: "black",
+      shadowOpacity: 0.1,
+      shadowRadius: 3,
+      borderColor: 'white',
+     },
+     cardItem: {
+      paddingLeft: 0, 
+      paddingRight: 0, 
+      paddingTop: 0, 
+      paddingBottom: 0, 
+      borderRadius: 10,
+    },
+     cardImage: {
+      borderBottomLeftRadius: 10, 
+      borderTopLeftRadius: 10, 
+      height: 150, 
+      width: 100, 
+      flex: 1,
+     }
   });

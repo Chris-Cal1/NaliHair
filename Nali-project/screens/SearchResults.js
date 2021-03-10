@@ -77,7 +77,7 @@ var findArticle = async () => {
                               />}
           />
     
-      <Content>
+      <Content> 
         <ScrollView>
 
           <TouchableOpacity activeOpacity={1} style={{marginTop: '7%', alignItems: 'center', justifyContent: 'center'}}>
@@ -85,16 +85,15 @@ var findArticle = async () => {
             style={styles.box}>
               <Image source={{  uri: props.article.image, }} style= {{width: 70, height: 110, marginLeft: '5%'}}/>
                 <View style={{marginLeft: '5%'}}>
-                  <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 14, marginRight: '20%'}}>{props.article.type}</Text>
-                  <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 14}}>{props.article.name}</Text>
-                  <View style={{flexDirection: 'row', marginTop: '16%'}}>
+                  <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 17, marginRight: '30%'}}>{props.article.type}</Text>
+                  <View style={{flexDirection: 'row', marginTop: '10%'}}>
                     <Badge value=" "
                     status="success"// success = vert  //  warning = orange  //  error = rouge
                     />
-                    <Text style={{ fontFamily: 'Roboto_300Light', fontSize: 17, marginLeft: '5%'}}>{props.article.rating}/20</Text>
+                    <Text style={{ fontFamily: 'Roboto_300Light', fontSize: 14, marginLeft: '5%', marginBottom: '5%', marginTop: '0%'}}>{props.article.rating}/20</Text>
                   </View>
                 </View>
-              <MaterialIcons name="favorite" size={30} color={color} style= {{marginLeft: '-50%', marginTop: '25%', }} onPress={() => {findArticle(); props.likeArticles(props.article); setIsLiked(true)} }/>
+              <MaterialIcons name="favorite" size={30} color={color} style= {{marginLeft: '-35%', marginTop: '25%', }} onPress={() => {findArticle(); props.likeArticles(props.article); setIsLiked(true)} }/>
             </View> 
           </TouchableOpacity>
 
@@ -137,7 +136,7 @@ var findArticle = async () => {
     box: {
       alignItems: 'center',
       flexDirection: 'row',
-      width: 300,
+      width: 350,
       height: 150,
       backgroundColor: 'white',
       elevation: 3,
