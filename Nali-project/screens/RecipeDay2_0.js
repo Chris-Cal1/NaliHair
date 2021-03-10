@@ -32,7 +32,16 @@ export default function RecipeDay2_0(props) {
       
   <ImageBackground source={require('../assets/007.png')} style={styles.container}>
     <Header
-      containerStyle = {{backgroundColor: 'white', elevation: 6,shadowOffset: { width: 5, height: 5 },shadowColor: "black", shadowColor: "black", shadowRadius: 10, paddingTop: "5%"}}
+      containerStyle = {{
+        backgroundColor: 'white', 
+        elevation: 6, 
+        shadowOffsetX: 0,
+        shadowOffsetY: -10,
+        shadowColor: 'black', 
+        shadowRadius: 7, 
+        shadowOpacity: 0.2,
+        paddingTop: "5%"
+      }}
        leftComponent={<MaterialIcons 
                          name="arrow-back-ios" 
                          size={26} 

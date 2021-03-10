@@ -121,8 +121,7 @@ function Analyse(props) {
               <Text style={{ fontFamily: 'Roboto_300Light', fontSize: 17, marginLeft: '5%'}}>{article.rating}/20</Text>
             </View>
           </View>
-        <MaterialIcons name="favorite" size={30} color="#F543A5" style= {{marginLeft: '-50%', marginTop: '25%'}}/>
-        <Entypo name="circle-with-cross" size={24} color="black" style= {{ marginLeft: '10%',marginTop: '35%'}} onPress={() => handleClickDeleteArticle(article._id, article.type)}/>
+        <Entypo name="cross" size={24} color="black" style= {{ marginLeft: '-30%', marginTop: '35%'}} onPress={() => handleClickDeleteArticle(article._id, article.type)}/>
       </View> 
     </TouchableOpacity>
 
@@ -167,7 +166,10 @@ function Analyse(props) {
         
       <ScrollView>
         
-        <View style={{alignItems: 'center', justifyContent: 'flex-start', marginTop: "12%"}}>
+        <View style={{alignItems: 'center', justifyContent: 'center', marginTop: "10%"}}>
+        <Text style={{marginBottom: '5%', fontSize: 14}}>Que contient votre produit capillaire préféré ?</Text>
+
+        <View style={{flexDirection: 'row', marginTop: 0, alignItems: 'center'}}>
           <SearchBar
             lightTheme
             containerStyle={{
@@ -180,49 +182,40 @@ function Analyse(props) {
                 shadowRadius: 5,
                 borderColor: 'white',
                 borderTopWidth:0,
-                borderRadius: 10,
+                borderRadius: 10, 
+                marginBottom: -20,
+                justifyContent: 'center', 
             }}        
-            inputContainerStyle={{backgroundColor: 'white', width: 260, height: 45}}
+            inputContainerStyle={{backgroundColor: 'white', width: 220, height: 40 }}
             placeholder="Rechercher produit.."
             placeholderTextColor={ "grey" }
-            searchIcon={{color:'#A1DEAB', size: 35 }}
+            searchIcon={null}
             onChangeText={onChangeSearch}
             value={searchQuery}
             style={{color:'black'}}            
           />
-          <Button dark
-          style={{marginTop: '5%', marginBottom: '4%', backgroundColor: '#222222', marginLeft: '30%'}}
-          onPress={() => {findArticle(); props.navigation.navigate('SearchResults')}}>
-           <Text style={{fontFamily: 'Roboto_500Medium', fontSize: 20}}> Rechercher </Text>
-         </Button>
-          <Text style={{marginTop: '3%', fontSize: 14}}>Que contient votre produit capillaire préféré ?</Text>
+          <MaterialIcons name="search" size={40} color="#A1DEAB" style= {{ shadowColor: "black",  elevation: 3,
+      shadowOffset: { width: 2, height: 2 },
+      shadowColor: "black",
+      shadowOpacity: 0.1,
+      shadowRadius: 1,
+ marginTop: '5%', paddingLeft: 12}} onPress={() => {findArticle(); props.navigation.navigate('SearchResults')}} />
+          </View>
+          
+          
           
         </View>
 
-        <View style={{ marginLeft: '5%', marginTop: '15%', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
-          <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20,}}>Favoris</Text>
+        <View style={{ marginLeft: '5%', marginTop: '15%', alignItems: 'flex-start', justifyContent: 'flex-start', flexDirection: 'row'}}>
+          <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, marginRight: 5}}>Favoris</Text> 
+          <MaterialIcons name="favorite" size={30} color="#F543A5"/>
+
         </View>
           {userFavoris}
           
 
-          <TouchableOpacity activeOpacity={1} style={{marginTop: '3%', alignItems: 'center', justifyContent: 'center'}} onPress={() => props.navigation.navigate('SearchResults', { screen: 'SearchResults' })}>
-          <View
-          style={styles.box}>
-            <Image source={require('../assets/shampoing.png')} style= {{width: 70, height: 110, marginLeft: '5%'}}/>
-              <View style={{marginLeft: '5%'}}>
-                <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, marginTop: '-10%'}}></Text>
-                <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20}}>Aromazon</Text>
-                 <View style={{flexDirection: 'row', marginTop: '16%'}}>
-                  <Badge value=" "
-                  status="success"// success = vert  //  warning = orange  //  error = rouge
-                  />
-                  <Text style={{ fontFamily: 'Roboto_300Light', fontSize: 17, marginLeft: '5%'}}>18/20</Text>
-                </View>
-              </View>
-            <MaterialIcons name="favorite" size={30} color="#F543A5" style= {{marginLeft: '-2%', marginTop: '20%'}}/>
-          </View> 
-        </TouchableOpacity>
-        <TouchableOpacity activeOpacity={1} style={{marginTop: '3%', alignItems: 'center', justifyContent: 'center'}} onPress={() => props.navigation.navigate('SearchResults', { screen: 'SearchResults' })}>
+          
+        {/*<TouchableOpacity activeOpacity={1} style={{marginTop: '3%', alignItems: 'center', justifyContent: 'center'}} onPress={() => props.navigation.navigate('SearchResults', { screen: 'SearchResults' })}>
           <View
           style={styles.box}>
             <Image source={require('../assets/shampoing.png')} style= {{width: 70, height: 110, marginLeft: '5%'}}/>
@@ -238,24 +231,7 @@ function Analyse(props) {
               </View>
             <MaterialIcons name="favorite" size={30} color="#F543A5" style= {{marginLeft: '-2%', marginTop: '20%'}}/>
           </View> 
-        </TouchableOpacity>
-        <TouchableOpacity activeOpacity={1} style={{marginTop: '3%', alignItems: 'center', justifyContent: 'center'}} onPress={() => props.navigation.navigate('SearchResults', { screen: 'SearchResults' })}>
-          <View
-          style={styles.box}>
-            <Image source={require('../assets/shampoing.png')} style= {{width: 70, height: 110, marginLeft: '5%'}}/>
-              <View style={{marginLeft: '5%'}}>
-                <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20, marginTop: '-10%'}}>Shampoing Doux</Text>
-                <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 20}}>Aromazon</Text>
-                 <View style={{flexDirection: 'row', marginTop: '16%'}}>
-                  <Badge value=" "
-                  status="error"// success = vert  //  warning = orange  //  error = rouge
-                  />
-                  <Text style={{ fontFamily: 'Roboto_300Light', fontSize: 17, marginLeft: '5%'}}>6/20</Text>
-                </View>
-              </View>
-            <MaterialIcons name="favorite" size={30} color="#F543A5" style= {{marginLeft: '-2%', marginTop: '20%'}}/>
-          </View> 
-        </TouchableOpacity>
+          </TouchableOpacity>*/}
         
         </ScrollView>
 
@@ -288,9 +264,26 @@ function Analyse(props) {
       shadowRadius: 5,
       borderColor: 'white',
       borderRadius: 10,
-     }
+     },
+     button: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf: 'center',
+      alignContent: 'center',
+      backgroundColor: "#222222", 
+      borderRadius: 10, 
+      width: 200, 
+      height: 50, 
+      fontFamily: 'Roboto_700Bold', 
+      marginTop: Platform.select({
+        ios: '10%', 
+        android:'7%', 
+      }),
+    }
   });
 
+
+  
   function mapStateToProps(state){
     //console.log('MON STATE RETOUR =================>>>>>>>>',state)
     return {articlesLiked: state.articlesLiked, token: state.token}

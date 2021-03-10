@@ -4,9 +4,12 @@ import React, { useState, useEffect} from 'react';
 
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, ImageBackground, View} from 'react-native';
-import { Card, ListItem, CheckBox } from 'react-native-elements'
+import { Card, ListItem, CheckBox, Header } from 'react-native-elements'
+import { Content} from 'native-base';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
 
 import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
@@ -14,7 +17,7 @@ import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light} f
 
 
 
-export default function ShoppingList() {
+export default function ShoppingList(props) {
 
 
   const [checkedBox1, setCheckedBox1] = useState(false);
@@ -109,7 +112,6 @@ export default function ShoppingList() {
       }, []);
 
 
-      
 
       let [fontsLoaded] = useFonts({
         Handlee_400Regular,
@@ -127,50 +129,77 @@ export default function ShoppingList() {
   return (
     <ImageBackground source={require('../assets/002.png')}style={styles.container}> 
 
-      <View style={{alignItems: 'flex-start', marginTop: '10%'}}>
+    <Header
+          containerStyle = {{
+            backgroundColor: 'white', 
+            elevation: 6, 
+            shadowOffsetX: 0,
+            shadowOffsetY: -10,
+            shadowColor: 'black', 
+            shadowRadius: 7, 
+            shadowOpacity: 0.2,
+            paddingTop: "5%"
+          }}
+          leftComponent={<MaterialIcons 
+            name="arrow-back-ios" 
+            size={26} 
+            color="black" 
+            onPress={() => props.navigation.navigate('DailyProgram')}
+            />}
+          centerComponent={{ text: 'Liste de course', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
+          rightComponent={<FontAwesome5 
+                              name="user-alt" 
+                              size={26} 
+                              color="black" 
+                              onPress={() => props.navigation.navigate('Profil', { screen: 'Profil' })}
+                              />}
+          />
+
+<Content>
+      <View style={{alignItems: 'flex-start', marginTop: '5%'}}>
    
-          <Card containerStyle={{width: '70%', borderRadius: 10}}>
+          <Card containerStyle={styles.box}>
 
-               <Text style={{fontSize: 30}}> Semaine 1</Text>
-
-                  <ListItem style={{alignItems: 'flex-start', marginBottom: -34, borderRadius: 20 }}>
+               <Text style={{fontSize: 30, fontFamily: 'Roboto_500Medium'}}> Semaine 1</Text>
+                  
+                  <ListItem style={{alignItems: 'flex-start', marginBottom: -30}}>
                     <CheckBox 
                     checked={checkedBox1}
                     checkedColor="#F475BB"
                     onPress={() => handleSubmit1(!checkedBox1)}/>
-                    <Text>Huile d'olive</Text>      
+                    <Text style={{fontSize: 15, fontFamily: 'Roboto_400Regular'}}>Huile d'olive</Text>      
                   </ListItem >
           
-                  <ListItem style={{alignItems: 'flex-start', marginBottom: -34}}>
+                  <ListItem style={{alignItems: 'flex-start', marginBottom: -30}}>
                     <CheckBox 
                     checked={checkedBox2}
                     checkedColor="#F475BB"
                     onPress={() => handleSubmit2(!checkedBox2)}
                     />
-                    <Text>Beurre de karité</Text>         
+                    <Text style={{fontSize: 15, fontFamily: 'Roboto_400Regular'}}>Beurre de karité</Text>         
                   </ListItem>
                
-                  <ListItem style={{alignItems: 'flex-start', marginBottom: -34}}>
+                  <ListItem style={{alignItems: 'flex-start', marginBottom: -30}}>
                     <CheckBox 
                     checked={checkedBox3}
                     checkedColor="#F475BB"
                     onPress={() => handleSubmit3(!checkedBox3)}/>
-                    <Text>Lait d'avoine</Text>         
+                    <Text style={{fontSize: 15, fontFamily: 'Roboto_400Regular'}}>Lait d'avoine</Text>         
                   </ListItem>
 
-                  <ListItem style={{alignItems: 'flex-start', marginBottom: -10}}>
+                  <ListItem style={{alignItems: 'flex-start', marginBottom: -30}}>
                     <CheckBox 
                     checked={checkedBox4}
                     checkedColor="#F475BB"
                     onPress={() => handleSubmit4(!checkedBox4)}
                     />
-                    <Text>Avocat</Text>         
+                    <Text style={{fontSize: 15, fontFamily: 'Roboto_400Regular'}}>Avocat</Text>         
                   </ListItem>
 
           </Card>
 
       </View>
-
+      </Content>
     <StatusBar style="dark" backgroundColor='white'/>
 
    </ImageBackground>
@@ -181,7 +210,21 @@ export default function ShoppingList() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
+  box: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    width: 350,
+    height: '100%',
+    backgroundColor: 'white',
+    elevation: 3,
+    shadowOffset: { width: 5, height: 5 },
+    shadowColor: "black",
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    borderColor: 'white',
+    borderRadius: 10,
+   },
 });
