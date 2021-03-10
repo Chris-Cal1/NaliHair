@@ -44,7 +44,7 @@ export default function Home2(props) {
             <Button 
               title="Je découvre ma routine"
               buttonStyle={styles.button}
-              onPress={() => props.navigation.navigate('StackNav', { screen: 'HomeScreen' })}
+              onPress={() => props.navigation.navigate('Home1', {sreen: 'RoutineChoice'})}
               type="solid"
             />
           </View>

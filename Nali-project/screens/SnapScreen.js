@@ -84,6 +84,7 @@ function SnapScreen(props) {
                   type: 'image/jpeg',
                   name: 'avatar.jpg',
                 });
+                props.navigation.navigate('DailyPics')
                props.onSnap(data)
                // var rawResponse = await fetch("http://127.0.0.1:19000/upload", {
                //   method: 'POST',
