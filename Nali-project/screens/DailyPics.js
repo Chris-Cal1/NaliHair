@@ -2,8 +2,8 @@
 import React, {useState} from 'react';
 
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, ImageBackground, Image, TouchableOpacity, Linking, Text, View, ScrollView, KeyboardAvoidingView, TextInput } from 'react-native';
-import {  Header, SearchBar, Badge } from 'react-native-elements';
+import { StyleSheet, ImageBackground, Image, TouchableOpacity, Linking, Text, View, ScrollView, KeyboardAvoidingView } from 'react-native';
+import {  Header, SearchBar, Badge, Input } from 'react-native-elements';
 import { Content} from 'native-base';
 
 import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
@@ -33,7 +33,7 @@ var handleSubmit = async () => {
                 data.append('comment', comment)
            
 
-  const database = await fetch("http://10.0.0.100:3000/dailypics", {
+  const database = await fetch("http://192.168.254.3:3000/dailypics", {
     method: 'POST',
     body: data 
    
@@ -42,6 +42,7 @@ var handleSubmit = async () => {
   //console.log("PHOTOSAVE bc", body.photoSave[0])
   props.sendPhoto(body.photoSave[0])
   props.navigation.navigate('MyDiary')
+
 
 
 }
@@ -86,6 +87,7 @@ var handleSubmit = async () => {
                               onPress={() => props.navigation.navigate('Profil', { screen: 'Profil' })}
                               />}
           />
+
     <ScrollView>
               <Content  >
 
@@ -122,6 +124,7 @@ var handleSubmit = async () => {
           </Content>
     
        
+
         </ScrollView>
         
 
@@ -154,23 +157,21 @@ var handleSubmit = async () => {
       shadowRadius: 7, 
       shadowOpacity: 0.2,
      },
-     addIcon: {
-       ...Platform.select({
-        ios: {
-        marginRight: '10%', 
-        marginTop: '20%',
-        alignItems: 'flex-end', 
-        justifyContent: 'flex-end',
-      },
-        android: {
-        alignItems: 'flex-end', 
-        justifyContent: 'flex-end',
-        marginRight: '8%', 
-        marginTop: '10%',
-      },
-      }),  
-      },
-
+     input: {
+      shadowOffset: { width: 5, height: 5 },
+      shadowColor: "black",
+      shadowOpacity: 0.1,
+      shadowRadius: 5,
+      borderColor: 'white',
+      height: '110%', 
+      backgroundColor: "white", 
+      width: Platform.select({
+        ios: '95%', 
+        android:'100%'
+      }), 
+      borderRadius: 10, 
+      elevation: 3
+      }
   });
 
   function mapStateToProps(state) {
