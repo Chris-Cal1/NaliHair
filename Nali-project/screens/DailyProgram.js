@@ -84,7 +84,7 @@ var findRecipe = async day => {
                           name="user-alt" 
                           size={26} 
                           color="black" 
-                          onPress={() => props.navigation.navigate('Signup')}
+                          onPress={() => props.navigation.navigate('Profil', { screen: 'Profil' })}
                           />}
       />
 
