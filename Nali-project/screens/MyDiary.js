@@ -31,6 +31,7 @@ useEffect(() => {
    // if(body.articles){
 
        setMyPicture(body)
+       props.loadingPhoto(body)
    //console.log('YOUPI', body)
     //}
 
@@ -47,7 +48,7 @@ useEffect(() => {
    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
    body: `id=${id}&token=${props.token}`
   });
-   var myPictureCopy = [...myPicture]
+   var myPictureCopy = [...props.loadingPics]
     var position = null
     console.log("myPictureCopy", myPictureCopy, id)
      for(let i=0;i<myPictureCopy.length;i++){
@@ -56,15 +57,16 @@ useEffect(() => {
             myPictureCopy.splice(position,1);
              
          }
-     } setMyPicture(myPictureCopy)    
+     } props.loadingPhoto(myPictureCopy)    
 
 }
 
 
-var cardPicture = myPicture.map((picture, i) => {
-  console.log(picture, 'PIC PIC')
+
+var cardPicture = props.loadingPics.map((picture, i) => {
+ // console.log(picture, 'PIC PIC')
   return (
-    <TouchableOpacity 
+    <TouchableOpacity key={i}
     onPress={() => props.navigation.navigate('DailyPics', { screen: 'DailyPics' })}>
     <Card style={{flex: 1, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%'}}>
             <CardItem style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0, borderRadius: 10,  elevation: 10,shadowOffset: { width: 5, height: 5 },shadowColor: "black",shadowColor: "black", shadowRadius: 10}}>
@@ -232,15 +234,20 @@ var handleTest = (day) => {
 
   function mapStateToProps(state) {
     //console.log(state);
-    return {  token: state.token }
+    return {  token: state.token, loadingPics: state.loadPhoto }
   }
 
   function mapDispatchToProps(dispatch){
     return {
   
       sendPhoto: function(photo) {
-        console.log(photo, 'PHOTO ============>>>>');
+        //console.log(photo, 'PHOTO ============>>>>');
         dispatch({type: 'sendPhoto', photo: photo})
+  
+      },
+      loadingPhoto: function(photo) {
+        //console.log(photo, 'PHOTO ============>>>>');
+        dispatch({type: 'loadingPhoto', photo: photo})
   
       }
     }

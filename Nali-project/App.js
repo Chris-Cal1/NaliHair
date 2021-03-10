@@ -55,8 +55,9 @@ import token from './reducers/token';
 import recipe from './reducers/recipe';
 import picture from './reducers/picture';
 import photo from './reducers/photo';
+import loadPhoto from './reducers/loadPhoto';
 
-const store = createStore(combineReducers({done1, done2, done3, done4, article, articlesLiked, token, recipe, doneAll, picture, photo}))
+const store = createStore(combineReducers({done1, done2, done3, done4, article, articlesLiked, token, recipe, doneAll, picture, photo, loadPhoto}))
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();

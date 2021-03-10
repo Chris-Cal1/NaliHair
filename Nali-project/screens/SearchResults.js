@@ -172,7 +172,7 @@ var findArticle = async () => {
   function mapDispatchToProps(dispatch) {
     return {
       likeArticles: function(articlesLiked){
-        console.log('ARTICLES LIKé DISPATCH',articlesLiked)
+       // console.log('ARTICLES LIKé DISPATCH',articlesLiked)
         dispatch({type: 'likeArticle',
         articlesLiked: articlesLiked
         })

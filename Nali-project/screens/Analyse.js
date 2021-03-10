@@ -48,6 +48,7 @@ function Analyse(props) {
       if(body.articles){
         
          setFavoris(body.articles)
+         props.loadingArticles(body.articles)
      
       }
     
@@ -64,16 +65,16 @@ function Analyse(props) {
    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
    body: `id=${name}&token=${props.token}`
   });
-   var favorisCopy = [...favoris]
+   var favorisCopy = [...props.articlesLiked]
    var position = null
-   console.log("FAVORISCOPY", favorisCopy, name)
+   console.log("FAVORISCOPY", favorisCopy, type)
      for(let i=0;i<favorisCopy.length;i++){
          if(favorisCopy[i].type == type){
              position = i
              favorisCopy.splice(position,1);
              
          }
-     }setFavoris(favorisCopy)
+     }props.loadingArticles(favorisCopy)
     
 
 }
@@ -89,9 +90,9 @@ function Analyse(props) {
        body: `name=${searchQuery}`
       }); 
       var response = await saveReq.json();
-      console.log(response, 'RESPONSE =================>>>')
-      console.log(response.article, 'RESPONSE.ARTICLE =================>>>')
-      console.log(response.article.name, 'RESPONSE.ARTICLE.NAME =================>>>')
+      //console.log(response, 'RESPONSE =================>>>')
+     // console.log(response.article, 'RESPONSE.ARTICLE =================>>>')
+     // console.log(response.article.name, 'RESPONSE.ARTICLE.NAME =================>>>')
 
       if(response.article) {
        
@@ -104,35 +105,36 @@ function Analyse(props) {
 
      // faire un map sur les favoris et retourner les card 
 
-   var userFavoris = favoris.map((article,i) => { 
-	
-   if(favoris != null){
-		return (
-      <TouchableOpacity key={i} activeOpacity={1} style={{marginTop: '3%', alignItems: 'center', justifyContent: 'center'}} onPress={() => props.navigation.navigate('SearchResults')}>
-      <View style={styles.box}>
-        <Image source={{  uri: article.image }} style= {{width: 70, height: 110, marginLeft: '5%'}}/>
-          <View style={{marginLeft: '5%'}}>
-            <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 14, marginTop: '10%', marginRight: '20%'}}>{article.type}</Text>
-            <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 14, marginBottom: "5%"}}>{article.name}</Text>
-             <View style={{flexDirection: 'row', marginTop: '1%'}}>
-              <Badge value=" "
-              status="success"// success = vert  //  warning = orange  //  error = rouge
-              />
-              <Text style={{ fontFamily: 'Roboto_300Light', fontSize: 17, marginLeft: '5%'}}>{article.rating}/20</Text>
-            </View>
-          </View>
-        <Entypo name="cross" size={24} color="black" style= {{ marginLeft: '-30%', marginTop: '35%'}} onPress={() => handleClickDeleteArticle(article._id, article.type)}/>
-      </View> 
-    </TouchableOpacity>
 
-        
-		)
-  } else {
-    return (
-      <View></View>
-    )
-  }
-		})
+    var userFavoris = props.articlesLiked.map((article,i) => { 
+	
+      if(favoris != null){
+       return (
+         <TouchableOpacity key={i} activeOpacity={1} style={{marginTop: '3%', alignItems: 'center', justifyContent: 'center'}} onPress={() => props.navigation.navigate('SearchResults')}>
+         <View style={styles.box}>
+           <Image source={{  uri: article.image }} style= {{width: 70, height: 110, marginLeft: '5%'}}/>
+             <View style={{marginLeft: '5%'}}>
+               <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 14, marginTop: '10%', marginRight: '20%'}}>{article.type}</Text>
+               <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 14, marginBottom: "5%"}}>{article.name}</Text>
+                <View style={{flexDirection: 'row', marginTop: '1%'}}>
+                 <Badge value=" "
+                 status="success"// success = vert  //  warning = orange  //  error = rouge
+                 />
+                 <Text style={{ fontFamily: 'Roboto_300Light', fontSize: 17, marginLeft: '5%'}}>{article.rating}/20</Text>
+               </View>
+             </View>
+           <Entypo name="cross" size={24} color="black" style= {{ marginLeft: '-30%', marginTop: '35%'}} onPress={() => handleClickDeleteArticle(article._id, article.type)}/>
+         </View> 
+       </TouchableOpacity>
+   
+           
+       )
+     } else {
+       return (
+         <View></View>
+       )
+     }
+       })
 
 
   if (!fontsLoaded) {
@@ -293,11 +295,17 @@ function Analyse(props) {
   function mapDispatchToProps(dispatch) {
     return {
       saveArticles: function(articles){
-        console.log('ARTICLES DISPATCH',articles)
+       // console.log('ARTICLES DISPATCH',articles)
         dispatch({type: 'saveArticles',
           articles: articles
         })
-    }
+    },
+    loadingArticles: function(articles){
+      console.log('ARTICLES DISPATCH',articles)
+      dispatch({type: 'loadingArticles',
+        articles: articles
+      })
+  }
   }
 }
  
