@@ -32,7 +32,7 @@ var handleSubmit = async () => {
                 data.append('comment', comment)
            
 
-  const database = await fetch("http://10.0.0.100:3000/dailypics", {
+  const database = await fetch("http://192.168.254.3:3000/dailypics", {
     method: 'POST',
     body: data 
   })

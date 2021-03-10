@@ -50,12 +50,12 @@ export default function Profil(props) {
         />}
        placement="left"
        centerComponent={{ text: 'Profil', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
-       rightComponent={<FontAwesome5 
-                          name="user-alt" 
-                          size={26} 
-                          color="black" 
-                          onPress={() => props.navigation.navigate('Profil', { screen: 'Profil' })}
-                          />}
+     //  rightComponent={<FontAwesome5 
+                    //      name="user-alt" 
+                    //      size={26} 
+                    //      color="black" 
+                    //      onPress={() => props.navigation.navigate('Profil', { screen: 'Profil' })}
+                    //      />}
       />
       <Content>
 

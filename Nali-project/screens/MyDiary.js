@@ -23,7 +23,7 @@ function MyDiary(props) {
 useEffect(() => {
   const findPhoto = async () => {
 
-    const dataWishlist = await fetch(`http://10.0.0.100:3000/card-picture?token=${props.token}`)
+    const dataWishlist = await fetch(`http://192.168.254.3:3000/card-picture?token=${props.token}`)
 
     const body = await dataWishlist.json()
 
