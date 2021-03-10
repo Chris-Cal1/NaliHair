@@ -31,6 +31,7 @@ useEffect(() => {
    // if(body.articles){
 
        setMyPicture(body)
+       props.loadingPhoto(body)
    //console.log('YOUPI', body)
     //}
 
@@ -47,7 +48,7 @@ useEffect(() => {
    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
    body: `id=${id}&token=${props.token}`
   });
-   var myPictureCopy = [...myPicture]
+   var myPictureCopy = [...props.loadingPics]
     var position = null
     console.log("myPictureCopy", myPictureCopy, id)
      for(let i=0;i<myPictureCopy.length;i++){
@@ -56,15 +57,16 @@ useEffect(() => {
             myPictureCopy.splice(position,1);
              
          }
-     } setMyPicture(myPictureCopy)    
+     } props.loadingPhoto(myPictureCopy)    
 
 }
 
 
-var cardPicture = myPicture.map((picture, i) => {
-  console.log(picture, 'PIC PIC')
+
+var cardPicture = props.loadingPics.map((picture, i) => {
+ // console.log(picture, 'PIC PIC')
   return (
-    <TouchableOpacity 
+    <TouchableOpacity key={i}
     onPress={() => props.navigation.navigate('DailyPics', { screen: 'DailyPics' })}>
     <Card style={{flex: 1, borderRadius: 10, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%'}}>
             <CardItem style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0, borderRadius: 10,  elevation: 6,shadowOffset: { width: 5, height: 5 },shadowColor: "black",borderColor: "white", shadowRadius: 10}}>
@@ -102,10 +104,10 @@ var handleTest = (day) => {
         
           //console.log(new Date(date.date).toLocaleDateString(), "DATE string")
            // console.log(date.date.slice(0, 10), "DATE")
-           console.log(date, "date test")
+           //console.log(date, "date test")
            if(new Date(date.date).toLocaleDateString() == new Date(thisDay).toLocaleDateString()){
             props.sendPhoto(date)
-            props.navigation.navigate('ReturnPics')
+            //props.navigation.navigate('ReturnPics')
              
       }
     
@@ -161,7 +163,7 @@ var handleTest = (day) => {
       markedDatesStyle={{color:'#222'}}
       highlightDateNumberStyle={{color: '#F475BB', fontSize:16}}
       highlightDateNameStyle={{color: '#F475BB', fontFamily: 'Handlee_400Regular', fontSize: 12}}
-      onDateSelected = { ( day )  => { console.log('selected day', day); handleTest(day) }}
+      onDateSelected = { ( day )  => { console.log('selected day', day); handleTest(day); props.navigation.navigate('ReturnPics') }}
       
       iconContainer={{flex: 0.1}}
       
@@ -202,15 +204,20 @@ var handleTest = (day) => {
 
   function mapStateToProps(state) {
     //console.log(state);
-    return {  token: state.token }
+    return {  token: state.token, loadingPics: state.loadPhoto }
   }
 
   function mapDispatchToProps(dispatch){
     return {
   
       sendPhoto: function(photo) {
-        console.log(photo, 'PHOTO ============>>>>');
+       // console.log(photo, 'PHOTO ============>>>>');
         dispatch({type: 'sendPhoto', photo: photo})
+  
+      },
+      loadingPhoto: function(photo) {
+        //console.log(photo, 'PHOTO ============>>>>');
+        dispatch({type: 'loadingPhoto', photo: photo})
   
       }
     }

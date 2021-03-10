@@ -18,13 +18,14 @@ function DailyPics(props) {
   const [comment, setComment] = useState('');
   var date = new Date().toLocaleDateString()
  var photo = props.pictureList;
+
  //console.log("PHOTO", photo[0]._parts[0].[1].uri)
 var handleSubmit = async () => {
  
                
                 var data = new FormData();
                 data.append('avatar', {
-                  uri: photo[0]._parts[0].[1].uri,
+                  uri: photo._parts[0].[1].uri,
                   type: 'image/jpeg',
                   name: 'avatar.jpg'   
                 });
@@ -35,51 +36,16 @@ var handleSubmit = async () => {
   const database = await fetch("http://192.168.254.3:3000/dailypics", {
     method: 'POST',
     body: data 
+   
   })
+   const body = await database.json()
+  //console.log("PHOTOSAVE bc", body.photoSave[0])
+  props.sendPhoto(body.photoSave[0])
   props.navigation.navigate('MyDiary')
 
+
+
 }
-
-var myPicture = props.pictureList.map((url, i) => {
-  //console.log(url._parts[0].[1].uri, "MY URL")
-  return(
-    <Content key= {i}>
-
-        <View style={{ marginLeft: '5%', marginTop: '8%', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
-          <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 24}}>{date}</Text>
-        </View>
-
-        <View style={{justifyContent: 'center', alignItems: 'center'}}>
-          <View style={styles.boxImage}>
-            <Image source={{ uri: url._parts[0].[1].uri}} style={{ height: '100%', width: '100%', borderRadius: 10 }} />
-          </View>
-        </View>    
-
-        <View style={{flexDirection: 'row', margin: 20, justifyContent: 'center', alignItems: 'center'}}>
-        <TouchableOpacity style={styles.input}> 
-        <Input
-          multiline={true}
-          numberOfLines={5}
-          style={{ fontSize: 15}}
-          inputContainerStyle={{backgroundColor:'white', height: 95,}}
-          containerStyle={{backgroundColor:'white', height: 115, borderRadius: 10}}
-          placeholder="Indiquez le soin du jour et commentez l'état de vos cheveux"
-          onChangeText={(val) => setComment(val)}
-         />
-      </TouchableOpacity>
-      </View>
-
-       <TouchableOpacity  style={{marginTop: 10, justifyContent: 'center', alignItems: 'center', alignSelf: 'center', fontSize: 40, color: 'white', backgroundColor: "#222222", fontFamily: 'Roboto', borderRadius: 10, height: 50, width: 180}}
-        onPress={() => handleSubmit()}>
-        <Text style={{ justifyContent: 'center', alignItems: 'center', alignContent: 'center', color: 'white', fontFamily: 'Roboto', fontSize: 20}}> Valider </Text>
-       </TouchableOpacity >
-       
-
-      </Content>
-  )
-
-})
-
 
 
       let [fontsLoaded] = useFonts({
@@ -121,8 +87,44 @@ var myPicture = props.pictureList.map((url, i) => {
                               onPress={() => props.navigation.navigate('Profil', { screen: 'Profil' })}
                               />}
           />
-        <ScrollView>
-        {myPicture}
+
+    <ScrollView>
+              <Content  >
+
+          <View style={{ marginLeft: '5%', marginTop: '8%', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
+            <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 24}}>{date}</Text>
+          </View>
+
+          <View style={{justifyContent: 'center', alignItems: 'center'}}>
+            <View style={styles.boxImage}>
+             <Image source={{ uri: photo._parts[0].[1].uri}} style={{ height: '100%', width: '100%', borderRadius: 10 }} />
+            </View>
+          </View>    
+
+          <View style={styles.addIcon}>
+          <Ionicons name="add-circle" size={40} color="black" onPress={() => props.navigation.navigate()}/>
+          </View>
+          
+
+          <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center', borderColor: 'grey', height: '20%', backgroundColor: "white", width: '90%', margin: 20, borderRadius: 10, elevation: 5, }}> 
+          <TextInput  style={{justifyContent: 'center', alignItems: 'center'}}
+            multiline={true}
+            numberOfLines={10}
+            placeholder="Indiquez le soin du jour et commentez l'état de vos cheveux"
+          onChangeText={(val) => setComment(val)}
+          />
+          </TouchableOpacity>
+
+          <TouchableOpacity  style={{ justifyContent: 'center', alignItems: 'center', fontSize: 40, color: 'white', backgroundColor: "#222222", marginTop: 15, fontFamily: 'Roboto', borderRadius: 10, height: 50, width: 180, alignItems: 'center', justifyContent: 'center', marginLeft: "25%", marginBottom: "60%"}}
+          onPress={() => handleSubmit()}
+          >
+          <Text style={{ color: 'white', fontFamily: 'Roboto', fontSize: 20}}> Valider </Text>
+          </TouchableOpacity >
+
+          </Content>
+    
+       
+
         </ScrollView>
         
 
@@ -173,11 +175,24 @@ var myPicture = props.pictureList.map((url, i) => {
   });
 
   function mapStateToProps(state) {
-    //console.log(state);
+   // console.log(state);
+    
     return { pictureList : state.picture, token: state.token }
+  }
+
+  function mapDispatchToProps(dispatch){
+    return {
+  
+      sendPhoto: function(pics) {
+       // console.log(pics, 'PHOTO ALLER============>>>>');
+        dispatch({type: 'sendPics', pics: pics})
+  
+      }
+      
+    }
   }
 
   export default connect(
     mapStateToProps, 
-    null,
+    mapDispatchToProps,
   )(DailyPics);
