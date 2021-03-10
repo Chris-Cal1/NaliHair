@@ -4,7 +4,7 @@ export default function(wishlist = [], action) {
       //console.log('WISHLIST COPY ====>', action.articles)
      return  action.photo;
     } else if(action.type == 'sendPics'){
-        //console.log(' + PICS ====>', action.pics)
+        console.log(' + PICS ====>', action.pics)
        return  [...wishlist, action.pics]
       
    } else {

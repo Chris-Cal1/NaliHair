@@ -174,7 +174,7 @@ var handleSubmit = async () => {
   });
 
   function mapStateToProps(state) {
-    console.log(state);
+   // console.log(state);
     
     return { pictureList : state.picture, token: state.token }
   }

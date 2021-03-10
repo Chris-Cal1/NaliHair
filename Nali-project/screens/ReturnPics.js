@@ -27,7 +27,7 @@ function ReturnPics(props) {
                                style={{ height: 150, width: 150, flex: 1 }} />
                       </Left>
                       <Body style={{justifyContent: 'center', marginLeft: '2%'}}>
-                        <Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, color: 'black', marginBottom: '2%'}}>{photo.date}</Text>
+                        <Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, color: 'black', marginBottom: '2%'}}>{new Date(photo.date).toLocaleDateString()}</Text>
                         <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12, color: 'black', marginBottom: '2%'}}>{photo.comment}</Text>
                         <View style={{flexDirection: 'row', marginTop: '3%'}}>
                           <Left>

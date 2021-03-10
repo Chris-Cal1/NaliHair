@@ -108,10 +108,10 @@ var handleTest = (day) => {
         
           //console.log(new Date(date.date).toLocaleDateString(), "DATE string")
            // console.log(date.date.slice(0, 10), "DATE")
-           console.log(date, "date test")
+           //console.log(date, "date test")
            if(new Date(date.date).toLocaleDateString() == new Date(thisDay).toLocaleDateString()){
             props.sendPhoto(date)
-            props.navigation.navigate('ReturnPics')
+            //props.navigation.navigate('ReturnPics')
              
       }
     
@@ -167,7 +167,7 @@ var handleTest = (day) => {
       markedDatesStyle={{color:'#222'}}
       highlightDateNumberStyle={{color: '#F475BB', fontSize:16}}
       highlightDateNameStyle={{color: '#F475BB', fontFamily: 'Handlee_400Regular', fontSize: 12}}
-      onDateSelected = { ( day )  => { console.log('selected day', day); handleTest(day) }}
+      onDateSelected = { ( day )  => { console.log('selected day', day); handleTest(day); props.navigation.navigate('ReturnPics') }}
       
       iconContainer={{flex: 0.1}}
       
@@ -241,7 +241,7 @@ var handleTest = (day) => {
     return {
   
       sendPhoto: function(photo) {
-        //console.log(photo, 'PHOTO ============>>>>');
+       // console.log(photo, 'PHOTO ============>>>>');
         dispatch({type: 'sendPhoto', photo: photo})
   
       },
