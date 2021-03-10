@@ -42,6 +42,12 @@ export default function Profil(props) {
         shadowOpacity: 0.2,
         paddingTop: "5%"
        }}
+       leftComponent={<MaterialIcons 
+        name="arrow-back-ios" 
+        size={26} 
+        color="black" 
+        onPress={() => props.navigation.navigate('RoutineChoice')}
+        />}
        placement="left"
        centerComponent={{ text: 'Profil', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
        rightComponent={<FontAwesome5 

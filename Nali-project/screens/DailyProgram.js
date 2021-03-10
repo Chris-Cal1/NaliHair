@@ -84,7 +84,7 @@ var findRecipe = async day => {
                           name="user-alt" 
                           size={26} 
                           color="black" 
-                          onPress={() => props.navigation.navigate('Profil')}
+                          onPress={() => props.navigation.navigate('Signup')}
                           />}
       />
 
@@ -128,7 +128,7 @@ var findRecipe = async day => {
                                   onPress={() => props.navigation.navigate('RecipeDay1_0')}
                               />}
                 checked = {props.dayDone1}
-                
+                onPress={() => props.navigation.navigate('RecipeDay1_0')}
             />
 
           <CheckBox
@@ -143,6 +143,7 @@ var findRecipe = async day => {
                                   onPress={() => props.navigation.navigate('RecipeDay2_0')}
                               />}
                 checked = {props.dayDone2}
+                onPress={() => props.navigation.navigate('RecipeDay2_0')}
                 
             />
 
@@ -158,6 +159,7 @@ var findRecipe = async day => {
                                   onPress={() => props.navigation.navigate('RecipeDay3_0')}
                               />}
                 checked = {props.dayDone3}
+                onPress={() => props.navigation.navigate('RecipeDay3_0')}
               
             />
 
@@ -173,6 +175,7 @@ var findRecipe = async day => {
                                   onPress={() => props.navigation.navigate('RecipeDay4_0')}
                               />}
                 checked = {props.dayDone4}
+                onPress={() => props.navigation.navigate('RecipeDay4_0')}
                 
             />           
 
