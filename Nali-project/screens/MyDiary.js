@@ -66,26 +66,23 @@ var cardPicture = myPicture.map((picture, i) => {
   return (
     <TouchableOpacity 
     onPress={() => props.navigation.navigate('DailyPics', { screen: 'DailyPics' })}>
-    <Card style={{flex: 1, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%'}}>
-            <CardItem style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0, borderRadius: 10,  elevation: 10,shadowOffset: { width: 5, height: 5 },shadowColor: "black",shadowColor: "black", shadowRadius: 10}}>
+    <Card style={{flex: 1, borderRadius: 10, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%'}}>
+            <CardItem style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0, borderRadius: 10,  elevation: 6,shadowOffset: { width: 5, height: 5 },shadowColor: "black",borderColor: "white", shadowRadius: 10}}>
               <Left style= {{marginLeft: 0}}>
                 <Image source={{uri: picture.url}}
-                       style={{ height: 150, width: 150, flex: 1 }} />
+                       style={{ height: 150, width: 150, flex: 1, borderBottomLeftRadius: 10, borderTopLeftRadius: 10 }} />
               </Left>
-              <Body style={{justifyContent: 'center', marginLeft: '2%'}}>
+              <Body style={{justifyContent: 'center', marginLeft: '3%'}}>
                 <Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, color: 'black', marginBottom: '2%'}}>{new Date(picture.date).toLocaleDateString()}</Text>
-                <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12, color: 'black', marginBottom: '2%'}}>{picture.comment}</Text>
-                <View style={{flexDirection: 'row', marginTop: '3%'}}>
-                  <Left>
-                    <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12}}></Text>
-                  </Left>
-                  <Right style= {{paddingRight:'3%'}}>
+                <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12, color: 'black', marginBottom: '15%'}}>{picture.comment}</Text>
+                <View style={{flexDirection: 'row', marginTop: '3%', marginBottom: '-5%'}}>
+                  <Right style= {{paddingRight:'13%'}}>
                     <SimpleLineIcons 
                       name="trash" 
                       size={20} 
                       color="black"
                       onPress={() => handleClickDeletePhoto(picture._id)}
-                    />
+                    />  
                   </Right>
                 </View>
               </Body>
@@ -95,7 +92,6 @@ var cardPicture = myPicture.map((picture, i) => {
 
   )
 })
-
 
 
 var handleTest = (day) => {
@@ -172,7 +168,7 @@ var handleTest = (day) => {
     />
 
   <Button
-      style={{marginTop: '3%', marginBottom: '3%', marginLeft: '20%', marginRight:'10%', backgroundColor: '#222222', justifyContent: 'center', alignItems: 'center', borderRadius: 10,  elevation: 10,shadowOffset: { width: 5, height: 5 },shadowColor: "black",shadowColor: "black", shadowRadius: 10}}
+      style={{marginTop: '3%', marginBottom: '3%', backgroundColor: '#222222', justifyContent: 'center', alignSelf: 'center', borderRadius: 10,  elevation: 6, shadowOffset: { width: 5, height: 5 },shadowColor: "black",shadowColor: "black", shadowRadius: 10}}
       onPress={()=> {props.navigation.navigate( 'SnapScreen' )}}>
         <Text style={{fontFamily: 'Roboto_500Medium', fontSize: 20}}> Prendre une photo </Text>
   </Button>
@@ -180,33 +176,7 @@ var handleTest = (day) => {
   <ScrollView>
 
     {cardPicture}
-  <TouchableOpacity 
-    onPress={() => props.navigation.navigate('DailyPics', { screen: 'DailyPics' })}>
-    <Card style={{flex: 1, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%'}}>
-            <CardItem style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0, borderRadius: 10,  elevation: 10,shadowOffset: { width: 5, height: 5 },shadowColor: "black",shadowColor: "black", shadowRadius: 10}}>
-              <Left style= {{marginLeft: 0}}>
-                <Image source={require('../assets/carmen.jpg')}
-                       style={{ height: 150, width: 150, flex: 1 }} />
-              </Left>
-              <Body style={{justifyContent: 'center', marginLeft: '2%'}}>
-                <Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, color: 'black', marginBottom: '2%'}}>Date</Text>
-                <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12, color: 'black', marginBottom: '2%'}}>Commentaire</Text>
-                <View style={{flexDirection: 'row', marginTop: '3%'}}>
-                  <Left>
-                    <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12}}></Text>
-                  </Left>
-                  <Right style= {{paddingRight:'3%'}}>
-                    <SimpleLineIcons 
-                      name="trash" 
-                      size={20} 
-                      color="black"
-                    />  
-                  </Right>
-                </View>
-              </Body>
-            </CardItem>
-          </Card>
-        </TouchableOpacity>
+  
       </ScrollView>
 
           
