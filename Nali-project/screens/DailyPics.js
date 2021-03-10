@@ -18,13 +18,14 @@ function DailyPics(props) {
   const [comment, setComment] = useState('');
   var date = new Date().toLocaleDateString()
  var photo = props.pictureList;
+
  //console.log("PHOTO", photo[0]._parts[0].[1].uri)
 var handleSubmit = async () => {
  
                
                 var data = new FormData();
                 data.append('avatar', {
-                  uri: photo[0]._parts[0].[1].uri,
+                  uri: photo._parts[0].[1].uri,
                   type: 'image/jpeg',
                   name: 'avatar.jpg'   
                 });
@@ -44,47 +45,6 @@ var handleSubmit = async () => {
 
 
 }
-
-var myPicture = props.pictureList.map((url, i) => {
-  //console.log(url._parts[0].[1].uri, "MY URL")
-  return(
-    <Content key={i} >
-
-        <View style={{ marginLeft: '5%', marginTop: '8%', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
-          <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 24}}>{date}</Text>
-        </View>
-
-        <View style={{justifyContent: 'center', alignItems: 'center'}}>
-          <View style={styles.boxImage}>
-            <Image source={{ uri: url._parts[0].[1].uri}} style={{ height: '100%', width: '100%', borderRadius: 10 }} />
-          </View>
-        </View>    
-
-        <View style={styles.addIcon}>
-        <Ionicons name="add-circle" size={40} color="black" onPress={() => props.navigation.navigate()}/>
-        </View>
-         
-
-        <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center', borderColor: 'grey', height: '20%', backgroundColor: "white", width: '90%', margin: 20, borderRadius: 10, elevation: 5, }}> 
-        <TextInput  style={{justifyContent: 'center', alignItems: 'center'}}
-          multiline={true}
-          numberOfLines={10}
-          placeholder="Indiquez le soin du jour et commentez l'état de vos cheveux"
-         onChangeText={(val) => setComment(val)}
-         />
-      </TouchableOpacity>
-
-       <TouchableOpacity  style={{ justifyContent: 'center', alignItems: 'center', fontSize: 40, color: 'white', backgroundColor: "#222222", marginTop: 15, fontFamily: 'Roboto', borderRadius: 10, height: 50, width: 180, alignItems: 'center', justifyContent: 'center', marginLeft: "25%", marginBottom: "60%"}}
-        onPress={() => handleSubmit()}
-        >
-        <Text style={{ color: 'white', fontFamily: 'Roboto', fontSize: 20}}> Valider </Text>
-       </TouchableOpacity >
-
-        </Content>
-  )
-
-})
-
 
 
       let [fontsLoaded] = useFonts({
@@ -135,7 +95,7 @@ var myPicture = props.pictureList.map((url, i) => {
 
           <View style={{justifyContent: 'center', alignItems: 'center'}}>
             <View style={styles.boxImage}>
-              <Image source={{ uri: photo[0]._parts[0].[1].uri}} style={{ height: '100%', width: '100%', borderRadius: 10 }} />
+             <Image source={{ uri: photo._parts[0].[1].uri}} style={{ height: '100%', width: '100%', borderRadius: 10 }} />
             </View>
           </View>    
 
