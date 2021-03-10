@@ -36,7 +36,7 @@ function DailyProgram(props) {
 var findRecipe = async day => {
     
 
-  const saveReq = await fetch('http://10.0.0.100:3000/search-recipe', {
+  const saveReq = await fetch('http://192.168.0.213:3000/search-recipe', {
 
      method: 'POST',
      headers: {'Content-Type':'application/x-www-form-urlencoded'},
@@ -68,7 +68,16 @@ var findRecipe = async day => {
       <ImageBackground source={require('../assets/008.png')} style={{flex: 1}}>
 
       <Header
-        containerStyle = {{backgroundColor: 'white', elevation: 6,shadowOffset: { width: 5, height: 5 },shadowColor: "black", shadowColor: "black", shadowRadius: 10, paddingTop: "5%"}}
+        containerStyle = {{
+          backgroundColor: 'white', 
+          elevation: 6, 
+          shadowOffsetX: 0,
+          shadowOffsetY: -10,
+          shadowColor: 'black', 
+          shadowRadius: 7, 
+          shadowOpacity: 0.2,
+          paddingTop: "5%"
+        }}
          placement="left"
          centerComponent={{ text: 'Programmes', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
          rightComponent={<FontAwesome5 
@@ -79,12 +88,10 @@ var findRecipe = async day => {
                           />}
       />
 
+<ScrollView>
       <View>
-
-        <ScrollView>
-
         <Content padder>
-          <Card transparent>
+          <Card transparent style={{marginBottom: '5%'}}>
             <CardItem>
               <Body>
                 <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 24, paddingBottom: '4%' }}>Manque de volume</Text>
@@ -110,8 +117,8 @@ var findRecipe = async day => {
           {/*Liste des jours */}
 
           <CheckBox
-                containerStyle = {{borderRadius: 10,  elevation: 10,shadowOffset: { width: 5, height: 5 },shadowColor: "black", shadowColor: "black", shadowRadius: 10, marginBottom:'2%', marginTop:'7%'}}
-                title = {<Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, paddingRight:'75%'}}>Jour 1</Text>}
+                containerStyle = {styles.box}
+                title = {<Text style={styles.jour}>Jour 1</Text>}
                 iconRight
                 checkedIcon = {<Entypo name="check" size={24} color="#A1DEAB"/>}
                 uncheckedIcon={<MaterialIcons 
@@ -125,8 +132,8 @@ var findRecipe = async day => {
             />
 
           <CheckBox
-                containerStyle = {{borderRadius: 10,  elevation: 10,shadowOffset: { width: 5, height: 5 },shadowColor: "black", shadowColor: "black", shadowRadius: 10, marginBottom:'2%'}}
-                title = {<Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, paddingRight:'75%'}}>Jour 2</Text>}
+                containerStyle = {styles.box}
+                title = {<Text style={styles.jour}>Jour 2</Text>}
                 iconRight
                 checkedIcon = {<Entypo name="check" size={24} color="#A1DEAB"/>}
                 uncheckedIcon={<MaterialIcons 
@@ -140,8 +147,8 @@ var findRecipe = async day => {
             />
 
           <CheckBox
-                containerStyle = {{borderRadius: 10,  elevation: 10,shadowOffset: { width: 5, height: 5 },shadowColor: "black", shadowColor: "black", shadowRadius: 10, marginBottom:'2%'}}
-                title = {<Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, paddingRight:'75%'}}>Jour 3</Text>}
+                containerStyle = {styles.box}
+                title = {<Text style={styles.jour}>Jour 3</Text>}
                 iconRight
                 checkedIcon = {<Entypo name="check" size={24} color="#A1DEAB"/>}
                 uncheckedIcon={<MaterialIcons 
@@ -155,8 +162,8 @@ var findRecipe = async day => {
             />
 
           <CheckBox
-                containerStyle = {{borderRadius: 10,  elevation: 10,shadowOffset: { width: 5, height: 5 },shadowColor: "black", shadowColor: "black", shadowRadius: 10, marginBottom:'2%'}}
-                title = {<Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, paddingRight:'75%'}}>Jour 4</Text>}
+                containerStyle = {styles.box}
+                title = {<Text style={styles.jour}>Jour 4</Text>}
                 iconRight
                 checkedIcon = {<Entypo name="check" size={24} color="#A1DEAB"/>}
                 uncheckedIcon={<MaterialIcons 
@@ -170,8 +177,8 @@ var findRecipe = async day => {
             />           
 
           <CheckBox
-                containerStyle = {{borderRadius: 10,  elevation: 10,shadowOffset: { width: 5, height: 5 },shadowColor: "black", shadowColor: "black", shadowRadius: 10, marginBottom:'2%'}}
-                title = {<Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, paddingRight:'75%'}}>Jour 5</Text>}
+                containerStyle = {styles.box}
+                title = {<Text style={styles.jour}>Jour 5</Text>}
                 iconRight
                 checkedIcon = {<Entypo name="check" size={24} color="#A1DEAB"/>}
                 uncheckedIcon={<MaterialIcons 
@@ -185,8 +192,8 @@ var findRecipe = async day => {
             /> 
 
           <CheckBox
-                containerStyle = {{borderRadius: 10,  elevation: 10,shadowOffset: { width: 5, height: 5 },shadowColor: "black", shadowColor: "black", shadowRadius: 10, marginBottom:'2%'}}
-                title = {<Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, paddingRight:'75%'}}>Jour 6</Text>}
+                containerStyle = {styles.box}
+                title = {<Text style={styles.jour}>Jour 6</Text>}
                 iconRight
                 checkedIcon = {<Entypo name="check" size={24} color="#A1DEAB"/>}
                 uncheckedIcon={<MaterialIcons 
@@ -200,8 +207,8 @@ var findRecipe = async day => {
             />
 
           <CheckBox
-                containerStyle = {{borderRadius: 10,  elevation: 10,shadowOffset: { width: 5, height: 5 },shadowColor: "black", shadowColor: "black", shadowRadius: 10, marginBottom:'2%'}}
-                title = {<Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, paddingRight:'75%'}}>Jour 7</Text>}
+                containerStyle = {styles.box}
+                title = {<Text style={styles.jour}>Jour 7</Text>}
                 iconRight
                 checkedIcon = {<Entypo name="check" size={24} color="#A1DEAB"/>}
                 uncheckedIcon={<MaterialIcons 
@@ -216,10 +223,8 @@ var findRecipe = async day => {
             />
 
         </Content>
-
-
-        </ScrollView>
       </View>
+      </ScrollView>
       <StatusBar style="dark" backgroundColor='white'/>
       </ImageBackground>  
 
@@ -233,6 +238,26 @@ var findRecipe = async day => {
        alignItems: 'center',
        justifyContent: 'flex-start',
      },
+     box: {
+      height: 55, 
+      marginBottom: '3%',
+      alignItems: 'center',
+      flexDirection: 'row',
+      backgroundColor: 'white',
+      elevation: 3,
+      shadowOffset: { width: 5, height: 5 },
+      shadowColor: "black",
+      shadowOpacity: 0.1,
+      shadowRadius: 3,
+      borderColor: 'white',
+      borderRadius: 10,
+     },
+     jour: {
+      fontFamily: 'Roboto_700Bold', 
+      fontSize: 17, 
+      marginLeft: '5%', 
+      paddingRight:'70%',
+     }
   });
 
 

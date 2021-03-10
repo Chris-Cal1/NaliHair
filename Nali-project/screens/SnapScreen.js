@@ -85,7 +85,7 @@ function SnapScreen(props) {
                   name: 'avatar.jpg',
                 });
                props.onSnap(data)
-               // var rawResponse = await fetch("http://127.0.0.1:3000/upload", {
+               // var rawResponse = await fetch("http://127.0.0.1:19000/upload", {
                //   method: 'POST',
                 //  body: data
                // });

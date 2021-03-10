@@ -28,7 +28,7 @@ var userData = {Name: name, Mail: mail, Password: password};
 
 
 
-    const data = await fetch('http://10.0.0.100:3000/sign-up', {
+    const data = await fetch('http://192.168.0.213:3000/sign-up', {
 
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},

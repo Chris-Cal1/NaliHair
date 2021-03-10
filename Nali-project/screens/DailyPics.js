@@ -35,7 +35,7 @@ var handleSubmit = async () => {
                
                
 
-  const database = await fetch("http://10.0.0.100:3000/dailypics", {
+  const database = await fetch("http://192.168.0.213:3000/dailypics", {
     method: 'POST',
     body: data 
   })
@@ -122,9 +122,9 @@ var myPicture = props.pictureList.map((url, i) => {
                               onPress={() => props.navigation.navigate('Profil', { screen: 'Profil' })}
                               />}
           />
-    
+    <ScrollView>
         {myPicture}
-
+        </ScrollView>
         
 
     <StatusBar style="dark" backgroundColor='white'/>

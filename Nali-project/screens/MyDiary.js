@@ -23,7 +23,7 @@ function MyDiary(props) {
 useEffect(() => {
   const findPhoto = async () => {
 
-    const dataWishlist = await fetch(`http://10.0.0.100:3000/card-picture?token=${props.token}`)
+    const dataWishlist = await fetch(`http://192.168.0.213:3000/card-picture?token=${props.token}`)
 
     const body = await dataWishlist.json()
 
@@ -42,7 +42,7 @@ useEffect(() => {
 // suppression d'une photo
   const handleClickDeletePhoto = async (id) => {
 
-  const response = await fetch('http://10.0.0.100:3000/delete-photo', {
+  const response = await fetch('http://192.168.0.213:3000/delete-photo', {
    method: 'DELETE',
    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
    body: `id=${id}&token=${props.token}`
@@ -132,7 +132,16 @@ var handleTest = (day) => {
       <ImageBackground source={require('../assets/005.png')} style={{flex: 1}}>
       
       <Header
-        containerStyle = {{backgroundColor: 'white', elevation: 6,shadowOffset: { width: 5, height: 5 },shadowColor: "black", shadowColor: "black", shadowRadius: 10, paddingTop: "5%"}}
+        containerStyle = {{
+          backgroundColor: 'white', 
+          elevation: 6, 
+          shadowOffsetX: 0,
+          shadowOffsetY: -10,
+          shadowColor: 'black', 
+          shadowRadius: 7, 
+          shadowOpacity: 0.2,
+          paddingTop: "5%"
+        }}        
         placement="left"
         centerComponent={{ text: 'Journal de bord', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
         rightComponent={<FontAwesome5 
