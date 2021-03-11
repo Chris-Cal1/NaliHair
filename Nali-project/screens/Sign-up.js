@@ -24,44 +24,45 @@ import {connect} from 'react-redux'
 
 // si déjà inscrit redirection sur RoutineChoice et non sur SignUp
 
-useEffect(() => {
-  let userExists = AsyncStorage.getItem("user");
-  if(userExists){
-    props.navigation.navigate('Home1', { screen: 'RoutineChoice' })
-  }
-
-},[])
- 
-  var handleSubmit = async () => {
-
-
-
-    const data = await fetch('http://192.168.254.3:3000/sign-up', {
-
-      method: 'POST',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: `username=${name}&email=${mail}&password=${password}`
-    })
-
-    const body = await data.json()
-
-    if(body.result == true){
-      props.addToken(body.token)
-      AsyncStorage.setItem("user", JSON.stringify(body.userSave))
-      props.navigation.navigate('RoutineChoice', {screen:'RoutineChoice'})
-      //props.navigation.navigate('Profil')
-
-    } else {
-      setErrorsSignup(body.error)
-    }
-
-
-    
-    var tabErrorsSignup = listErrorsSignup.map((error,i) => {
-      return(<p>{error}</p>)
-    });
+useEffect(() => {
+    let userExists = AsyncStorage.getItem("user");
+    console.log(userExists, 'YoooH')
+    if(userExists){
+      props.addToken(userExists)
+      props.navigation.navigate('Home1', { screen: 'RoutineChoice' })
+      
+    }
   
-   }
+  },[])
+   
+    var handleSubmit = async () => {
+  
+  
+      const data = await fetch('http://192.168.1.20:3000/sign-up', {
+  
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: `username=${name}&email=${mail}&password=${password}`
+      })
+  
+      const body = await data.json()
+  
+      if(body.result == true){
+        props.addToken(body.token)
+        AsyncStorage.setItem("user", JSON.stringify(body.token))
+        props.navigation.navigate('RoutineChoice', {screen:'RoutineChoice'})
+       // props.navigation.navigate('Signup', {screen: 'Signup'})
+  
+      } else {
+        setErrorsSignup(body.error)
+      }
+  
+      
+      var tabErrorsSignup = listErrorsSignup.map((error,i) => {
+        return(<p>{error}</p>)
+      });
+    
+     }
 
    
 
