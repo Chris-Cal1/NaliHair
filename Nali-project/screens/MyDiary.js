@@ -94,7 +94,8 @@ var cardPicture = myPics.map((picture, i) => {
         </TouchableOpacity>
 
   )
-})
+}).reverse()
+
 
 
 var handleTest = (day) => {
