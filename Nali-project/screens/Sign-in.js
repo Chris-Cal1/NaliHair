@@ -9,6 +9,8 @@ import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
 import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light} from '@expo-google-fonts/roboto';
 import {connect} from 'react-redux'
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 function Signin(props) {
 
   const [mail, setMail] = useState('');
