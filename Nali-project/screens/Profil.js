@@ -48,7 +48,8 @@ export default function Profil(props) {
         name="arrow-back-ios" 
         size={26} 
         color="black" 
-        onPress={() => props.navigation.navigate('RoutineChoice')}
+        style={{marginLeft: 10}}
+        onPress={() => props.navigation.navigate('Home1', {screen: 'Home1' })}
         />}
        placement="left"
        centerComponent={{ text: 'Profil', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
@@ -71,7 +72,7 @@ export default function Profil(props) {
                 elevation: 6,
                 shadowOffset: { width: 5, height: 5 },
                 shadowColor: "black",
-                shadowOpacity: 0.5,
+                shadowOpacity: 0.2,
                 shadowRadius: 10,
               }}
               />
@@ -80,12 +81,12 @@ export default function Profil(props) {
  
           <View style={{flex: 4, alignItems: 'flex-start', justifyContent: 'flex-start', marginLeft: '5%', marginTop: '20%' }}>
               
-              <TouchableOpacity style={styles.touchable} activeOpacity={1} onPress={() => props.navigation.navigate('MyDiary', { screen: 'MyDiary' })}>
+              <TouchableOpacity style={styles.touchable} activeOpacity={1} onPress={() => props.navigation.navigate('Home1', { screen: 'MyDiary' })}>
                   <Ionicons name="journal" size={30} color="black" />
                   <Text style={styles.textMenu}>Journal de bord</Text>
               </TouchableOpacity>
       
-              <TouchableOpacity style={styles.touchable} activeOpacity={1} onPress={() => props.navigation.navigate('Analyse', { screen: 'Analyse' })}>
+              <TouchableOpacity style={styles.touchable} activeOpacity={1} onPress={() => props.navigation.navigate('Home1', { screen: 'Analyse' })}>
                   <MaterialIcons name="favorite" size={30} color="#F543A5" /> 
                   <Text style={styles.textMenu}>Mes favoris</Text>
               </TouchableOpacity>
@@ -122,13 +123,14 @@ export default function Profil(props) {
        justifyContent: 'flex-start',
      },
      touchable: {
-      marginTop: '3%', 
+      marginTop: '5%', 
       marginBottom: '3%', 
       flexDirection: 'row'
      },
      textMenu: {
       fontFamily: 'Roboto_700Bold',
       fontSize: 20,
-      marginLeft: '3%'
+      marginLeft: '3%', 
+      marginTop: 3
      }
   });

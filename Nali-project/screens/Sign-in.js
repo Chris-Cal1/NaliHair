@@ -25,7 +25,7 @@ function Signin(props) {
 
 
 
-    const data = await fetch('http://10.0.0.103:3000/sign-in', {
+    const data = await fetch('http://192.168.0.213:3000/sign-in', {
 
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -75,13 +75,14 @@ function Signin(props) {
 
 
          <Input 
-          containerStyle = {{borderColor: "lightgrey", marginBottom: 20, elevation: 3, width: 200, height: '8%' }}
+          containerStyle = {{marginBottom: 20, elevation: 3, width: 200, height: '8%' }}
           placeholder='Mail'
           onChangeText={(val) => setMail(val)}/>
 
          <Input 
-          containerStyle = {{borderColor: "lightgrey", marginBottom: 20, elevation: 3, width: 200, height: '8%' }}
+          containerStyle = {{marginBottom: 20, elevation: 3, width: 200, height: '8%' }}
           placeholder='Mot de passe'
+          //secureTextEntry= 'true'
           onChangeText={(val) => setPassword(val)}/>
 
 
@@ -90,7 +91,7 @@ function Signin(props) {
           >
           <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular', fontSize: 20}}> Me connecter </Text>
           </TouchableOpacity>
-          <Text style={{ color: '#222222', fontFamily: 'Roboto_400Regular', fontSize: 15, marginTop: 15}}  onPress={() => props.navigation.navigate('Signup')}> M'inscrire </Text>
+          <Text style={{ color: '#222222', fontFamily: 'Roboto_400Regular', fontSize: 15, marginTop: 15}}  onPress={() => props.navigation.navigate('Signup')}> M'inscrire ? </Text>
         </View>
         <StatusBar style="dark" backgroundColor='white'/>
     </ImageBackground>

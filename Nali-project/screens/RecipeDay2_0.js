@@ -5,8 +5,8 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import argileVerte from '../assets/argileVerte.jpg';
 import { StyleSheet, ImageBackground, Image, ScrollView} from 'react-native';
-import { Button, Text, View, Content} from 'native-base';
-import {  Header } from 'react-native-elements';
+import { Text, View, Content} from 'native-base';
+import {  Button, Header } from 'react-native-elements';
 
 import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
@@ -46,6 +46,7 @@ export default function RecipeDay2_0(props) {
                          name="arrow-back-ios" 
                          size={26} 
                          color="black" 
+                         style={{marginLeft: 10}}
                          onPress={() => props.navigation.navigate('DailyProgram')}
                          />}
        centerComponent={{ text: 'Programmes', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
@@ -53,6 +54,7 @@ export default function RecipeDay2_0(props) {
                           name="user-alt" 
                           size={26} 
                           color="black" 
+                          style={{marginRight: 10}}
                           onPress={() => props.navigation.navigate('Profil')}
                           />}
       />
@@ -110,6 +112,20 @@ export default function RecipeDay2_0(props) {
        alignItems: 'flex-start',
        justifyContent: 'flex-start',
      },
+     button: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf: 'center',
+      alignContent: 'center',
+      backgroundColor: "#222222", 
+      borderRadius: 10, 
+      width: 200, 
+      height: 50,  
+      marginTop: Platform.select({
+        ios: '10%', 
+        android:'7%', 
+      }),
+    }
   });
 
 
