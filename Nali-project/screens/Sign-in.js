@@ -82,7 +82,7 @@ function Signin(props) {
          <Input 
           containerStyle = {{marginBottom: 20, elevation: 3, width: 200, height: '8%' }}
           placeholder='Mot de passe'
-          //secureTextEntry= 'true'
+          secureTextEntry= 'true'
           onChangeText={(val) => setPassword(val)}/>
 
 
