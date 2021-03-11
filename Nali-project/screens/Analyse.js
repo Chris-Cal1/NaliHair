@@ -134,7 +134,7 @@ function Analyse(props) {
          <View></View>
        )
      }
-       })
+       }).reverse()
 
 
   if (!fontsLoaded) {
