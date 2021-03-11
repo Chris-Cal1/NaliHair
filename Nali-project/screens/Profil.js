@@ -13,6 +13,8 @@ import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
 import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light } from '@expo-google-fonts/roboto';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 
 export default function Profil(props) {
@@ -98,7 +100,7 @@ export default function Profil(props) {
                   <Text style={styles.textMenu}>FAQ</Text>
               </TouchableOpacity>
                                 
-              <TouchableOpacity style={styles.touchable} activeOpacity={1} onPress={() => props.navigation.navigate('Signin', { screen: 'Signin' })}> 
+              <TouchableOpacity style={styles.touchable} activeOpacity={1} onPress={() => {props.navigation.navigate('Signin', { screen: 'Signin' }); AsyncStorage.clear()}}> 
                   <Image source={require('../assets/logout.png')} style={{ width: 24, height: 24, marginLeft: '1%'}} /> 
                   <Text style={{fontFamily: 'Roboto_700Bold', fontSize: 20, marginLeft: '4%'}}>Déconnexion</Text>
               </TouchableOpacity>
