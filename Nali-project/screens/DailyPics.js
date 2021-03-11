@@ -33,14 +33,14 @@ var handleSubmit = async () => {
                 data.append('comment', comment)
            
 
-  const database = await fetch("http://192.168.254.3:3000/dailypics", {
+  const database = await fetch("http://10.0.0.103:3000/dailypics", {
     method: 'POST',
     body: data 
    
   })
    const body = await database.json()
-  //console.log("PHOTOSAVE bc", body.photoSave[0])
-  props.sendPhoto(body.photoSave[0])
+  console.log("PHOTOSAVE bc", body.photoSave)
+  props.sendPhoto(body.photoSave)
   props.navigation.navigate('MyDiary')
 
 
@@ -88,9 +88,9 @@ var handleSubmit = async () => {
                               />}
           />
 
-    <ScrollView>
+         <ScrollView >
               <Content  >
-
+           
           <View style={{ marginLeft: '5%', marginTop: '8%', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
             <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 24}}>{date}</Text>
           </View>
@@ -101,31 +101,31 @@ var handleSubmit = async () => {
             </View>
           </View>    
 
-          <View style={styles.addIcon}>
-          <Ionicons name="add-circle" size={40} color="black" onPress={() => props.navigation.navigate()}/>
-          </View>
           
-
-          <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center', borderColor: 'grey', height: '20%', backgroundColor: "white", width: '90%', margin: 20, borderRadius: 10, elevation: 5, }}> 
-          <TextInput  style={{justifyContent: 'center', alignItems: 'center'}}
+          <View style={{flexDirection: 'row', margin: 20, justifyContent: 'center', alignItems: 'center'}}>
+          <TouchableOpacity style={styles.input}> 
+          <Input
             multiline={true}
-            numberOfLines={10}
+            numberOfLines={5}
+            style={{ fontSize: 15}}
+            inputContainerStyle={{backgroundColor:'white', height: 95,}}
+            containerStyle={{backgroundColor:'white', height: 115, borderRadius: 10}}
             placeholder="Indiquez le soin du jour et commentez l'état de vos cheveux"
-          onChangeText={(val) => setComment(val)}
+            onChangeText={(val) => setComment(val)}
           />
-          </TouchableOpacity>
-
-          <TouchableOpacity  style={{ justifyContent: 'center', alignItems: 'center', fontSize: 40, color: 'white', backgroundColor: "#222222", marginTop: 15, fontFamily: 'Roboto', borderRadius: 10, height: 50, width: 180, alignItems: 'center', justifyContent: 'center', marginLeft: "25%", marginBottom: "60%"}}
-          onPress={() => handleSubmit()}
-          >
-          <Text style={{ color: 'white', fontFamily: 'Roboto', fontSize: 20}}> Valider </Text>
+        </TouchableOpacity>
+        </View>
+           
+            <TouchableOpacity  style={{marginTop: 10, justifyContent: 'center', alignItems: 'center', alignSelf: 'center', fontSize: 40, color: 'white', backgroundColor: "#222222", fontFamily: 'Roboto', borderRadius: 10, height: 50, width: 180}}
+            onPress={() => handleSubmit()}>
+            <Text style={{ justifyContent: 'center', alignItems: 'center', alignContent: 'center', color: 'white', fontFamily: 'Roboto', fontSize: 20}}> Valider </Text>
           </TouchableOpacity >
-
+        
           </Content>
-    
+     </ScrollView>
        
 
-        </ScrollView>
+       
         
 
     <StatusBar style="dark" backgroundColor='white'/>

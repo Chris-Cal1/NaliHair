@@ -304,13 +304,13 @@ var result = false;
     userPhoto.photo.push({url: resultCloudinary.url, date: date, comment: req.body.comment});
    
     var photoSave = await userPhoto.save()
-    console.log("PHOTOSAVE",photoSave.photo)
+    console.log("PHOTOSAVE",photoSave.photo[photoSave.photo.length - 1])
    if(photoSave){       
     result = true     
     } 
   }
 
-  res.json({result, photoSave: photoSave.photo});
+  res.json({result, photoSave: photoSave.photo[photoSave.photo.length - 1]});
   fs.unlinkSync(pictureName);
 });
 

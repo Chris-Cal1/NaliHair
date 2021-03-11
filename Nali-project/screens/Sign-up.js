@@ -24,6 +24,7 @@ import {connect} from 'react-redux'
 
 // si déjà inscrit redirection sur RoutineChoice et non sur SignUp
 
+
 useEffect(() => {
     let userExists = AsyncStorage.getItem("user");
     console.log(userExists, 'YoooH')
@@ -56,6 +57,7 @@ useEffect(() => {
       } else {
         setErrorsSignup(body.error)
       }
+
   
       
       var tabErrorsSignup = listErrorsSignup.map((error,i) => {
