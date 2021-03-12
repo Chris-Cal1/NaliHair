@@ -112,8 +112,7 @@ var findArticle = async () => {
               Avis
             </Text>
             <Text>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Excellent produit, mes cheveux ont retrouvé tout leur éclat, très bon rapport qualité/prix!
             </Text>
           </View>
 
