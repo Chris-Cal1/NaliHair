@@ -129,7 +129,7 @@ export default function ShoppingList(props) {
   return (
     <ImageBackground source={require('../assets/002.png')}style={styles.container}> 
 
-    <Header
+<Header
           containerStyle = {{
             backgroundColor: 'white', 
             elevation: 6, 
@@ -144,6 +144,8 @@ export default function ShoppingList(props) {
             name="arrow-back-ios" 
             size={26} 
             color="black" 
+            style={{marginLeft: 10}}
+
             onPress={() => props.navigation.navigate('DailyProgram')}
             />}
           centerComponent={{ text: 'Liste de course', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
@@ -151,6 +153,7 @@ export default function ShoppingList(props) {
                               name="user-alt" 
                               size={26} 
                               color="black" 
+                              style={{marginRight: 10}}
                               onPress={() => props.navigation.navigate('Profil', { screen: 'Profil' })}
                               />}
           />

@@ -114,6 +114,7 @@ function ReturnPics(props) {
             name="arrow-back-ios" 
             size={26} 
             color="black" 
+            style={{marginLeft: 10}}
             onPress={() => props.navigation.navigate('MyDiary', { screen: 'MyDiary' })}
             />}
            centerComponent={{ text: 'Journal de bord', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
@@ -121,6 +122,7 @@ function ReturnPics(props) {
                               name="user-alt" 
                               size={26} 
                               color="black" 
+                              style={{marginRight: 10}}
                               onPress={() => props.navigation.navigate('Profil', { screen: 'Profil' })}
                               />}
           />
@@ -145,7 +147,7 @@ function ReturnPics(props) {
                     <Left>
                       <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12}}></Text>
                     </Left>
-                    <Right style= {{paddingRight:'3%'}}>
+                    <Right style= {{paddingRight:'13%'}}>
                       <SimpleLineIcons 
                         name="trash" 
                         size={20} 

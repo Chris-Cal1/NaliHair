@@ -25,46 +25,43 @@ import {connect} from 'react-redux'
 // si déjà inscrit redirection sur RoutineChoice et non sur SignUp
 
 
-useEffect(() => {
-    let userExists = AsyncStorage.getItem("user");
-    console.log(userExists, 'YoooH')
-    if(userExists){
-      props.addToken(userExists)
-      props.navigation.navigate('Home1', { screen: 'RoutineChoice' })
-      
-    }
-  
-  },[])
-   
-    var handleSubmit = async () => {
-  
-  
-      const data = await fetch('http://10.0.0.103:3000/sign-up', {
-  
-        method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: `username=${name}&email=${mail}&password=${password}`
-      })
-  
-      const body = await data.json()
-  
-      if(body.result == true){
-        props.addToken(body.token)
-        AsyncStorage.setItem("user", JSON.stringify(body.token))
-        props.navigation.navigate('RoutineChoice', {screen:'RoutineChoice'})
-       // props.navigation.navigate('Signup', {screen: 'Signup'})
-  
-      } else {
-        setErrorsSignup(body.error)
-      }
 
-  
-      
-      var tabErrorsSignup = listErrorsSignup.map((error,i) => {
-        return(<p>{error}</p>)
-      });
-    
-     }
+useEffect(() => {
+  let userExists = AsyncStorage.getItem("user", function(error, data){
+    if ( data ) {
+    props.addToken(data)
+    props.navigation.navigate('Home1', {screen: 'RoutineChoice'})
+    }
+  });
+
+
+},[])
+ 
+  var handleSubmit = async () => {
+
+
+    const data = await fetch('http://192.168.0.213:3000/sign-up', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: `username=${name}&email=${mail}&password=${password}`
+    })
+
+    const body = await data.json()
+    console.log(body.result)
+    if(body.result == true){
+      props.addToken(body.token)
+      AsyncStorage.setItem("user", body.token)
+      props.navigation.navigate('Home1', {screen:'RoutineChoice'})
+     // props.navigation.navigate('Signup', {screen: 'Signup'})
+
+    } else {
+      setErrorsSignup(body.error)
+    }
+
+    var tabErrorsSignup = listErrorsSignup.map((error,i) => {
+      return(<p>{error}</p>)
+    });
+   }
 
    
 
@@ -86,18 +83,19 @@ useEffect(() => {
           <Image source={require('../assets/logo_nalihair.png')} style={{ width: 150, height: 200, marginBottom: '10%', marginTop: '20%' }} />
 
           <Input 
-          containerStyle = {{borderColor: "lightgrey", marginBottom: 20, elevation: 3, width: 200, height: '8%' }}
+          containerStyle = {{ marginBottom: 20, elevation: 3, width: 200, height: '8%' }}
           placeholder='Prénom'
           onChangeText={(val) => setName(val)}/>
 
          <Input 
-          containerStyle = {{borderColor: "lightgrey", marginBottom: 20, elevation: 3, width: 200, height: '8%' }}
+          containerStyle = {{marginBottom: 20, elevation: 3, width: 200, height: '8%' }}
           placeholder='Mail'
           onChangeText={(val) => setMail(val)}/>
 
          <Input 
-          containerStyle = {{borderColor: "lightgrey", marginBottom: 20, elevation: 3, width: 200, height: '8%' }}
+          containerStyle = {{ marginBottom: 20, elevation: 3, width: 200, height: '8%' }}
           placeholder='Mot de passe'
+          secureTextEntry= "true"
           onChangeText={(val) => setPassword(val)}/>
 
 
@@ -106,7 +104,7 @@ useEffect(() => {
           >
           <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular', fontSize: 20}}> Me connecter </Text>
           </TouchableOpacity>
-          <Text style={{ color: '#222222', fontFamily: 'Roboto_400Regular', fontSize: 15, marginTop: 15}}  onPress={() => props.navigation.navigate('Signin')}> Déjà inscrit </Text>
+          <Text style={{ color: '#222222', fontFamily: 'Roboto_400Regular', fontSize: 15, marginTop: 15}}  onPress={() => props.navigation.navigate('Signin')}> Déjà inscrit ? </Text>
         </View>
       <StatusBar style="dark" backgroundColor='white'/>
     </ImageBackground>

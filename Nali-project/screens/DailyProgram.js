@@ -36,7 +36,7 @@ function DailyProgram(props) {
 var findRecipe = async day => {
     
 
-  const saveReq = await fetch('http://10.0.0.103:3000/search-recipe', {
+  const saveReq = await fetch('http:/192.168.0.213:3000/search-recipe', {
 
      method: 'POST',
      headers: {'Content-Type':'application/x-www-form-urlencoded'},
@@ -84,7 +84,7 @@ var findRecipe = async day => {
                           name="user-alt" 
                           size={26} 
                           color="black" 
-
+                          style={{marginRight: 10}}
                           onPress={() => props.navigation.navigate('Signin')}
 
                           />}
@@ -98,8 +98,8 @@ var findRecipe = async day => {
               <Body>
                 <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 24, paddingBottom: '4%' }}>Manque de volume</Text>
                 <View style={{flexDirection: 'row'}}>
-                  <Left>
-                    <Text style={{fontFamily: 'Roboto_400Regular', fontSize: 12}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed lorem enim.</Text>
+                  <Left style= {{marginRight: -40}}>
+                    <Text style={{fontFamily: 'Roboto_400Regular', fontSize: 13}}>Pour donner du volume aux cheveux fins, on adopte des huiles légères comme l'huile de coco, de macadamia, de jojoba, de carotte.</Text>
                   </Left>
                   <Right>
                     <Button style={{backgroundColor: '#A1DEAB', height: 50, width: 50, paddingLeft: '7%', borderRadius: 10,  elevation: 10,shadowOffset: { width: 5, height: 5 },shadowColor: "black", shadowColor: "black", shadowRadius: 10 }}>

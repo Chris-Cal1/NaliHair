@@ -5,8 +5,8 @@ import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import aloeVera from '../assets/aloeVera.jpg';
 import { StyleSheet, ImageBackground, Image, ScrollView} from 'react-native';
-import { Button, Text, View, Content} from 'native-base';
-import {  Header } from 'react-native-elements';
+import { Text, View, Content} from 'native-base';
+import {  Button, Header } from 'react-native-elements';
 
 import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 
@@ -37,7 +37,7 @@ import { connect } from 'react-redux';
       
   <ImageBackground source={require('../assets/007.png')} style={styles.container}>
 
-    <Header
+<Header
         containerStyle = {{
           backgroundColor: 'white', 
           elevation: 6, 
@@ -52,6 +52,7 @@ import { connect } from 'react-redux';
                          name="arrow-back-ios" 
                          size={26} 
                          color="black" 
+                         style={{marginLeft: 10}}
                          onPress={() => props.navigation.navigate('DailyProgram')}
                          />}
        centerComponent={{ text: 'Programmes', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
@@ -59,6 +60,7 @@ import { connect } from 'react-redux';
                           name="user-alt" 
                           size={26} 
                           color="black" 
+                          style={{marginRight: 10}}
                           onPress={() => props.navigation.navigate('Profil')}
                           />}
       />
@@ -79,12 +81,15 @@ import { connect } from 'react-redux';
         <Text style={{ fontFamily: 'Roboto_400Regular'}}>- c-à-s d'une huile végétale de votre choix</Text>
         <Text style={{ fontFamily: 'Roboto_500Medium', fontSize: 20, color: 'black',  marginTop: '4%', marginBottom: '3%' }}>Mode d'emploi</Text>
         <Text style={{ fontFamily: 'Roboto_400Regular'}}>Appliquez une fine couche d'huile végétale au choix puis une ou deux noisette du beurre végétale de votre choix sur l'ensemble de votre chevelure</Text>
-        
-         <Button dark
-          style={{marginTop: '11%', marginBottom: '10%', marginLeft: '32%', backgroundColor: '#222222'}}
+        <View style={{ justifyContent:'center', alignItems: 'center'}}>
+        <Button
+          title="Terminé"
+          titleStyle={{fontFamily: 'Roboto_700Bold', color: 'white'}}
+          buttonStyle={styles.button}
           onPress={()=> {props.navigation.navigate( 'Bravo' ); setTermine4(true); props.rituel4Done(true); }}>
            <Text style={{fontFamily: 'Roboto_500Medium', fontSize: 20}}> Terminé </Text>
          </Button>
+         </View>
       
         
                    
@@ -105,6 +110,20 @@ import { connect } from 'react-redux';
        alignItems: 'flex-start',
        justifyContent: 'flex-start',
      },
+     button: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf: 'center',
+      alignContent: 'center',
+      backgroundColor: "#222222", 
+      borderRadius: 10, 
+      width: 200, 
+      height: 50,  
+      marginTop: Platform.select({
+        ios: '10%', 
+        android:'7%', 
+      }),
+    }
   });
 
   function mapDispatchToProps(dispatch){

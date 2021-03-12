@@ -4,8 +4,8 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, ScrollView, ImageBackground, Image, TouchableOpacity } from 'react-native';
-import {  Header, Overlay } from 'react-native-elements';
-import {  Text, View, Card, CardItem, Left, Body, Right, Button, Textarea} from 'native-base';
+import { Button, Header, Overlay } from 'react-native-elements';
+import {  Text, View, Card, CardItem, Left, Body, Right, Textarea} from 'native-base';
 import { SimpleLineIcons, FontAwesome5, AntDesign } from '@expo/vector-icons';
 import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
@@ -23,7 +23,7 @@ function MyDiary(props) {
 useEffect(() => {
   const findPhoto = async () => {
 
-    const dataWishlist = await fetch(`http://10.0.0.103:3000/card-picture?token=${props.token}`)
+    const dataWishlist = await fetch(`http://192.168.0.213:3000/card-picture?token=${props.token}`)
 
     const body = await dataWishlist.json()
 
@@ -43,7 +43,7 @@ useEffect(() => {
 // suppression d'une photo
   const handleClickDeletePhoto = async (id) => {
 
-  const response = await fetch('http://10.0.0.103:3000/delete-photo', {
+  const response = await fetch('http://192.168.0.213:3000/delete-photo', {
    method: 'DELETE',
    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
    body: `id=${id}&token=${props.token}`
@@ -149,6 +149,7 @@ var handleTest = (day) => {
                           name="user-alt" 
                           size={26} 
                           color="black" 
+                          style={{marginRight: 10}}
                           onPress={() => props.navigation.navigate('Profil', { screen: 'Profil' })}
                           />}
       />
@@ -171,12 +172,12 @@ var handleTest = (day) => {
       iconContainer={{flex: 0.1}}
       
     />
-
-  <Button
-      style={{marginTop: '3%', marginBottom: '3%', backgroundColor: '#222222', justifyContent: 'center', alignSelf: 'center', borderRadius: 10,  elevation: 6, shadowOffset: { width: 5, height: 5 },shadowColor: "black",shadowColor: "black", shadowRadius: 10}}
-      onPress={()=> {props.navigation.navigate( 'SnapScreen' )}}>
-        <Text style={{fontFamily: 'Roboto_500Medium', fontSize: 20}}> Prendre une photo </Text>
-  </Button>
+            <Button
+              title="Prendre une photo"
+              titleStyle={{fontFamily: 'Roboto_700Bold', color: 'white'}}
+              buttonStyle={styles.button}
+              onPress={()=> {props.navigation.navigate( 'SnapScreen' )}}>
+            </Button>
 
   <ScrollView style={{ marginBottom: "80%"}}>
 
@@ -203,6 +204,20 @@ var handleTest = (day) => {
        alignItems: 'center',
        justifyContent: 'flex-start',
      },
+     button: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf: 'center',
+      alignContent: 'center',
+      backgroundColor: "#222222", 
+      borderRadius: 10, 
+      width: 200, 
+      height: 50,  
+      marginBottom: Platform.select({
+        ios: '5%', 
+        android:'5%', 
+      }),
+    }
   });
 
   function mapStateToProps(state) {

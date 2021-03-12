@@ -27,22 +27,22 @@ export default function Home2(props) {
     return <AppLoading />;
   } else {
     return (
-      <ImageBackground source={require('../assets/pellicules.jpg')} style={{flex: 1}}>
+      <ImageBackground source={require('../assets/pellicule.jpg')} style={{flex: 1}}>
 
       
-      <Content>
 
         <View>
 
-        <Text style={{fontSize: 50, fontFamily: 'Handlee_400Regular', color: 'white', marginBottom: '3%', marginLeft: '3%', marginTop: '10%'}}>Mon programme cheveux </Text>
-        <Text style={{fontSize: 18, fontFamily: 'Roboto_700Bold', color: 'white', marginBottom: '8%', marginRight: '3%', marginLeft: '3%', marginTop: '5%'}}>
-          La routine capillaire est indispensable pour pouvoir prendre soin de ses cheveux crépus, frisés, bouclés, et frisés au quotidien. {"\n"}
+        <Text style={{fontSize: 50, fontFamily: 'Handlee_400Regular', color: 'white', marginBottom: '3%', marginLeft: '3%', marginTop: '15%'}}>Mon programme cheveux </Text>
+        <Text style={{fontSize: 18, fontFamily: 'Roboto_700Bold', color: 'white', marginBottom: '8%', marginRight: '25%', marginLeft: '3%', marginTop: '5%'}}>
+          La routine capillaire est indispensable pour pouvoir prendre soin de ses cheveux crépus, frisés, bouclés, et frisés au quotidien. {"\n"}{"\n"}
           Découvrez votre programme de recettes de soins à base de produits naturels pour embellir vos cheveux.
         </Text>
 
           <View style={{ justifyContent:'center', alignItems: 'center'}}>
             <Button 
               title="Je découvre ma routine"
+              titleStyle={{fontFamily: 'Roboto_700Bold', color: 'white'}}
               buttonStyle={styles.button}
               onPress={() => props.navigation.navigate('Signup', {sreen: 'Signup'})}
               type="solid"
@@ -51,7 +51,6 @@ export default function Home2(props) {
 
         </View>
   
-        </Content>
 
       <StatusBar style="hidden" translucent={false} />
  
@@ -74,7 +73,7 @@ export default function Home2(props) {
       height: 50, 
       fontFamily: 'Roboto_700Bold', 
       marginTop: Platform.select({
-        ios: '110%', 
+        ios: '120%', 
         android:'70%', 
       }),
      }

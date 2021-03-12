@@ -133,25 +133,26 @@ function RechercheStackScreen() {
         tabBarIcon: ({ color }) => {
           let iconName;
  
-          if (route.name == 'RoutineChoice') {
+          if (route.name == 'Routine') {
             iconName = 'home';
-          } else if (route.name == 'DailyProgram') {
+          } else if (route.name == 'Programme') {
             iconName = 'list';
-          } else if (route.name == 'MyDiary') {
+          } else if (route.name == 'Journal') {
             iconName = 'journal';
           } else if (route.name == 'Analyse') {
             iconName = 'search';
           } 
   
-          return <Ionicons name={iconName} size={28} color={color} />;
+          return <Ionicons name={iconName} size={35} color={color} />;
         },
         })}
         
       tabBarOptions={{
         //showLabel: false,
-        activeTintColor: '#A1DEAB',
-        inactiveTintColor: '#FFFFFF',
+        activeTintColor: '#FFFFFF',
+        inactiveTintColor: 'grey',
         style: { 
+          paddingTop: "2%",
           backgroundColor: '#222222',
           alignContent: 'center', 
           justifyContent: 'center',
@@ -170,9 +171,9 @@ function RechercheStackScreen() {
      
 
      
-     <Tab.Screen name="RoutineChoice" component={RoutineChoiceStackScreen} />
-      <Tab.Screen name="DailyProgram" component={DailyProgramStackScreen} />
-      <Tab.Screen name="MyDiary" component={MyDiaryStackScreen} />
+      <Tab.Screen name="Routine" component={RoutineChoiceStackScreen} />
+      <Tab.Screen name="Programme" component={DailyProgramStackScreen} />
+      <Tab.Screen name="Journal" component={MyDiaryStackScreen} />
       <Tab.Screen name="Analyse" component={RechercheStackScreen} />
 
      

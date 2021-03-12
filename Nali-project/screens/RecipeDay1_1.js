@@ -5,7 +5,8 @@ import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import huileOlive from '../assets/huileOlive.jpg';
 import { StyleSheet, ImageBackground, Image, ScrollView} from 'react-native';
-import { Button, Text, View, Content} from 'native-base';
+import { Text, View, Content} from 'native-base';
+import {  Button, Header } from 'react-native-elements';
 
 import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 
@@ -13,7 +14,6 @@ import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
 import { Roboto_400Regular, Roboto_700Bold, Roboto_500Medium, Roboto_300Light} from '@expo-google-fonts/roboto';
 
-import {  Header } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 
@@ -42,7 +42,7 @@ function RecipeDay1_1(props) {
   <ImageBackground source={require('../assets/007.png')} style={styles.container}>
    
    
-    <Header
+   <Header
       containerStyle = {{
         backgroundColor: 'white', 
         elevation: 6, 
@@ -57,6 +57,7 @@ function RecipeDay1_1(props) {
                          name="arrow-back-ios" 
                          size={26} 
                          color="black" 
+                         style={{marginLeft: 10}}
                          onPress={() => props.navigation.navigate('RecipeDay1_0')}
                          />}
        centerComponent={{ text: 'Programmes', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
@@ -64,7 +65,7 @@ function RecipeDay1_1(props) {
                           name="user-alt" 
                           size={26} 
                           color="black" 
-                          marginRight= '10px'
+                          style={{marginRight: 10}}
                           onPress={() => props.navigation.navigate('Profil')}
                           />}
       />
@@ -84,15 +85,15 @@ function RecipeDay1_1(props) {
         <Text style={{ marginBottom: '2%', fontFamily: 'Roboto_400Regular', fontSize: 13}}>- Disposez dans un bol 6 cuillères à café de l'huile de votre choix. </Text>
         <Text style={{ marginBottom: '2%', fontFamily: 'Roboto_400Regular', fontSize: 13}}>- Appliquez sur cheveux humides, répartissez l'huile sur vos cheveux section par section en commençant par les pointes. </Text>
         <Text style={{ marginBottom: '3%', fontFamily: 'Roboto_400Regular', fontSize: 13}}>- Laissez poser 20 minutes puis procéder au shampoing préconisé à l'étape suivante. </Text>
-        <Button dark
-          style={{marginTop: '11%', marginBottom: '9%', marginLeft: '33%', backgroundColor: '#222222'}}
-
-
-          onPress={()=> {props.navigation.navigate( 'Bravo' ); setTermine(true); props.rituel1Done(true); }}>
-
-
-           <Text style={{fontFamily: 'Roboto_500Medium', fontSize: 20}}> Terminé </Text>
+        <View style={{ justifyContent:'center', alignItems: 'center'}}>
+        <Button 
+          title="Terminé"
+          titleStyle={{fontFamily: 'Roboto_700Bold', color: 'white'}}
+          buttonStyle={styles.button}
+          onPress={()=> {props.navigation.navigate( 'Bravo' ); setTermine(true); props.rituel1Done(true); }}
+          >
          </Button>
+         </View>
 
                       
     </View>
@@ -113,6 +114,20 @@ function RecipeDay1_1(props) {
        alignItems: 'flex-start',
        justifyContent: 'flex-start',
      },
+     button: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf: 'center',
+      alignContent: 'center',
+      backgroundColor: "#222222", 
+      borderRadius: 10, 
+      width: 200, 
+      height: 50,  
+      marginTop: Platform.select({
+        ios: '10%', 
+        android:'7%', 
+      }),
+    }
   });
 
   function mapDispatchToProps(dispatch){
