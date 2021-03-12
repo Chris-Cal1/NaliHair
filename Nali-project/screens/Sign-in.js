@@ -36,7 +36,7 @@ function Signin(props) {
     const body = await data.json()
 
     if(body.result == true){
-      props.navigation.navigate('Profil')
+      props.navigation.navigate('Home1')
       props.addToken(body.token)
       setUserExists(true)
 
