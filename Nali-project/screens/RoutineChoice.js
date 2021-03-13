@@ -1,4 +1,3 @@
-// Marie
 
 import React from 'react';
 

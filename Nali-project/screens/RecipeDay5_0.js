@@ -1,4 +1,3 @@
-// Chris
 
 import React from 'react';
 

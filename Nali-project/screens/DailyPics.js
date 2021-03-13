@@ -1,4 +1,3 @@
-// Phyllis
 import React, {useState} from 'react';
 
 import { StatusBar } from 'expo-status-bar';
@@ -33,7 +32,7 @@ var handleSubmit = async () => {
                 data.append('comment', comment)
            
 
-  const database = await fetch("http://10.0.0.103:3000/dailypics", {
+  const database = await fetch("http://10.0.0.101:3000/dailypics", {
     method: 'POST',
     body: data 
    

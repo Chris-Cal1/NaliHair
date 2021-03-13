@@ -1,6 +1,3 @@
-// Marie
-
-// Marie
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, ScrollView, ImageBackground, Image, TouchableOpacity } from 'react-native';
@@ -23,7 +20,7 @@ function MyDiary(props) {
 useEffect(() => {
   const findPhoto = async () => {
 
-    const dataWishlist = await fetch(`http://10.0.0.103:3000/card-picture?token=${props.token}`)
+    const dataWishlist = await fetch(`http://10.0.0.101:3000/card-picture?token=${props.token}`)
 
     const body = await dataWishlist.json()
 
@@ -42,12 +39,14 @@ useEffect(() => {
 
 // suppression d'une photo
   const handleClickDeletePhoto = async (id) => {
+    console.log("ID 1 ======>>>", id )
 
-  const response = await fetch('http://10.0.0.103:3000/delete-photo', {
+  const response = await fetch('http://10.0.0.101:3000/delete-photo', {
    method: 'DELETE',
    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
    body: `id=${id}&token=${props.token}`
   });
+  
    var myPictureCopy = [...props.loadingPics]
     var position = null
     console.log("myPictureCopy", myPictureCopy, id)
@@ -65,7 +64,7 @@ var myPics = props.loadingPics;
 
 
 var cardPicture = myPics.map((picture, i) => {
-  console.log(picture, 'PIC PIC')
+  //console.log(picture, 'PIC PIC')
   return (
     <TouchableOpacity key = {i}
     onPress={() => props.navigation.navigate('DailyPics', { screen: 'DailyPics' })}>

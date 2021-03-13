@@ -1,6 +1,3 @@
-// Maurine front
-// Chris back
-
 import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, ImageBackground, Image, TouchableOpacity, Linking, Text, View, ScrollView, KeyboardAvoidingView } from 'react-native';
@@ -21,7 +18,7 @@ function SearchResults(props) {
 var findArticle = async () => {
     
 
-  const saveReq = await fetch('http://10.0.0.103:3000/add-article', {
+  const saveReq = await fetch('http://10.0.0.101:3000/add-article', {
 
      method: 'POST',
      headers: {'Content-Type':'application/x-www-form-urlencoded'},

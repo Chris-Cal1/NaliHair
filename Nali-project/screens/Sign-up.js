@@ -40,7 +40,7 @@ useEffect(() => {
   var handleSubmit = async () => {
 
 
-    const data = await fetch('http://10.0.0.103:3000/sign-up', {
+    const data = await fetch('http://10.0.0.101:3000/sign-up', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `username=${name}&email=${mail}&password=${password}`

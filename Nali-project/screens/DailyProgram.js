@@ -1,5 +1,3 @@
-// Marie
-
 import React, { useState } from 'react';
 
 import { StatusBar } from 'expo-status-bar';
@@ -36,7 +34,7 @@ function DailyProgram(props) {
 var findRecipe = async day => {
     
 
-  const saveReq = await fetch('http:/10.0.0.103:3000/search-recipe', {
+  const saveReq = await fetch('http:/10.0.0.101:3000/search-recipe', {
 
      method: 'POST',
      headers: {'Content-Type':'application/x-www-form-urlencoded'},
