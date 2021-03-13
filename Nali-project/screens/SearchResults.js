@@ -21,7 +21,7 @@ function SearchResults(props) {
 var findArticle = async () => {
     
 
-  const saveReq = await fetch('http://10.0.0.100:3000/add-article', {
+  const saveReq = await fetch('http://10.0.0.103:3000/add-article', {
 
      method: 'POST',
      headers: {'Content-Type':'application/x-www-form-urlencoded'},
@@ -66,6 +66,7 @@ var findArticle = async () => {
             name="arrow-back-ios" 
             size={26} 
             color="black" 
+            style={{marginLeft: 10}}
             onPress={() => props.navigation.navigate('Analyse')}
             />}
            centerComponent={{ text: 'Analyse', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
@@ -73,6 +74,7 @@ var findArticle = async () => {
                               name="user-alt" 
                               size={26} 
                               color="black" 
+                              style={{marginRight: 10}}
                               onPress={() => props.navigation.navigate('Profil', { screen: 'Profil' })}
                               />}
           />
@@ -86,14 +88,14 @@ var findArticle = async () => {
               <Image source={{  uri: props.article.image, }} style= {{width: 70, height: 110, marginLeft: '5%'}}/>
                 <View style={{marginLeft: '5%'}}>
                   <Text style={{ fontFamily: 'Roboto_700Bold', fontSize: 17, marginRight: '30%'}}>{props.article.type}</Text>
-                  <View style={{flexDirection: 'row', marginTop: '10%'}}>
+                  <View style={{flexDirection: 'row', marginTop: '8%', paddingLeft: '5%'}}>
                     <Badge value=" "
                     status="success"// success = vert  //  warning = orange  //  error = rouge
                     />
-                    <Text style={{ fontFamily: 'Roboto_300Light', fontSize: 14, marginLeft: '5%', marginBottom: '5%', marginTop: '0%'}}>{props.article.rating}/20</Text>
+                    <Text style={{ fontFamily: 'Roboto_300Light', fontSize: 14, marginLeft: '3%', marginBottom: '5%', marginTop: 1}}>{props.article.rating}/20</Text>
                   </View>
                 </View>
-              <MaterialIcons name="favorite" size={30} color={color} style= {{marginLeft: '-35%', marginTop: '25%', }} onPress={() => {findArticle(); props.likeArticles(props.article); setIsLiked(true)} }/>
+              <MaterialIcons name="favorite" size={30} color={color} style= {{marginLeft: '-40%', marginTop: '20%', }} onPress={() => {findArticle(); props.likeArticles(props.article); setIsLiked(true)} }/>
             </View> 
           </TouchableOpacity>
 
@@ -110,8 +112,7 @@ var findArticle = async () => {
               Avis
             </Text>
             <Text>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Excellent produit, mes cheveux ont retrouvé tout leur éclat, très bon rapport qualité/prix!
             </Text>
           </View>
 
@@ -172,7 +173,7 @@ var findArticle = async () => {
   function mapDispatchToProps(dispatch) {
     return {
       likeArticles: function(articlesLiked){
-        console.log('ARTICLES LIKé DISPATCH',articlesLiked)
+       // console.log('ARTICLES LIKé DISPATCH',articlesLiked)
         dispatch({type: 'likeArticle',
         articlesLiked: articlesLiked
         })

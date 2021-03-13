@@ -5,8 +5,8 @@ import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import avoine from '../assets/avoine.jpg';
 import { StyleSheet, ImageBackground, Image, ScrollView} from 'react-native';
-import { Button, Text, View, Content} from 'native-base';
-import {  Header } from 'react-native-elements';
+import { Text, View, Content} from 'native-base';
+import {  Button, Header } from 'react-native-elements';
 
 import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 
@@ -38,7 +38,7 @@ import { connect } from 'react-redux';
    
   <ImageBackground source={require('../assets/007.png')} style={styles.container}>
    
-    <Header
+   <Header
         containerStyle = {{
           backgroundColor: 'white', 
           elevation: 6, 
@@ -53,6 +53,7 @@ import { connect } from 'react-redux';
                          name="arrow-back-ios" 
                          size={26} 
                          color="black" 
+                         style={{marginLeft: 10}}
                          onPress={() => props.navigation.navigate('RecipeDay2_0')}
                          />}
        centerComponent={{ text: 'Programme', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
@@ -60,7 +61,7 @@ import { connect } from 'react-redux';
                           name="user-alt" 
                           size={26} 
                           color="black" 
-                          marginRight= '10px'
+                          style={{marginRight: 10}}
                           onPress={() => props.navigation.navigate('Profil')}
                           />}
       />
@@ -85,11 +86,15 @@ import { connect } from 'react-redux';
         <Text style={{ fontFamily: 'Roboto_500Medium', fontSize: 20, color: 'black',  marginTop: '4%', marginBottom: '3%' }}>Mode d'emploi</Text>
         <Text style={{ marginBottom: '2%', fontFamily: 'Roboto_400Regular', fontSize: 13}}>Appliquez la crème d'avoine ou le lait de coco sur vos cheveux section par section en commençant par les pointes. Enveloppez dans une serviette pour éviter que ça goutte puis laissez poser 20 minutes puis rincez à l'eau claire.</Text>
         <Text style={{ fontFamily: 'Roboto_400Regular', fontSize: 13}}>Conservez la crème d'avoine a côté elle sera utile pour la réalisation de votre spray hydratant ;-) gv</Text>
-        <Button dark
-          style={{marginTop: '11%', marginBottom: '50%', marginLeft: '35%', backgroundColor: '#222222'}}
+        <View style={{ justifyContent:'center', alignItems: 'center'}}>
+        <Button
+          title="Terminé"
+          titleStyle={{fontFamily: 'Roboto_700Bold', color: 'white'}}
+          buttonStyle={styles.button}
           onPress={()=> {props.navigation.navigate( 'Bravo' ); setTermine2(true); props.rituel2Done(true); }}>
            <Text style={{fontFamily: 'Roboto_500Medium', fontSize: 20}}> Terminé </Text>
          </Button>
+         </View>
         
                       
    </View>
@@ -110,6 +115,20 @@ import { connect } from 'react-redux';
        alignItems: 'flex-start',
        justifyContent: 'flex-start',
      },
+     button: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf: 'center',
+      alignContent: 'center',
+      backgroundColor: "#222222", 
+      borderRadius: 10, 
+      width: 200, 
+      height: 50,  
+      marginTop: Platform.select({
+        ios: '10%', 
+        android:'7%', 
+      }),
+    }
   });
 
   function mapDispatchToProps(dispatch){

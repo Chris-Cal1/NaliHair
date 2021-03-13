@@ -15,38 +15,75 @@ import {connect} from 'react-redux';
 
 function ReturnPics(props) {
       
-  
-    var myPics = props.photo.map((photo, i) => {
-          return(
-            <TouchableOpacity key= {i}
-            onPress={() => props.navigation.navigate('DailyPics', { screen: 'DailyPics' })}>
-            <Card style={{flex: 1, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%'}}>
-                    <CardItem style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0, borderRadius: 10,  elevation: 10,shadowOffset: { width: 5, height: 5 },shadowColor: "black",shadowColor: "black", shadowRadius: 10}}>
-                      <Left style= {{marginLeft: 0}}>
-                        <Image source={{uri: photo.url}}
-                               style={{ height: 150, width: 150, flex: 1 }} />
-                      </Left>
-                      <Body style={{justifyContent: 'center', marginLeft: '2%'}}>
-                        <Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, color: 'black', marginBottom: '2%'}}>{photo.date}</Text>
-                        <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12, color: 'black', marginBottom: '2%'}}>{photo.comment}</Text>
-                        <View style={{flexDirection: 'row', marginTop: '3%'}}>
-                          <Left>
-                            <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12}}></Text>
-                          </Left>
-                          <Right style= {{paddingRight:'3%'}}>
-                            <SimpleLineIcons 
-                              name="trash" 
-                              size={20} 
-                              color="black"
-                            />
-                          </Right>
-                        </View>
-                      </Body>
-                    </CardItem>
-                  </Card>
-                </TouchableOpacity>
-          )
-     })
+  var photoDay = props.photo;
+  console.log("PHOTODAY", photoDay)
+
+  /*var myPics = props.photo.map((photo, i) => {
+    console.log(photo, "PHOTO")
+    return(
+     
+     <TouchableOpacity key= {i}
+      onPress={() => props.navigation.navigate('DailyPics', { screen: 'DailyPics' })}>
+      <Card style={{flex: 1, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%'}}>
+              <CardItem style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0, borderRadius: 10,  elevation: 10,shadowOffset: { width: 5, height: 5 },shadowColor: "black",shadowColor: "black", shadowRadius: 10}}>
+                <Left style= {{marginLeft: 0}}>
+                  <Image source={{uri: photo.url}}
+                         style={{ height: 150, width: 150, flex: 1 }} />
+                </Left>
+                <Body style={{justifyContent: 'center', marginLeft: '2%'}}>
+                  <Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, color: 'black', marginBottom: '2%'}}>{new Date(photo.date).toLocaleDateString()}</Text>
+                  <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12, color: 'black', marginBottom: '2%'}}>{photo.comment}</Text>
+                  <View style={{flexDirection: 'row', marginTop: '3%'}}>
+                    <Left>
+                      <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12}}></Text>
+                    </Left>
+                    <Right style= {{paddingRight:'3%'}}>
+                      <SimpleLineIcons 
+                        name="trash" 
+                        size={20} 
+                        color="black"
+                      />
+                    </Right>
+                  </View>
+                </Body>
+              </CardItem>
+            </Card>
+          </TouchableOpacity>
+    )
+})*/
+
+/*var mesPhotos = photoDay.map((pics, i) => {
+  return (
+    <TouchableOpacity key= {i}
+      onPress={() => props.navigation.navigate('DailyPics', { screen: 'DailyPics' })}>
+      <Card style={{flex: 1, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%'}}>
+              <CardItem style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0, borderRadius: 10,  elevation: 10,shadowOffset: { width: 5, height: 5 },shadowColor: "black",shadowColor: "black", shadowRadius: 10}}>
+                <Left style= {{marginLeft: 0}}>
+                  <Image source={{uri: pics.url}}
+                         style={{ height: 150, width: 150, flex: 1 }} />
+                </Left>
+                <Body style={{justifyContent: 'center', marginLeft: '2%'}}>
+                  <Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, color: 'black', marginBottom: '2%'}}>{new Date(pics.date).toLocaleDateString()}</Text>
+                  <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12, color: 'black', marginBottom: '2%'}}>{pics.comment}</Text>
+                  <View style={{flexDirection: 'row', marginTop: '3%'}}>
+                    <Left>
+                      <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12}}></Text>
+                    </Left>
+                    <Right style= {{paddingRight:'3%'}}>
+                      <SimpleLineIcons 
+                        name="trash" 
+                        size={20} 
+                        color="black"
+                      />
+                    </Right>
+                  </View>
+                </Body>
+              </CardItem>
+            </Card>
+          </TouchableOpacity>
+  )
+})*/
+
 
       let [fontsLoaded] = useFonts({
         Handlee_400Regular,
@@ -77,6 +114,7 @@ function ReturnPics(props) {
             name="arrow-back-ios" 
             size={26} 
             color="black" 
+            style={{marginLeft: 10}}
             onPress={() => props.navigation.navigate('MyDiary', { screen: 'MyDiary' })}
             />}
            centerComponent={{ text: 'Journal de bord', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
@@ -84,6 +122,7 @@ function ReturnPics(props) {
                               name="user-alt" 
                               size={26} 
                               color="black" 
+                              style={{marginRight: 10}}
                               onPress={() => props.navigation.navigate('Profil', { screen: 'Profil' })}
                               />}
           />
@@ -91,7 +130,35 @@ function ReturnPics(props) {
     
        <View>
            <ScrollView>
-            {myPics}
+           { /*{myPics}*/}
+           {/*{mesPhotos}*/}
+           <TouchableOpacity 
+      onPress={() => props.navigation.navigate('DailyPics', { screen: 'DailyPics' })}>
+      <Card style={{flex: 1, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%'}}>
+              <CardItem style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0, borderRadius: 10,  elevation: 10,shadowOffset: { width: 5, height: 5 },shadowColor: "black",shadowColor: "black", shadowRadius: 10}}>
+                <Left style= {{marginLeft: 0}}>
+                  <Image source={{uri: props.photo.url}}
+                         style={{ height: 150, width: 150, flex: 1 }} />
+                </Left>
+                <Body style={{justifyContent: 'center', marginLeft: '2%'}}>
+                  <Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, color: 'black', marginBottom: '2%'}}>{new Date(props.photo.date).toLocaleDateString()}</Text>
+                  <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12, color: 'black', marginBottom: '2%'}}>{props.photo.comment}</Text>
+                  <View style={{flexDirection: 'row', marginTop: '3%'}}>
+                    <Left>
+                      <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12}}></Text>
+                    </Left>
+                    <Right style= {{paddingRight:'13%'}}>
+                      <SimpleLineIcons 
+                        name="trash" 
+                        size={20} 
+                        color="black"
+                      />
+                    </Right>
+                  </View>
+                </Body>
+              </CardItem>
+            </Card>
+          </TouchableOpacity>
             </ScrollView>
             </View>
        
@@ -145,7 +212,7 @@ function ReturnPics(props) {
   });
 
   function mapStateToProps(state) {
-    console.log(state);
+   // console.log(state);
     return { photo: state.photo, token: state.token }
   }
 

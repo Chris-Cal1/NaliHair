@@ -3,7 +3,7 @@
 import React, { useState, useEffect} from 'react';
 
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, ImageBackground, View} from 'react-native';
+import { StyleSheet, Text, ImageBackground, View, ScrollView} from 'react-native';
 import { Card, ListItem, CheckBox, Header } from 'react-native-elements'
 import { Content} from 'native-base';
 
@@ -129,7 +129,7 @@ export default function ShoppingList(props) {
   return (
     <ImageBackground source={require('../assets/002.png')}style={styles.container}> 
 
-    <Header
+<Header
           containerStyle = {{
             backgroundColor: 'white', 
             elevation: 6, 
@@ -144,6 +144,8 @@ export default function ShoppingList(props) {
             name="arrow-back-ios" 
             size={26} 
             color="black" 
+            style={{marginLeft: 10}}
+
             onPress={() => props.navigation.navigate('DailyProgram')}
             />}
           centerComponent={{ text: 'Liste de course', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
@@ -151,54 +153,66 @@ export default function ShoppingList(props) {
                               name="user-alt" 
                               size={26} 
                               color="black" 
+                              style={{marginRight: 10}}
                               onPress={() => props.navigation.navigate('Profil', { screen: 'Profil' })}
                               />}
           />
 
 <Content>
+
       <View style={{alignItems: 'flex-start', marginTop: '5%'}}>
-   
           <Card containerStyle={styles.box}>
 
                <Text style={{fontSize: 30, fontFamily: 'Roboto_500Medium'}}> Semaine 1</Text>
                   
-                  <ListItem style={{alignItems: 'flex-start', marginBottom: -30}}>
+                  <ListItem style={{alignItems: 'flex-start', marginBottom: Platform.select({ios: -30, android: -35}),}}>
                     <CheckBox 
+                    title="Huile d'olive"
                     checked={checkedBox1}
                     checkedColor="#F475BB"
+                    containerStyle={{backgroundColor: 'white', borderColor: 'white'}}
+                    textStyle= {{fontFamily: 'Roboto_400Regular', fontSize: 13}}
                     onPress={() => handleSubmit1(!checkedBox1)}/>
-                    <Text style={{fontSize: 15, fontFamily: 'Roboto_400Regular'}}>Huile d'olive</Text>      
                   </ListItem >
           
-                  <ListItem style={{alignItems: 'flex-start', marginBottom: -30}}>
+                  <ListItem style={{alignItems: 'flex-start', marginBottom: Platform.select({ios: -30, android: -35}),}}>
                     <CheckBox 
+                    title="Beurre de karité"
                     checked={checkedBox2}
                     checkedColor="#F475BB"
                     onPress={() => handleSubmit2(!checkedBox2)}
+                    containerStyle={{backgroundColor: 'white', borderColor: 'white'}}
+                    textStyle= {{fontFamily: 'Roboto_400Regular', fontSize: 13}}
+
                     />
-                    <Text style={{fontSize: 15, fontFamily: 'Roboto_400Regular'}}>Beurre de karité</Text>         
                   </ListItem>
                
-                  <ListItem style={{alignItems: 'flex-start', marginBottom: -30}}>
-                    <CheckBox 
+                  <ListItem style={{alignItems: 'flex-start', marginBottom: Platform.select({ios: -30, android: -35}),}}>
+                    <CheckBox
+                    title="Lait d'avoine" 
                     checked={checkedBox3}
                     checkedColor="#F475BB"
-                    onPress={() => handleSubmit3(!checkedBox3)}/>
-                    <Text style={{fontSize: 15, fontFamily: 'Roboto_400Regular'}}>Lait d'avoine</Text>         
+                    onPress={() => handleSubmit3(!checkedBox3)}
+                    containerStyle={{backgroundColor: 'white', borderColor: 'white'}}
+                    textStyle= {{fontFamily: 'Roboto_400Regular', fontSize: 13}}
+                    />
                   </ListItem>
 
-                  <ListItem style={{alignItems: 'flex-start', marginBottom: -30}}>
+                  <ListItem style={{alignItems: 'flex-start', marginBottom: Platform.select({ios: -30, android: -10}), }}>
                     <CheckBox 
+                    title="Avocat"
                     checked={checkedBox4}
                     checkedColor="#F475BB"
                     onPress={() => handleSubmit4(!checkedBox4)}
+                    containerStyle={{backgroundColor: 'white', borderColor: 'white'}}
+                    textStyle= {{fontFamily: 'Roboto_400Regular', fontSize: 13}}
                     />
-                    <Text style={{fontSize: 15, fontFamily: 'Roboto_400Regular'}}>Avocat</Text>         
                   </ListItem>
 
           </Card>
 
       </View>
+
       </Content>
     <StatusBar style="dark" backgroundColor='white'/>
 
@@ -216,10 +230,16 @@ const styles = StyleSheet.create({
   box: {
     alignItems: 'center',
     flexDirection: 'row',
-    width: 350,
-    height: '100%',
+    width: Platform.select({
+      ios: 350, 
+      android: 300, 
+    }),
+    height: Platform.select({
+      ios: "100%", 
+      android: "95%", 
+    }),
     backgroundColor: 'white',
-    elevation: 3,
+    elevation: 6,
     shadowOffset: { width: 5, height: 5 },
     shadowColor: "black",
     shadowOpacity: 0.2,

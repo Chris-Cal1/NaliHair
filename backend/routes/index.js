@@ -284,7 +284,7 @@ var result = false;
 
   var pictureName = './tmp/'+uniqid()+'.jpg';
   var resultCopy = await req.files.avatar.mv(pictureName);
-  console.log("RESULTCOPY", resultCopy)
+ // console.log("RESULTCOPY", resultCopy)
   if(!resultCopy) {
   
   var resultCloudinary = await cloudinary.uploader.upload(pictureName);
@@ -293,23 +293,24 @@ var result = false;
  console.log('else', pictureName); 
 }
 
-console.log('resultcloudinary', resultCloudinary.url);
-console.log('pictureName', pictureName);
+//console.log('resultcloudinary', resultCloudinary.url);
+//console.log('pictureName', pictureName);
 
   var userPhoto = await userModel.findOne({token: req.body.token})
-  console.log("USER", userPhoto.photo)
+ // console.log("USER", userPhoto.photo)
   var date = new Date().toLocaleString()
-  console.log("DATE =====>>", date)
+  //console.log("DATE =====>>", date)
   if(userPhoto){
     userPhoto.photo.push({url: resultCloudinary.url, date: date, comment: req.body.comment});
    
     var photoSave = await userPhoto.save()
+    console.log("PHOTOSAVE",photoSave.photo[photoSave.photo.length - 1])
    if(photoSave){       
     result = true     
     } 
   }
 
-  res.json(result);
+  res.json({result, photoSave: photoSave.photo[photoSave.photo.length - 1]});
   fs.unlinkSync(pictureName);
 });
 

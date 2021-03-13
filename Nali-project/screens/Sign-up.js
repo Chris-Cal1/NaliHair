@@ -19,71 +19,51 @@ import {connect} from 'react-redux'
   const [mail, setMail] = useState('');
   const [password, setPassword] = useState('');
 
-  const [userExists, setUserExists] = useState(false)
   const [listErrorsSignup, setErrorsSignup] = useState([])
 
-var userData = {Name: name, Mail: mail, Password: password};
+
+// si déjà inscrit redirection sur RoutineChoice et non sur SignUp
+
+
+
+useEffect(() => {
+  let userExists = AsyncStorage.getItem("user", function(error, data){
+    if ( data ) {
+    props.addToken(data)
+    props.navigation.navigate('Home1', {screen: 'RoutineChoice'})
+    }
+  });
+
+
+},[])
  
   var handleSubmit = async () => {
 
 
-
-    const data = await fetch('http://10.0.0.100:3000/sign-up', {
-
+    const data = await fetch('http://10.0.0.103:3000/sign-up', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `username=${name}&email=${mail}&password=${password}`
     })
 
     const body = await data.json()
-
+    console.log(body.result)
     if(body.result == true){
       props.addToken(body.token)
-      setUserExists(true)
-      props.navigation.navigate('Profil')
+      AsyncStorage.setItem("user", body.token)
+      props.navigation.navigate('Home1', {screen:'RoutineChoice'})
+     // props.navigation.navigate('Signup', {screen: 'Signup'})
 
     } else {
       setErrorsSignup(body.error)
     }
 
-    if(userExists){
-      //props.navigation.navigate('Signin')
-      props.addToken(body.token)
-
-    }
-    
     var tabErrorsSignup = listErrorsSignup.map((error,i) => {
       return(<p>{error}</p>)
     });
-  
-     if(name && mail && password !== '') {
-    //  AsyncStorage.setItem("user", JSON.stringify(userData))
-    //  props.navigation.navigate('Profil')
-       props.addToken(body.token)
-
-      console.log(userData)
-    }
    }
 
    
-
-    /* AsyncStorage.getItem('user', (err, data) => {
-
-      var userData = JSON.parse(data);
-      if (data) {
-        setName(userData.Name);
-        setMail(userData.Mail);
-        setPassword(userData.Password);
-
-        
-
-        props.navigation.navigate('Profil')
-        console.log(data)
-       
-      }
-
-    });*/
-
 
     let [fontsLoaded] = useFonts({
       Handlee_400Regular,
@@ -103,18 +83,19 @@ var userData = {Name: name, Mail: mail, Password: password};
           <Image source={require('../assets/logo_nalihair.png')} style={{ width: 150, height: 200, marginBottom: '10%', marginTop: '20%' }} />
 
           <Input 
-          containerStyle = {{borderColor: "lightgrey", marginBottom: 20, elevation: 3, width: 200, height: '8%' }}
+          containerStyle = {{ marginBottom: 20, elevation: 3, width: 200, height: '8%' }}
           placeholder='Prénom'
           onChangeText={(val) => setName(val)}/>
 
          <Input 
-          containerStyle = {{borderColor: "lightgrey", marginBottom: 20, elevation: 3, width: 200, height: '8%' }}
+          containerStyle = {{marginBottom: 20, elevation: 3, width: 200, height: '8%' }}
           placeholder='Mail'
           onChangeText={(val) => setMail(val)}/>
 
          <Input 
-          containerStyle = {{borderColor: "lightgrey", marginBottom: 20, elevation: 3, width: 200, height: '8%' }}
+          containerStyle = {{ marginBottom: 20, elevation: 3, width: 200, height: '8%' }}
           placeholder='Mot de passe'
+          secureTextEntry= "true"
           onChangeText={(val) => setPassword(val)}/>
 
 
@@ -123,7 +104,7 @@ var userData = {Name: name, Mail: mail, Password: password};
           >
           <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular', fontSize: 20}}> Me connecter </Text>
           </TouchableOpacity>
-          <Text style={{ color: '#222222', fontFamily: 'Roboto_400Regular', fontSize: 15, marginTop: 15}}  onPress={() => props.navigation.navigate('Signin')}> Déjà inscrit </Text>
+          <Text style={{ color: '#222222', fontFamily: 'Roboto_400Regular', fontSize: 15, marginTop: 15}}  onPress={() => props.navigation.navigate('Signin')}> Déjà inscrit ? </Text>
         </View>
       <StatusBar style="dark" backgroundColor='white'/>
     </ImageBackground>

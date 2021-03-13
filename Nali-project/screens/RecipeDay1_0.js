@@ -5,8 +5,8 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import basilic from '../assets/basilic.jpg';
 import { StyleSheet, ImageBackground, Image, ScrollView} from 'react-native';
-import {  Header } from 'react-native-elements';
-import { Button, Text, View, Content} from 'native-base';
+import { Text, View, Content} from 'native-base';
+import {  Button, Header } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
@@ -34,7 +34,7 @@ export default function RecipeDay1_0(props) {
       
   <ImageBackground source={require('../assets/007.png')} style={styles.container}>
  
-       <Header
+ <Header
        containerStyle = {{
         backgroundColor: 'white', 
         elevation: 6, 
@@ -49,6 +49,7 @@ export default function RecipeDay1_0(props) {
                          name="arrow-back-ios" 
                          size={26} 
                          color="black" 
+                         style={{marginLeft: 10}}
                          onPress={() => props.navigation.navigate('DailyProgram')}
                          />}
        centerComponent={{ text: 'Programmes', style: { fontFamily: 'Handlee_400Regular', color: 'black', fontSize: 26}}}
@@ -56,7 +57,7 @@ export default function RecipeDay1_0(props) {
                           name="user-alt" 
                           size={26} 
                           color="black" 
-                          marginRight= '10px'
+                          style={{marginRight: 10}}
                           onPress={() => props.navigation.navigate('Profil')}
                           />}
       />
@@ -110,6 +111,19 @@ export default function RecipeDay1_0(props) {
        flex: 1,
        alignItems: 'flex-start',
        justifyContent: 'flex-start',
-      
      },
+     button: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf: 'center',
+      alignContent: 'center',
+      backgroundColor: "#222222", 
+      borderRadius: 10, 
+      width: 200, 
+      height: 50,  
+      marginTop: Platform.select({
+        ios: '10%', 
+        android:'7%', 
+      }),
+    }
   });

@@ -4,8 +4,8 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, ScrollView, ImageBackground, Image, TouchableOpacity } from 'react-native';
-import {  Header, Overlay } from 'react-native-elements';
-import {  Text, View, Card, CardItem, Left, Body, Right, Button, Textarea} from 'native-base';
+import { Button, Header, Overlay } from 'react-native-elements';
+import {  Text, View, Card, CardItem, Left, Body, Right, Textarea} from 'native-base';
 import { SimpleLineIcons, FontAwesome5, AntDesign } from '@expo/vector-icons';
 import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
@@ -23,7 +23,7 @@ function MyDiary(props) {
 useEffect(() => {
   const findPhoto = async () => {
 
-    const dataWishlist = await fetch(`http://10.0.0.100:3000/card-picture?token=${props.token}`)
+    const dataWishlist = await fetch(`http://10.0.0.103:3000/card-picture?token=${props.token}`)
 
     const body = await dataWishlist.json()
 
@@ -31,6 +31,7 @@ useEffect(() => {
    // if(body.articles){
 
        setMyPicture(body)
+       props.loadingPhoto(body)
    //console.log('YOUPI', body)
     //}
 
@@ -42,12 +43,12 @@ useEffect(() => {
 // suppression d'une photo
   const handleClickDeletePhoto = async (id) => {
 
-  const response = await fetch('http://10.0.0.100:3000/delete-photo', {
+  const response = await fetch('http://10.0.0.103:3000/delete-photo', {
    method: 'DELETE',
    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
    body: `id=${id}&token=${props.token}`
   });
-   var myPictureCopy = [...myPicture]
+   var myPictureCopy = [...props.loadingPics]
     var position = null
     console.log("myPictureCopy", myPictureCopy, id)
      for(let i=0;i<myPictureCopy.length;i++){
@@ -56,36 +57,35 @@ useEffect(() => {
             myPictureCopy.splice(position,1);
              
          }
-     } setMyPicture(myPictureCopy)    
+     } props.loadingPhoto(myPictureCopy)    
 
 }
 
+var myPics = props.loadingPics;
 
-var cardPicture = myPicture.map((picture, i) => {
+
+var cardPicture = myPics.map((picture, i) => {
   console.log(picture, 'PIC PIC')
   return (
-    <TouchableOpacity 
+    <TouchableOpacity key = {i}
     onPress={() => props.navigation.navigate('DailyPics', { screen: 'DailyPics' })}>
-    <Card style={{flex: 1, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%'}}>
-            <CardItem style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0, borderRadius: 10,  elevation: 10,shadowOffset: { width: 5, height: 5 },shadowColor: "black",shadowColor: "black", shadowRadius: 10}}>
+    <Card style={{flex: 1, borderRadius: 10, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%'}}>
+            <CardItem style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0, borderRadius: 10,  elevation: 6,shadowOffset: { width: 5, height: 5 },shadowColor: "black",borderColor: "white", shadowRadius: 10}}>
               <Left style= {{marginLeft: 0}}>
                 <Image source={{uri: picture.url}}
-                       style={{ height: 150, width: 150, flex: 1 }} />
+                       style={{ height: 150, width: 150, flex: 1, borderBottomLeftRadius: 10, borderTopLeftRadius: 10 }} />
               </Left>
-              <Body style={{justifyContent: 'center', marginLeft: '2%'}}>
-                <Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, color: 'black', marginBottom: '2%'}}>{new Date(picture.date).toLocaleDateString()}</Text>
-                <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12, color: 'black', marginBottom: '2%'}}>{picture.comment}</Text>
-                <View style={{flexDirection: 'row', marginTop: '3%'}}>
-                  <Left>
-                    <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12}}></Text>
-                  </Left>
-                  <Right style= {{paddingRight:'3%'}}>
+              <Body style={{justifyContent: 'center', marginLeft: '3%'}}>
+               <Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, color: 'black', marginBottom: '2%'}}>{new Date(picture.date).toLocaleDateString()}</Text>
+                <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12, color: 'black', marginBottom: '15%'}}>{picture.comment}</Text>
+                <View style={{flexDirection: 'row', marginTop: '3%', marginBottom: '-5%'}}>
+                  <Right style= {{paddingRight:'13%'}}>
                     <SimpleLineIcons 
                       name="trash" 
                       size={20} 
                       color="black"
                       onPress={() => handleClickDeletePhoto(picture._id)}
-                    />
+                    />  
                   </Right>
                 </View>
               </Body>
@@ -94,7 +94,7 @@ var cardPicture = myPicture.map((picture, i) => {
         </TouchableOpacity>
 
   )
-})
+}).reverse()
 
 
 
@@ -106,12 +106,13 @@ var handleTest = (day) => {
         
           //console.log(new Date(date.date).toLocaleDateString(), "DATE string")
            // console.log(date.date.slice(0, 10), "DATE")
-           console.log(date, "date test")
+           //console.log(date, "date test")
            if(new Date(date.date).toLocaleDateString() == new Date(thisDay).toLocaleDateString()){
             props.sendPhoto(date)
-            props.navigation.navigate('ReturnPics')
+            //props.navigation.navigate('ReturnPics')
              
-      }
+       }
+        props.navigation.navigate('ReturnPics')
     
   })
   
@@ -148,6 +149,7 @@ var handleTest = (day) => {
                           name="user-alt" 
                           size={26} 
                           color="black" 
+                          style={{marginRight: 10}}
                           onPress={() => props.navigation.navigate('Profil', { screen: 'Profil' })}
                           />}
       />
@@ -170,43 +172,17 @@ var handleTest = (day) => {
       iconContainer={{flex: 0.1}}
       
     />
+            <Button
+              title="Prendre une photo"
+              titleStyle={{fontFamily: 'Roboto_700Bold', color: 'white'}}
+              buttonStyle={styles.button}
+              onPress={()=> {props.navigation.navigate( 'SnapScreen' )}}>
+            </Button>
 
-  <Button
-      style={{marginTop: '3%', marginBottom: '3%', marginLeft: '20%', marginRight:'10%', backgroundColor: '#222222', justifyContent: 'center', alignItems: 'center', borderRadius: 10,  elevation: 10,shadowOffset: { width: 5, height: 5 },shadowColor: "black",shadowColor: "black", shadowRadius: 10}}
-      onPress={()=> {props.navigation.navigate( 'SnapScreen' )}}>
-        <Text style={{fontFamily: 'Roboto_500Medium', fontSize: 20}}> Prendre une photo </Text>
-  </Button>
+  <ScrollView style={{ marginBottom: "80%"}}>
 
-  <ScrollView>
-
-    {cardPicture}
-  <TouchableOpacity 
-    onPress={() => props.navigation.navigate('DailyPics', { screen: 'DailyPics' })}>
-    <Card style={{flex: 1, marginLeft:'3%', marginTop: '3%', marginRight: '3%', marginBottom: '3%'}}>
-            <CardItem style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0, borderRadius: 10,  elevation: 10,shadowOffset: { width: 5, height: 5 },shadowColor: "black",shadowColor: "black", shadowRadius: 10}}>
-              <Left style= {{marginLeft: 0}}>
-                <Image source={require('../assets/carmen.jpg')}
-                       style={{ height: 150, width: 150, flex: 1 }} />
-              </Left>
-              <Body style={{justifyContent: 'center', marginLeft: '2%'}}>
-                <Text style={{fontFamily: 'Roboto_700Bold', fontSize: 17, color: 'black', marginBottom: '2%'}}>Date</Text>
-                <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12, color: 'black', marginBottom: '2%'}}>Commentaire</Text>
-                <View style={{flexDirection: 'row', marginTop: '3%'}}>
-                  <Left>
-                    <Text style={{fontFamily: 'Roboto_300Light', fontSize: 12}}></Text>
-                  </Left>
-                  <Right style= {{paddingRight:'3%'}}>
-                    <SimpleLineIcons 
-                      name="trash" 
-                      size={20} 
-                      color="black"
-                    />  
-                  </Right>
-                </View>
-              </Body>
-            </CardItem>
-          </Card>
-        </TouchableOpacity>
+  {cardPicture}
+  
       </ScrollView>
 
           
@@ -228,19 +204,38 @@ var handleTest = (day) => {
        alignItems: 'center',
        justifyContent: 'flex-start',
      },
+     button: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf: 'center',
+      alignContent: 'center',
+      backgroundColor: "#222222", 
+      borderRadius: 10, 
+      width: 200, 
+      height: 50,  
+      marginBottom: Platform.select({
+        ios: '5%', 
+        android:'5%', 
+      }),
+    }
   });
 
   function mapStateToProps(state) {
     //console.log(state);
-    return {  token: state.token }
+    return {  token: state.token, loadingPics: state.loadPhoto }
   }
 
   function mapDispatchToProps(dispatch){
     return {
   
       sendPhoto: function(photo) {
-        console.log(photo, 'PHOTO ============>>>>');
+       // console.log(photo, 'PHOTO ============>>>>');
         dispatch({type: 'sendPhoto', photo: photo})
+  
+      },
+      loadingPhoto: function(photo) {
+        //console.log(photo, 'PHOTO ============>>>>');
+        dispatch({type: 'loadingPhoto', photo: photo})
   
       }
     }
