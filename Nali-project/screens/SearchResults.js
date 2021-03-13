@@ -21,7 +21,7 @@ function SearchResults(props) {
 var findArticle = async () => {
     
 
-  const saveReq = await fetch('http://192.168.0.213:3000/add-article', {
+  const saveReq = await fetch('http://10.0.0.103:3000/add-article', {
 
      method: 'POST',
      headers: {'Content-Type':'application/x-www-form-urlencoded'},
