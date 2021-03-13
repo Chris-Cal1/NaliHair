@@ -1,5 +1,3 @@
-// Marie
-
 import React from 'react';
 import { StyleSheet, Text, View} from 'react-native';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';

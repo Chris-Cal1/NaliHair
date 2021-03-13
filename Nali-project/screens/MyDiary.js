@@ -1,6 +1,3 @@
-// Marie
-
-// Marie
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, ScrollView, ImageBackground, Image, TouchableOpacity } from 'react-native';
