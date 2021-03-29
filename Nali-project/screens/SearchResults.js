@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, ImageBackground, Image, TouchableOpacity, Linking, Text, View, ScrollView, KeyboardAvoidingView } from 'react-native';
-import {  Header, SearchBar, Badge } from 'react-native-elements';
+import { StyleSheet, ImageBackground, Image, TouchableOpacity, Text, View, ScrollView} from 'react-native';
+import {  Header, Badge } from 'react-native-elements';
 import { Content} from 'native-base';
 import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
 
@@ -18,7 +18,7 @@ function SearchResults(props) {
 var findArticle = async () => {
     
 
-  const saveReq = await fetch('http://10.0.0.101:3000/add-article', {
+  const saveReq = await fetch('http://10.0.0.106:3000/add-article', {
 
      method: 'POST',
      headers: {'Content-Type':'application/x-www-form-urlencoded'},

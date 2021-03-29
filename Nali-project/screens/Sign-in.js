@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef} from 'react';
+import React, { useState, useRef} from 'react';
 
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, ImageBackground, Button, TouchableOpacity, View, Image} from 'react-native';
-import { Card, ListItem, CheckBox, Input } from 'react-native-elements';
+import {  Input } from 'react-native-elements';
 
 import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
@@ -25,7 +25,7 @@ function Signin(props) {
 
 
 
-    const data = await fetch('http://10.0.0.101:3000/sign-in', {
+    const data = await fetch('http://10.0.0.106:3000/sign-in', {
 
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},

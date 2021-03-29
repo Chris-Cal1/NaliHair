@@ -4,10 +4,10 @@ var express = require('express');
 var router = express.Router();
 const request = require('sync-request');
 
-// (4.1) importation des deux modules nécessaires au chiffrement
+//  import of the two modules needed for encryption
 var uid2 = require('uid2');
 var bcrypt = require('bcrypt');
-// importation des modules nécéssaires pour la sauvegarde dans cloudinary
+// import of the necessary modules for the backup in cloudinary
 var uniqid = require('uniqid');
 var fs = require('fs');
 
@@ -27,15 +27,10 @@ cloudinary.config({
 
 
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
-
+// creation of a new road named /sign-up which will add a new user to the database
 router.post('/sign-up', async function(req, res, next){
  
-  //(4.2) générez le hash via bcrypt.
+  // générez le hash via bcrypt.
   const hash = bcrypt.hashSync(req.body.password, 10);
 
   var error = []
@@ -57,7 +52,8 @@ router.post('/sign-up', async function(req, res, next){
  ){
    error.push('champs vides')
  }
-
+// Modification of the request to take into account the recording of the password now encrypted.
+ // modification of the request to add the new property which will be initialized with an id generated with the uid2 module.
  if(error.length == 0) {
     var newUser = new userModel({
     userName: req.body.username,
@@ -75,12 +71,13 @@ router.post('/sign-up', async function(req, res, next){
     token = userSave.token
   }
  }
- 
+ // Sending the response back to the frontend
   res.json({result, userSave, error, token});
 
 
 });
 
+// creation of a new road named /sign-in which will check the existence in the database of a user
 router.post('/sign-in', async function(req,res,next){
 
   
@@ -95,14 +92,14 @@ router.post('/sign-in', async function(req,res,next){
     error.push('champs vides')
   }
   if(error.length == 0) {
-
+// request to search for a user in a database
   const user = await userModel.findOne({ 
     email: req.body.email,
     //password: req.body.password,
 
   })
 
-  //(4.4) Vérifiecation que le mot de passe chiffré correspond à celui enregistré en base de données.
+  // Verification that the encrypted password matches the one stored in the database.
   if(user) {
     if(bcrypt.compareSync(req.body.password, user.password)){
   result = true
@@ -115,13 +112,14 @@ router.post('/sign-in', async function(req,res,next){
     error.push('email incorrect')
   }
 }
+// Sending the response back to the frontend
    res.json({result, user, error, token});
 
 })
 
 
 
-// ajout de recette fake en db
+// add fake recipe in database
 router.post('/fake-recipe', async function(req, res, next) {
 
   var newRecipe = new recipeModel({
@@ -146,8 +144,8 @@ router.post('/fake-recipe', async function(req, res, next) {
 })
 
 
-// recherche d'une recette en db
-router.post('/search-recipe', async function(req, res, next) { 
+// Recipe search in database
+router.post('/find-recipe', async function(req, res, next) { 
 
   var result = false
   var recipe = await recipeModel.findOne({day: req.body.day})
@@ -161,8 +159,8 @@ router.post('/search-recipe', async function(req, res, next) {
 
 
 
-// ajout des articles fake en db
-router.post('/wishlist-articles', async function(req, res, next) {
+// adding fake articles to the database
+router.post('/fake-articles', async function(req, res, next) {
 
   var newArticle = new articleModel({
     name: req.body.name,
@@ -185,8 +183,8 @@ router.post('/wishlist-articles', async function(req, res, next) {
 
 
 
-// suppression d'un article fake en bdd
-router.delete('/wishlist-articles/:name', async function(req, res, next) {
+// deletion of an fake article of the db
+router.delete('/delete-articles/:name', async function(req, res, next) {
   
   var returnDb = await articleModel.deleteOne({name: req.params.name})
 
@@ -200,8 +198,8 @@ router.delete('/wishlist-articles/:name', async function(req, res, next) {
 
 
 
-// recherche d'un article en db
-router.post('/wishlist-article', async function(req, res, next) { 
+// search for an article in a database
+router.post('/find-article', async function(req, res, next) { 
 
   var result = false
   var article = await articleModel.findOne({name: req.body.name})
@@ -214,16 +212,13 @@ router.post('/wishlist-article', async function(req, res, next) {
        });
 
 
-// =======>>> TEST <<<<<=============
-// ajout d'un article en cles étrangère de la collection user au like sur le btn coeur
+
+// add an article in foreign keys of the user collection 
 router.post('/add-article', async function(req, res, next) { 
 
   var result = false
-  //var article = await articleModel.findOne({name: req.query.name})
   var user = await userModel.findOne({token: req.body.token})
  
-
-
     if(user != null){
           user.articleId.push(req.body.name)       
           var articleSave = await user.save()
@@ -237,9 +232,29 @@ router.post('/add-article', async function(req, res, next) {
             res.json({result})   
           });
 
-// ========>> TEST <<<<<===========
 
-// Suppression d'un article dans la db
+// extraction of products like from the database
+router.get('/wishlist-articles', async function(req, res, next){
+
+  var articles = []
+ var user = await userModel.findOne({token: req.query.token})
+ // console.log("USER", user)
+  
+  if(user){
+    articles = await userModel.find({token: req.query.token})
+                            .populate('articleId')
+                            .exec();
+   // console.log("ART ===>>", articles[0].articleId)
+  }
+     
+  
+  
+ res.json({articles: articles[0].articleId })
+})  
+
+
+
+// Deleting an article in the foreign key of a user collection in database
 router.delete('/delete-article', async function(req, res, next) {
 
   var result = false
@@ -257,49 +272,26 @@ router.delete('/delete-article', async function(req, res, next) {
   res.json({result});
 })
 
-// extraction des produits liké dans la db pour les ajouter dans la wishlist
-router.get('/wishlist-articles', async function(req, res, next){
 
-  var articles = []
- var user = await userModel.findOne({token: req.query.token})
-                          
-  //var article = await articleModel.findById(user.articleId)
- // console.log("USER", user)
-  
-  if(user){
-    articles = await userModel.find({token: req.query.token})
-                            .populate('articleId')
-                            .exec();
-   // console.log("ART ===>>", articles[0].articleId)
-  }
-     
-  
-  
- res.json({articles: articles[0].articleId })
-})
-
-router.post('/dailypics', async function(req, res, next) {
+//adding information from new photo cards to the database
+router.post('/add-pics', async function(req, res, next) {
 
 var result = false;
 
   var pictureName = './tmp/'+uniqid()+'.jpg';
   var resultCopy = await req.files.avatar.mv(pictureName);
- // console.log("RESULTCOPY", resultCopy)
+ 
   if(!resultCopy) {
-  
   var resultCloudinary = await cloudinary.uploader.upload(pictureName);
 } else {
   console.log('else', resultCloudinary);
  console.log('else', pictureName); 
 }
 
-//console.log('resultcloudinary', resultCloudinary.url);
-//console.log('pictureName', pictureName);
-
   var userPhoto = await userModel.findOne({token: req.body.token})
- // console.log("USER", userPhoto.photo)
+ 
   var date = new Date().toLocaleString()
-  //console.log("DATE =====>>", date)
+  
   if(userPhoto){
     userPhoto.photo.push({url: resultCloudinary.url, date: date, comment: req.body.comment});
    
@@ -309,12 +301,12 @@ var result = false;
     result = true     
     } 
   }
-
+// sending to the frontend the last photo cards information taken by the user
   res.json({result, photoSave: photoSave.photo[photoSave.photo.length - 1]});
   fs.unlinkSync(pictureName);
 });
 
-// extraction des cards  dans la db pour les ajouter dans MyDiary
+// extraction of photo card information from the database
 router.get('/card-picture', async function(req, res, next){
 
   var photos = []
@@ -328,11 +320,11 @@ router.get('/card-picture', async function(req, res, next){
                          console.log('PHOTOOOO', photos)
   
   }
-
+// sending photo cards information to the frontend
  res.json(photos)
 })
 
-// Suppression d'une photo dans la db
+// Deleting photo card information from the user's database
 router.delete('/delete-photo', async function(req, res, next) {
 
   var result = false

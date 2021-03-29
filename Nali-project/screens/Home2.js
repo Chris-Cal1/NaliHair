@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, ImageBackground, Text, TouchableOpacity, Linking } from 'react-native';
+import { StyleSheet, ImageBackground, Text} from 'react-native';
 import { Button} from 'react-native-elements'
-import { View, Content} from 'native-base';
+import { View} from 'native-base';
 
 import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';

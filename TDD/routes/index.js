@@ -119,7 +119,7 @@ router.post('/upload', function(req, res, next) {
 
 
  // add article in wishlist
- router.get('/add-product', function(req, res, next) {
+ router.get('/add-article', function(req, res, next) {
 
   let article = req.query.article
 

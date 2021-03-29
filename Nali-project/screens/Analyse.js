@@ -30,11 +30,11 @@ function Analyse(props) {
   });
 
 
-// acquisition des articles liké de la db
+// acquisition of the likened items of the db
   useEffect(() => {
     const findArticlesWishList = async () => {
 
-      const dataWishlist = await fetch(`http://10.0.0.101:3000/wishlist-articles?token=${props.token}`)
+      const dataWishlist = await fetch(`http://10.0.0.106:3000/wishlist-articles?token=${props.token}`)
 
       const body = await dataWishlist.json()
       
@@ -50,10 +50,10 @@ function Analyse(props) {
     findArticlesWishList()
   },[]) 
 
-// suppression d'un article
+// deletion of an article
   const handleClickDeleteArticle = async (name, type) => {
 
-  const response = await fetch('http://10.0.0.101:3000/delete-article', {
+  const response = await fetch('http://10.0.0.106:3000/delete-article', {
    method: 'DELETE',
    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
    body: `id=${name}&token=${props.token}`
@@ -70,11 +70,11 @@ function Analyse(props) {
      } props.loadingArticles(favorisCopy)
 }
 
-// recherche d'un article
+// search for an article 
   var findArticle = async () => {
     
 
-    const saveReq = await fetch('http://10.0.0.101:3000/wishlist-article', {
+    const saveReq = await fetch('http://10.0.0.103:3000/find-article', {
 
        method: 'POST',
        headers: {'Content-Type':'application/x-www-form-urlencoded'},
@@ -93,7 +93,7 @@ function Analyse(props) {
       
      }
      
-     // faire un map sur les favoris et retourner les card 
+     //  map on the favorites and return the cards 
 
     var userFavoris = props.articlesLiked.map((article,i) => { 
 	
@@ -269,7 +269,7 @@ function Analyse(props) {
 }
  
   
- //(3.19) Modification de l’export, pour appliquer nos functions au composant conteneur
+ // Modification de l’export, pour appliquer nos functions au composant conteneur
   export default connect(
   mapStateToProps,
   mapDispatchToProps,
