@@ -16,12 +16,13 @@ function DailyPics(props) {
       
   const [comment, setComment] = useState('');
   var date = new Date().toLocaleDateString()
- var photo = props.pictureList;
+  var photo = props.pictureList;
 
  //console.log("PHOTO", photo[0]._parts[0].[1].uri)
+
+ //sending information for a new photo card
 var handleSubmit = async () => {
- 
-               
+     
                 var data = new FormData();
                 data.append('avatar', {
                   uri: photo._parts[0].[1].uri,
@@ -31,18 +32,14 @@ var handleSubmit = async () => {
                 data.append('token', props.token);
                 data.append('comment', comment)
            
-
-  const database = await fetch("http://10.0.0.103:3000/dailypics", {
+  const database = await fetch("http://10.0.0.106:3000/add-pics", {
     method: 'POST',
     body: data 
    
   })
    const body = await database.json()
-  console.log("PHOTOSAVE bc", body.photoSave)
   props.sendPhoto(body.photoSave)
   props.navigation.navigate('MyDiary')
-
-
 
 }
 
@@ -178,12 +175,11 @@ var handleSubmit = async () => {
     
     return { pictureList : state.picture, token: state.token }
   }
-
+// sending information from the database to the reducer
   function mapDispatchToProps(dispatch){
     return {
   
       sendPhoto: function(pics) {
-       // console.log(pics, 'PHOTO ALLER============>>>>');
         dispatch({type: 'sendPics', pics: pics})
   
       }

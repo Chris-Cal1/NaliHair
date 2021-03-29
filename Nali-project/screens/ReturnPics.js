@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, ImageBackground, Image, TouchableOpacity, Linking,  ScrollView, KeyboardAvoidingView, TextInput } from 'react-native';
-import {  Header, SearchBar, Badge } from 'react-native-elements';
+import { StyleSheet, ImageBackground, Image, TouchableOpacity,  ScrollView, } from 'react-native';
+import {  Header,} from 'react-native-elements';
 
-import {  Text, View, Card, CardItem, Left, Body, Right, Button, Textarea} from 'native-base';
+import {  Text, View, Card, CardItem, Left, Body, Right,} from 'native-base';
 import { MaterialIcons, FontAwesome5, Ionicons, SimpleLineIcons } from '@expo/vector-icons';
 
 import AppLoading from 'expo-app-loading';

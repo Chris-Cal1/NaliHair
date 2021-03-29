@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import argileVerte from '../assets/argileVerte.jpg';
 import { StyleSheet, ImageBackground, Image, ScrollView} from 'react-native';
 import { Text, View, Content} from 'native-base';
-import {  Button, Header } from 'react-native-elements';
+import {  Header } from 'react-native-elements';
 
 import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';

@@ -4,8 +4,8 @@ import { StatusBar } from 'expo-status-bar';
 import basilic from '../assets/basilic.jpg';
 import { StyleSheet, ImageBackground, Image, ScrollView} from 'react-native';
 import { Text, View, Content} from 'native-base';
-import {  Button, Header } from 'react-native-elements';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {  Header } from 'react-native-elements';
+
 
 import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';

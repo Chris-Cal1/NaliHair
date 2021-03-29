@@ -55,7 +55,7 @@ test("Identification - Body correct", async (done) => {
  });
 
  test("ajout d'un article à la wishlist - Body correct", async (done) => {
-  await request(app).get('/add-product?article=shampoo')
+  await request(app).get('/add-article?article=shampoo')
     .expect(200)
     .expect({ result: true, article: "shampoo"});
   done();

@@ -34,7 +34,7 @@ function DailyProgram(props) {
 var findRecipe = async day => {
     
 
-  const saveReq = await fetch('http:/10.0.0.103:3000/search-recipe', {
+  const saveReq = await fetch('http:/10.0.0.106:3000/find-recipe', {
 
      method: 'POST',
      headers: {'Content-Type':'application/x-www-form-urlencoded'},

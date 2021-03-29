@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef} from 'react';
 
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, ImageBackground, Button, TouchableOpacity, View, Image} from 'react-native';
-import { Card, ListItem, CheckBox, Input } from 'react-native-elements'
+import { Input } from 'react-native-elements'
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -40,7 +40,7 @@ useEffect(() => {
   var handleSubmit = async () => {
 
 
-    const data = await fetch('http://10.0.0.103:3000/sign-up', {
+    const data = await fetch('http://10.0.0.106:3000/sign-up', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `username=${name}&email=${mail}&password=${password}`

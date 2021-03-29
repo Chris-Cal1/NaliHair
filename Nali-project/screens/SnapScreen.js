@@ -5,15 +5,10 @@ import { useIsFocused } from '@react-navigation/native';
 
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import IconIonic from 'react-native-vector-icons/Ionicons';
-
-import {Button, Overlay} from 'react-native-elements';
 import { Entypo } from '@expo/vector-icons';
-import { MaterialIcons } from '@expo/vector-icons';
 import {connect} from 'react-redux';
 
 function SnapScreen(props) {
-
-
 
   // useEffect(() => {
   //   if (route.state && route.state.routeNames [route.state.index] === "SnapScreen") {

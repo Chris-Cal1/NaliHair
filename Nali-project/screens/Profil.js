@@ -5,7 +5,7 @@ import { StyleSheet, ImageBackground, Image, Text, TouchableOpacity, Linking } f
 import {  Header, Avatar } from 'react-native-elements';
 import { View, Content} from 'native-base';
 
-import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
+import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 
 import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';

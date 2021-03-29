@@ -9,7 +9,7 @@ import { Content} from 'native-base';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
+import { MaterialIcons, FontAwesome5,} from '@expo/vector-icons';
 
 import AppLoading from 'expo-app-loading';
 import { useFonts, Handlee_400Regular } from '@expo-google-fonts/handlee';
